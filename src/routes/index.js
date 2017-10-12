@@ -20,7 +20,7 @@ module.exports = app => {
                 })
             })
         })
-        next()
+        await next()
     })
 
     app.use(router.routes(), router.allowedMethods())
