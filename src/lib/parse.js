@@ -2,7 +2,6 @@ const fs = require('fs')
 const drafter = require('drafter')
 const urlParser = require('./url')
 // const parseParameters = require('./parameters')
-
 let allRoutesList = []
 
 module.exports = (async function () {

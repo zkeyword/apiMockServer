@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const Mock = require('mockjs')
 const parse = require('../lib/parse')
 module.exports = app => {
     router.get('/', async (ctx, next) => {
@@ -6,6 +7,7 @@ module.exports = app => {
             title: 'Hello Koa 2!'
         })
     })
+
     app.use(async (ctx, next) => {
         let urlList = await parse
         urlList.forEach(re => {
@@ -14,12 +16,13 @@ module.exports = app => {
                     exp.responses[0].headers.forEach(header => {
                         ctx.set(header.name, header.value)
                     })
-                    ctx.body = exp.responses[0].body
+                    ctx.body = Mock.mock(JSON.parse(exp.responses[0].body))
                 })
             })
         })
         next()
     })
+
     app.use(router.routes(), router.allowedMethods())
 }
 
