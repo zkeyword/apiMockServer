@@ -1,5 +1,7 @@
 # mockServer
 
+给apiblueprint补充mockjs的功能，实现apiblueprint不能随机的缺点。
+
 #### 目录结构
 
     / 根目录
