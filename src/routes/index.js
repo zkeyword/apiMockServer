@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const Mock = require('mockjs')
-const parse = require('../lib/parse')
+const parse = require('../middleware/parse')
 module.exports = app => {
     router.get('/', async (ctx, next) => {
         await ctx.render('index', {
