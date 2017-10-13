@@ -6,7 +6,7 @@ let allRoutesList = []
 
 module.exports = (async function () {
     let result = await new Promise((resolve, reject) => {
-        fs.readFile(`${__dirname}/../../upload/test.md`, 'utf-8', (err, content) => {
+        fs.readFile(`${__dirname}/../../../upload/test.md`, 'utf-8', (err, content) => {
             if (err) {
                 return reject(err)
             }
