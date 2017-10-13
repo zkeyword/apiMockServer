@@ -1,46 +1,20 @@
-const fs = require('fs')
-const drafter = require('drafter')
-const urlParser = require('./url')
-// const parseParameters = require('./parameters')
-let allRoutesList = []
+const parse = require('./parse')
+const Mock = require('mockjs')
 
-module.exports = (async function () {
-    let result = await new Promise((resolve, reject) => {
-        fs.readFile(`${__dirname}/../../upload/test.md`, 'utf-8', (err, content) => {
-            if (err) {
-                return reject(err)
-            }
-            resolve(content)
+module.exports = (router) => {
+    return async (ctx, next) => {
+        let urlList = await parse
+        console.log(ctx)
+        urlList.forEach(re => {
+            re.examples.forEach(exp => {
+                router[re.method.toLocaleLowerCase()](re.url, async (ctx, next) => {
+                    exp.responses[0].headers.forEach(header => {
+                        ctx.set(header.name, header.value)
+                    })
+                    ctx.body = Mock.mock(JSON.parse(exp.responses[0].body))
+                })
+            })
         })
-    })
-
-    let str = await drafter.parse(result, { type: 'ast' }, (err, result) => {
-        if (err) return err
-        return result
-    })
-
-    str.ast.resourceGroups.forEach(resourceGroup => {
-        resourceGroup.resources.forEach(setupResourceAndUrl)
-    })
-
-    function setupResourceAndUrl(resource) {
-        var parsedUrl = urlParser.parse(resource.uriTemplate)
-        // var key = parsedUrl.url
-        // routeMap[key] = routeMap[key] || { urlExpression: key, methods: {} }
-        // parseParameters(parsedUrl, resource.parameters, routeMap)
-        resource.actions.forEach(function (action) {
-            // parseAction(parsedUrl, action, routeMap)
-            saveRouteToTheList(parsedUrl, action)
-        })
+        await next()
     }
-    function saveRouteToTheList(parsedUrl, action) {
-        // used to add options routes later
-        // if (typeof allRoutesList[parsedUrl.url] === 'undefined') {
-        //     allRoutesList[parsedUrl.url] = []
-        // }
-        action.url = parsedUrl.url
-        allRoutesList.push(action)
-    }
-
-    return allRoutesList
-})()
+}
