@@ -7,6 +7,7 @@ const logger = require('koa-logger')
 
 const routes = require('./routes')
 const error = require('./routes/error')
+const parse = require('./middleware/parse')
 
 // middlewares
 app.use(bodyparser({
@@ -29,8 +30,9 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-// app.use(index.routes(), index.allowedMethods())
-routes(app)
+app.use(parse(routes))
+app.use(routes.routes(), routes.allowedMethods())
+// routes(app)
 app.use(error())
 
 // error-handling
