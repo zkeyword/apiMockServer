@@ -4,15 +4,34 @@ const urlParser = require('./url')
 // const parseParameters = require('./parameters')
 let allRoutesList = []
 
-module.exports = (async function () {
-    let result = await new Promise((resolve, reject) => {
-        fs.readFile(`${__dirname}/../../../upload/test.md`, 'utf-8', (err, content) => {
+module.exports = (async () => {
+    let dir = `${__dirname}/../../../upload/`
+    let fileNameList = await new Promise((resolve, reject) => {
+        fs.readdir(dir, (err, content) => {
             if (err) {
                 return reject(err)
             }
             resolve(content)
         })
     })
+    let result = await (async () => {
+        let arr = []
+        await new Promise((resolve, reject) => {
+            fileNameList.forEach(async (fileName, index) => {
+                let result = await new Promise((resolve, reject) => {
+                    fs.readFile(`${dir}/${fileName}`, 'utf-8', (err, content) => {
+                        if (err) {
+                            return reject(err)
+                        }
+                        resolve(content)
+                    })
+                })
+                arr.push(result)
+                if (index + 1 === fileNameList.length) resolve(arr)
+            })
+        })
+        return arr.join(`\n`)
+    })()
 
     let str = await drafter.parse(result, { type: 'ast' }, (err, result) => {
         if (err) return err
