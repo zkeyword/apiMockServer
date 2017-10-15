@@ -4,7 +4,6 @@ const Mock = require('mockjs')
 module.exports = (router) => {
     return async (ctx, next) => {
         let urlList = await parse
-        console.log(ctx)
         urlList.forEach(re => {
             re.examples.forEach(exp => {
                 router[re.method.toLocaleLowerCase()](re.url, async (ctx, next) => {
