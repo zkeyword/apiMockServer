@@ -26,20 +26,21 @@ module.exports = (async () => {
                         resolve(content)
                     })
                 })
-                arr.push(result)
+                let str = await drafter.parse(result, { type: 'ast' }, (err, result) => {
+                    if (err) return err
+                    return result
+                })
+                arr.push(str)
                 if (index + 1 === fileNameList.length) resolve(arr)
             })
         })
-        return arr.join(`\n`)
+        return arr
     })()
 
-    let str = await drafter.parse(result, { type: 'ast' }, (err, result) => {
-        if (err) return err
-        return result
-    })
-
-    str.ast.resourceGroups.forEach(resourceGroup => {
-        resourceGroup.resources.forEach(setupResourceAndUrl)
+    result.forEach(item => {
+        item.ast.resourceGroups.forEach(resourceGroup => {
+            resourceGroup.resources.forEach(setupResourceAndUrl)
+        })
     })
 
     function setupResourceAndUrl(resource) {
