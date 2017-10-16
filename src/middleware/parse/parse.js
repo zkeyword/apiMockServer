@@ -1,5 +1,6 @@
 const fs = require('fs')
 const drafter = require('drafter')
+const normalizeNewline = require('normalize-newline')
 const urlParser = require('./url')
 // const parseParameters = require('./parameters')
 let allRoutesList = []
@@ -26,7 +27,7 @@ module.exports = (async () => {
                         resolve(content)
                     })
                 })
-                let str = await drafter.parse(result, { type: 'ast' }, (err, result) => {
+                let str = await drafter.parse(normalizeNewline(result), { type: 'ast' }, (err, result) => {
                     if (err) return err
                     return result
                 })
