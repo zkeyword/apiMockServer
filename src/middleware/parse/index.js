@@ -10,6 +10,7 @@ module.exports = (router) => {
                     exp.responses[0].headers.forEach(header => {
                         ctx.set(header.name, header.value)
                     })
+                    console.log(exp.responses[0].body)
                     ctx.body = Mock.mock(JSON.parse(exp.responses[0].body))
                 })
             })

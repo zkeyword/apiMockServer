@@ -17,6 +17,7 @@ module.exports = (async () => {
     })
     let result = await (async () => {
         let arr = []
+        let count = 0
         await new Promise((resolve, reject) => {
             fileNameList.forEach(async (fileName, index) => {
                 let result = await new Promise((resolve, reject) => {
@@ -27,12 +28,15 @@ module.exports = (async () => {
                         resolve(content)
                     })
                 })
-                let str = await drafter.parse(normalizeNewline(result), { type: 'ast' }, (err, result) => {
-                    if (err) return err
-                    return result
-                })
-                arr.push(str)
-                if (index + 1 === fileNameList.length) resolve(arr)
+                if (result) {
+                    let str = await drafter.parse(normalizeNewline(result), { type: 'ast' }, (err, result) => {
+                        if (err) return err
+                        return result
+                    })
+                    arr.push(str)
+                }
+                count++
+                if (count === fileNameList.length) resolve(arr)
             })
         })
         return arr

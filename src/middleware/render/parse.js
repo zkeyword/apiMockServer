@@ -1,10 +1,9 @@
-const router = require('koa-router')()
-const fs = require('fs')
 const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
+const fs = require('fs')
 
-router.get('/', async (ctx, next) => {
-    let dir = `${__dirname}/../../upload/`
+module.exports = (async () => {
+    let dir = `${__dirname}/../../../upload/`
     let fileNameList = await new Promise((resolve, reject) => {
         fs.readdir(dir, (err, content) => {
             if (err) {
@@ -13,10 +12,8 @@ router.get('/', async (ctx, next) => {
             resolve(content)
         })
     })
-
     let result = await (async () => {
         let arr = []
-        let count = 0
         await new Promise((resolve, reject) => {
             fileNameList.forEach(async (fileName, index) => {
                 let result = await new Promise((resolve, reject) => {
@@ -27,30 +24,18 @@ router.get('/', async (ctx, next) => {
                         resolve(content)
                     })
                 })
-                if (result) {
-                    let str = await drafter.parse(normalizeNewline(result), { type: 'ast' }, (err, result) => {
-                        if (err) return err
-                        return result
-                    })
-                    arr.push(str)
-                }
-                count++
-                if (count === fileNameList.length) resolve(arr)
+                let str = await drafter.parse(normalizeNewline(result), { type: 'ast' }, (err, result) => {
+                    if (err) return err
+                    return result
+                })
+                arr.push(str)
+                if (index + 1 === fileNameList.length) resolve(arr)
             })
         })
         return arr
     })()
-    console.log(result)
-    let arr = []
+
     result.forEach(item => {
-        arr.push(item.ast)
-        // console.log(1, item.ast.resourceGroups[0].resources[0], 1212)
+        console.log(item.ast.resourceGroups)
     })
-
-    await ctx.render('index', {
-        title: 'Hello Koa 2!',
-        body: arr
-    })
-})
-
-module.exports = router
+})()
