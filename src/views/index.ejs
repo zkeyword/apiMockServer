@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>EJS Welcome to <%= title %></p>
-  </body>
+</head>
+
+<body>
+    <% body.forEach(item=>{ %>
+        <p><%= item.name %></p>
+        <p><%= item.description %></p>
+        <% item.resourceGroups.forEach(resourceGroups=>{ %>
+            <p>
+                <% resourceGroups.resources.forEach(resources=>{ %>
+                    <p>资源url: <%= resources.uriTemplate %></p>
+                    <% resources.actions.forEach(action=>{ %>
+                        <p>接口名称： <%= action.name %></p>
+                        <p>接口描述： <%= action.description %></p>
+                        <p>请求方法： <%= action.method %></p>
+                        <p>返回结果： </p>
+                        <p>
+                            <% action.examples.forEach(example=>{ %>
+                                <% example.responses.forEach(response=>{ %>
+                                    <pre><%= jsonParse(response.body) %></pre>
+                                <% }) %>
+                            <% }) %>
+                        </p>
+                        <hr>
+                    <% }) %>
+                <% }) %>
+            </p>
+        <% }) %>
+    <% }) %>
+    <pre>
+    </pre>
+</body>
+
 </html>

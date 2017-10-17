@@ -4,13 +4,13 @@ const Mock = require('mockjs')
 module.exports = (router) => {
     return async (ctx, next) => {
         let urlList = await parse
-        console.log(ctx)
         urlList.forEach(re => {
             re.examples.forEach(exp => {
                 router[re.method.toLocaleLowerCase()](re.url, async (ctx, next) => {
                     exp.responses[0].headers.forEach(header => {
                         ctx.set(header.name, header.value)
                     })
+                    console.log(exp.responses[0].body)
                     ctx.body = Mock.mock(JSON.parse(exp.responses[0].body))
                 })
             })
