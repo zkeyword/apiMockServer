@@ -27,9 +27,10 @@ exports.getDrafterResult = dir => {
         let count = 0
         let arr = []
         list.forEach(async (fileName, index) => {
-            count++
             let result = await this.readFile(`${dir}/${fileName}`)
-            if (result) arr.push(drafter.parseSync(normalizeNewline(result), { type: 'ast' }))
+            let item = drafter.parseSync(normalizeNewline(result), { type: 'ast' })
+            if (result) arr.push(item)
+            count++
             if (count === list.length) resolve(arr)
         })
     })

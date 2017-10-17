@@ -6,7 +6,7 @@ router.get('/', async (ctx, next) => {
     let arr = []
     result.forEach(item => {
         arr.push(item.ast)
-        // console.log(1, item.ast.resourceGroups[0].resources[0], 1212)
+        // console.log(1, item.ast.resourceGroups[0].resources[0])
     })
 
     await ctx.render('index', {
