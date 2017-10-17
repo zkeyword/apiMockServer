@@ -6,6 +6,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 // const convert = require('koa-convert')
 const Mock = require('mockjs')
+const nanoRender = require('nano-json')
 
 const routes = require('./routes')
 const error = require('./routes/error')
@@ -20,10 +21,13 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(`${__dirname}/public`))
 app.use(async (ctx, next) => {
-    console.log(1111111, ctx)
+    // console.log(1111111, ctx)
     ctx.state = {
-        Mock,
-        JSON
+        jsonParse: str => {
+            if (!str) return
+            str = Mock.mock(JSON.parse(str.replace(/\'/g, '"')))
+            return nanoRender.render(str)
+        }
     }
     await next()
 })

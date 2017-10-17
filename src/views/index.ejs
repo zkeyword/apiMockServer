@@ -24,7 +24,7 @@
                         <p>
                             <% action.examples.forEach(example=>{ %>
                                 <% example.responses.forEach(response=>{ %>
-                                    <pre><%= Mock.mock(response.body) %></pre>
+                                    <pre><%= jsonParse(response.body) %></pre>
                                 <% }) %>
                             <% }) %>
                         </p>
@@ -34,7 +34,8 @@
             </p>
         <% }) %>
     <% }) %>
-    <%= JSON.parse %>
+    <pre>
+    </pre>
 </body>
 
 </html>

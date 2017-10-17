@@ -26,6 +26,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
     "mockjs": "^1.0.1-beta3",
+    "nano-json": "^1.2.4",
     "normalize-newline": "^3.0.0",
     "qs": "^6.5.1",
     "require-directory": "^2.1.1"
