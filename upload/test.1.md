@@ -7,6 +7,8 @@ Lists all the things from the API222
 
 ### Retrieve all the things [GET]
 
+This is the `application/vnd.siren+json` message resource representation.
+
 + Response 200 (application/json;charset=UTF-8)
 
     + Body
@@ -22,6 +24,8 @@ Lists all the things from the API222
                 }
             ]
         }
+
++ Response 401 (application/json;charset=UTF-8)
 
 ### Retrieve all the things [PUT]
 

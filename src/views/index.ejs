@@ -9,14 +9,32 @@
 </head>
 
 <body>
-    item.ast.resourceGroups[0].resources[0]
-
     <% body.forEach(item=>{ %>
         <p><%= item.name %></p>
         <p><%= item.description %></p>
-        <%= item.resourceGroups %>
-
+        <% item.resourceGroups.forEach(resourceGroups=>{ %>
+            <p>
+                <% resourceGroups.resources.forEach(resources=>{ %>
+                    <p>资源url: <%= resources.uriTemplate %></p>
+                    <% resources.actions.forEach(action=>{ %>
+                        <p>接口名称： <%= action.name %></p>
+                        <p>接口描述： <%= action.description %></p>
+                        <p>请求方法： <%= action.method %></p>
+                        <p>返回结果： </p>
+                        <p>
+                            <% action.examples.forEach(example=>{ %>
+                                <% example.responses.forEach(response=>{ %>
+                                    <pre><%= Mock.mock(response.body) %></pre>
+                                <% }) %>
+                            <% }) %>
+                        </p>
+                        <hr>
+                    <% }) %>
+                <% }) %>
+            </p>
+        <% }) %>
     <% }) %>
+    <%= JSON.parse %>
 </body>
 
 </html>
