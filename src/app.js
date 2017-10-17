@@ -21,7 +21,6 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(`${__dirname}/public`))
 app.use(async (ctx, next) => {
-    // console.log(1111111, ctx)
     ctx.state = {
         jsonParse: str => {
             if (!str) return
