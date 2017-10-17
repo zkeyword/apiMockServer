@@ -4,10 +4,14 @@ const views = require('koa-views')
 const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+// const convert = require('koa-convert')
+const Mock = require('mockjs')
+const nanoRender = require('nano-json')
 
 const routes = require('./routes')
 const error = require('./routes/error')
 const parse = require('./middleware/parse')
+// const render = require('./middleware/render')
 
 // middlewares
 app.use(bodyparser({
@@ -16,6 +20,17 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(`${__dirname}/public`))
+app.use(async (ctx, next) => {
+    // console.log(1111111, ctx)
+    ctx.state = {
+        jsonParse: str => {
+            if (!str) return
+            str = Mock.mock(JSON.parse(str.replace(/\'/g, '"')))
+            return nanoRender.render(str)
+        }
+    }
+    await next()
+})
 
 app.use(views(`${__dirname}/views`, {
     extension: 'ejs'
@@ -30,6 +45,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+// app.use(render(routes))
 app.use(parse(routes))
 app.use(routes.routes(), routes.allowedMethods())
 // routes(app)
