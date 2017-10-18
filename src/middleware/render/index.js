@@ -1,11 +1,21 @@
-const parse = require('./parse')
-const Mock = require('mockjs')
+const { mock } = require('mockjs')
+const nanoRender = require('nano-json')
 
-module.exports = (router) => {
+module.exports = () => {
     return async (ctx, next) => {
-        let urlList = await parse
-        console.log(urlList)
-        ctx.render('test', urlList)
+        ctx.state = {
+            jsonParse: str => {
+                if (!str) return
+                str = str.replace(/\'/g, '"')
+                str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
+                try {
+                    str = JSON.parse(str)
+                } catch (error) {
+
+                }
+                return nanoRender.render(mock(str))
+            }
+        }
         await next()
     }
 }

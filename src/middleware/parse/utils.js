@@ -2,6 +2,8 @@
 const fs = require('fs')
 const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
+const { mock } = require('mockjs')
+const nanoRender = require('nano-json')
 
 exports.readDir = dir => {
     return new Promise((resolve, reject) => {
@@ -34,4 +36,16 @@ exports.getDrafterResult = dir => {
             if (count === list.length) resolve(arr)
         })
     })
+}
+
+exports.jsonParse = str => {
+    if (!str) return str
+    str = str.replace(/\'/g, '"')
+    str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
+    try {
+        str = JSON.parse(str)
+    } catch (error) {
+
+    }
+    return nanoRender.render(mock(str))
 }

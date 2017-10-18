@@ -1,9 +1,9 @@
 const urlParser = require('./url')
 let allRoutesList = []
-let tools = require('./utils')
+let { getDrafterResult } = require('./utils')
 
 module.exports = (async () => {
-    let result = await tools.getDrafterResult(`${__dirname}/../../../upload/`)
+    let result = await getDrafterResult(`${__dirname}/../../../upload/`)
 
     result.forEach(item => {
         item.ast.resourceGroups.forEach(resourceGroup => {

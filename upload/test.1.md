@@ -1,7 +1,8 @@
 FORMAT: 2A
 
-# Return all the things
-Lists all the things from the API222
+# test 资源
+
+这个是test资源的相关操作
 
 ## Things [/api/test]
 
@@ -10,6 +11,10 @@ Lists all the things from the API222
 This is the `application/vnd.siren+json` message resource representation.
 
 + Response 200 (application/json;charset=UTF-8)
+
+    + Headers
+
+        X-My-Message-Header: 42
 
     + Body
 
@@ -39,7 +44,7 @@ This is the `application/vnd.siren+json` message resource representation.
                     "name|+1": [
                         "Hello",
                         "Mock.js",
-                        "!"
+                        "@image()"
                     ]
                 }
             ]

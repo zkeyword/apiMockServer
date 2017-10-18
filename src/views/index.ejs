@@ -10,12 +10,11 @@
 
 <body>
     <% body.forEach(item=>{ %>
-        <p><%= item.name %></p>
+        <h1><%= item.name %></h1>
         <p><%= item.description %></p>
         <% item.resourceGroups.forEach(resourceGroups=>{ %>
-            <p>
                 <% resourceGroups.resources.forEach(resources=>{ %>
-                    <p>资源url: <%= resources.uriTemplate %></p>
+                    <h2>资源url: <%= resources.uriTemplate %></h2>
                     <% resources.actions.forEach(action=>{ %>
                         <p>接口名称： <%= action.name %></p>
                         <p>接口描述： <%= action.description %></p>
@@ -31,7 +30,6 @@
                         <hr>
                     <% }) %>
                 <% }) %>
-            </p>
         <% }) %>
     <% }) %>
 </body>

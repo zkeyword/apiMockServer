@@ -1,5 +1,5 @@
 const parse = require('./parse')
-const Mock = require('mockjs')
+const { jsonParse } = require('./utils')
 
 module.exports = (router) => {
     return async (ctx, next) => {
@@ -10,8 +10,7 @@ module.exports = (router) => {
                     exp.responses[0].headers.forEach(header => {
                         ctx.set(header.name, header.value)
                     })
-                    console.log(exp.responses[0].body)
-                    ctx.body = Mock.mock(JSON.parse(exp.responses[0].body))
+                    ctx.body = jsonParse(exp.responses[0].body)
                 })
             })
         })
