@@ -16,4 +16,17 @@ router.get('/', async (ctx, next) => {
     })
 })
 
+router.get('/admin', async (ctx, next) => {
+    await ctx.render('admin', {
+        title: '接口管理'
+    })
+})
+
+const upload = require('../middleware/upload')
+router.post('/upload', upload.single('file'), async (ctx, next) => {
+    ctx.body = {
+        filename: ctx.req.file.filename
+    }
+})
+
 module.exports = router

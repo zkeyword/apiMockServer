@@ -23,17 +23,24 @@ exports.readFile = url => {
     })
 }
 
+exports.getFileFormat = fileName => {
+    let fileFormat = fileName.split('.')
+    return fileFormat[fileFormat.length - 1]
+}
+
 exports.getDrafterResult = dir => {
     return new Promise(async (resolve, reject) => {
         let list = await this.readDir(dir)
         let count = 0
         let arr = []
         list.forEach(async (fileName, index) => {
-            let result = await this.readFile(`${dir}/${fileName}`)
-            let item = drafter.parseSync(normalizeNewline(result), { type: 'ast' })
-            if (result) arr.push(item)
+            if (this.getFileFormat(fileName) === 'md') {
+                let result = await this.readFile(`${dir}/${fileName}`)
+                let item = drafter.parseSync(normalizeNewline(result), { type: 'ast' })
+                if (result) arr.push(item)
+            }
+            if (count === list.length - 1) resolve(arr)
             count++
-            if (count === list.length) resolve(arr)
         })
     })
 }
