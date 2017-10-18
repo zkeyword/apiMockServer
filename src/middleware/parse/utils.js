@@ -43,9 +43,9 @@ exports.jsonParse = str => {
     str = str.replace(/\'/g, '"')
     str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
     try {
-        str = JSON.parse(str)
+        str = mock(JSON.parse(str))
     } catch (error) {
-
+        return str
     }
-    return nanoRender.render(mock(str))
+    return typeof str === 'string' ? str : nanoRender.render(str)
 }
