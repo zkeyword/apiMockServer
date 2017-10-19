@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 const routes = require('./routes')
 const error = require('./routes/error')
 const parse = require('./middleware/parse')
+const { apiAUTH } = require('./middleware/auth')
 
 // middlewares
 app.use(bodyparser({
@@ -19,6 +20,7 @@ app.use(require('koa-static')(`${__dirname}/public`))
 app.use(views(`${__dirname}/views`, {
     extension: 'ejs'
 }))
+app.use(apiAUTH)
 
 // logger
 app.use(async (ctx, next) => {
