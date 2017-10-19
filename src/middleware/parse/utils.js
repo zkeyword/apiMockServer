@@ -37,9 +37,12 @@ exports.getDrafterResult = dir => {
             if (this.getFileFormat(fileName) === 'md') {
                 let result = await this.readFile(`${dir}/${fileName}`)
                 let item = drafter.parseSync(normalizeNewline(result), { type: 'ast' })
-                if (result) arr.push(item)
+                if (result) {
+                    item.ast.fileName = fileName
+                    arr[index] = item // 保证顺序
+                }
             }
-            if (count === list.length - 1) resolve(arr)
+            if (count === list.length - 1) resolve(arr.filter(x => x))
             count++
         })
     })

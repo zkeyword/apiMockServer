@@ -4,7 +4,9 @@ const views = require('koa-views')
 const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const koaStatic = require('koa-static')
 
+const stylus = require('./middleware/stylus')
 const routes = require('./routes')
 const error = require('./routes/error')
 const parse = require('./middleware/parse')
@@ -16,11 +18,11 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(`${__dirname}/public`))
+app.use(stylus(`${__dirname}/../public`))
+app.use(koaStatic(`${__dirname}/../public`))
 app.use(views(`${__dirname}/views`, {
     extension: 'ejs'
 }))
-app.use(apiAUTH)
 
 // logger
 app.use(async (ctx, next) => {
@@ -31,6 +33,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+app.use(apiAUTH)
 app.use(parse(routes))
 app.use(routes.routes(), routes.allowedMethods())
 app.use(error())
