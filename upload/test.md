@@ -1,52 +1,18 @@
 FORMAT: 1A
 
-# Responses API
-In this API example we will discuss what information a response can bear and
-how to define multiple responses. Technically a response is represented by a
-payload that is sent back in response to a request.
+# The Simplest API
+This is one of the simplest APIs written in the **API Blueprint**.
+One plain resource combined with a method and that's it! We will explain what is going on in the next installment - [Resource and Actions](02.%20Resource%20and%20Actions.md).
+
+**Note:** As we progress through the examples, do not also forget to view the [Raw](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md) code to see what is really going on in the API Blueprint, as opposed to just seeing the output of the Github Markdown parser.
+
+Also please keep in mind that every single example in this course is a **real API Blueprint** and as such you can **parse** it with the [API Blueprint parser](https://github.com/apiaryio/drafter) or one of its [bindings](https://github.com/apiaryio/drafter#bindings).
 
 ## API Blueprint
-+ [Previous: Grouping Resources](04.%20Grouping%20Resources.md)
-+ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/05.%20Responses.md)
-+ [Next: Requests](06.%20Requests.md)
++ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md)
++ [Next: Resource and Actions](02.%20Resource%20and%20Actions.md)
 
-# Group Messages
-Group of all messages-related resources.
-
-## My Message [/message]
-
-### Retrieve a Message [GET]
-This action has **two** responses defined: One returning plain text and the
-other a JSON representation of our resource. Both have the same HTTP status
-code. Also both responses bear additional information in the form of a custom
-HTTP header. Note that both responses have set the `Content-Type` HTTP header
-just by specifying `(text/plain)` or `(application/json)` in their respective
-signatures.
-
+# GET /message
 + Response 200 (text/plain)
 
-    + Headers
-
-            X-My-Message-Header: 42
-
-    + Body
-
-            Random.image()
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            X-My-Message-Header: 42
-
-    + Body
-
-            { "message": Random.image() }
-
-### Update a Message [PUT]
-
-+ Request (text/plain)
-
-        All your base are belong to us.
-
-+ Response 204
+        Hello World!

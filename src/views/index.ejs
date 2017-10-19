@@ -10,6 +10,14 @@
 
 <body>
     <% body.forEach(item=>{ %>
+        <% if(item.metadata){ %>
+            <div>版本信息</div>
+            <div>
+                <% item.metadata.forEach(meta=>{ %>
+                    <p><%= meta.name %>: <%= meta.value %></p>
+                <% }) %>
+            </div>
+        <% } %>
         <h1><%= item.name %></h1>
         <p><%= item.description %></p>
         <% item.resourceGroups.forEach(resourceGroups=>{ %>
