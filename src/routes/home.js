@@ -7,7 +7,7 @@ router.get('/', async (ctx, next) => {
     result.forEach(item => {
         body.push(item.ast)
         // console.log(item.ast.resourceGroups[0].resources[0].actions[0].examples[0].responses[0].body)
-        // console.log(item.ast)
+        console.log(item.ast)
     })
     await ctx.render('index', {
         title: 'Hello Koa 2!',

@@ -25,6 +25,7 @@
     "koa-stylus": "^0.1.0",
     "koa-views": "^5.2.1",
     "mockjs": "^1.0.1-beta3",
+    "mysql": "^2.15.0",
     "nano-json": "^1.2.4",
     "normalize-newline": "^3.0.0",
     "qs": "^6.5.1",

@@ -31,3 +31,16 @@
 - 启动项目
 
     npm run dev
+
+#### 相关文档
+
++ [API Blueprint 教程](https://apiblueprint.org/documentation/tutorial.html)
++ [Mockjs 实例](http://mockjs.com/examples.html)
+
+#### TODO LIST
+
+- 接入mysql
+- 支持markdown在线编辑
+- 渲染apiBlueprint解析的数据
+- 支持多个项目
+- 支持简单的用户模块，支持后台管理
