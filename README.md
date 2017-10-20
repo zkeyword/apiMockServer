@@ -11,8 +11,8 @@
     |__ script sql、初始化等相关脚本
     |__ src 后端开发目录
     |   |__ controllers 控制器
-    |   |__ dao 数据模型层
     |   |__ middleware 中间件
+    |   |__ models 数据模型层
     |   |__ routes 路由
     |   |__ services 业务层
     |   |__ views 模板

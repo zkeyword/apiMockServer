@@ -8,7 +8,7 @@
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix --ext .js script",
+    "lint": "eslint --fix --ext .js src",
     "precommit": "npm run lint"
   },
   "dependencies": {
