@@ -1,7 +1,7 @@
 const router = require('koa-router')()
-const fs = require('fs')
 const { parseResult } = require('../services/markdown')
 const upload = require('../middleware/upload')
+const { unlink } = require('../utils')
 
 router.get('/', async (ctx, next) => {
     let body = await parseResult()
@@ -24,22 +24,8 @@ router.post('/upload', upload.single('file'), async (ctx, next) => {
 })
 
 router.get('/delfile/:filename', async (ctx, next) => {
-    let unlink = filePath => {
-        return new Promise((resolve, reject) => {
-            fs.unlink(filePath, err => {
-                if (err) return reject(err)
-                resolve()
-            })
-        })
-    }
-    let msg
-    try {
-        await unlink(`${__dirname}/../../upload/${ctx.params.filename}`)
-        msg = '删除成功'
-    } catch (error) {
-        msg = '删除失败'
-    }
-    ctx.body = msg
+    let isError = await unlink(`${__dirname}/../../upload/${ctx.params.filename}`)
+    ctx.body = isError ? '删除失败' : '删除成功'
 })
 
 module.exports = router
