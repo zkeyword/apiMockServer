@@ -1,16 +1,12 @@
 const router = require('koa-router')()
-const upload = require('../middleware/upload')
-const { getDrafterResult } = require('../middleware/parse/utils')
 const fs = require('fs')
+const { parseResult } = require('../services/markdown')
+const upload = require('../middleware/upload')
 
 router.get('/', async (ctx, next) => {
-    let result = await getDrafterResult(`${__dirname}/../../upload/`)
-    let body = []
-    result.forEach(item => {
-        body.push(item.ast)
-    })
+    let body = await parseResult()
     await ctx.render('admin', {
-        title: '接口管理!',
+        title: '接口管理',
         body
     })
 })

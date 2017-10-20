@@ -10,7 +10,6 @@
     |__ public 前端开发目录
     |__ script sql、初始化等相关脚本
     |__ src 后端开发目录
-    |   |__ controllers 控制器
     |   |__ middleware 中间件
     |   |__ models 数据模型层
     |   |__ routes 路由
