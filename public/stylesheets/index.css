@@ -1,0 +1,377 @@
+@charset "utf-8";
+html {
+  color: #444;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  font-family: Microsoft Yahei, Arial, sans-serif;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+body,
+button,
+input,
+select,
+textarea {
+  font: 14px/1.5 "Microsoft YaHei", "Helvetica", "Helvetica Neue";
+}
+input,
+select,
+textarea {
+  color: #444;
+  font-size: 100%;
+}
+button {
+  cursor: pointer;
+  outline: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th {
+  text-align: inherit;
+}
+fieldset,
+img {
+  border: 0;
+}
+iframe {
+  display: block;
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+del {
+  text-decoration: line-through;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+th,
+var {
+  font-style: normal;
+  font-weight: 500;
+}
+ol,
+ul {
+  list-style: none;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+q:before,
+q:after {
+  content: '';
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+i {
+  font-style: normal;
+}
+ins,
+a {
+  text-decoration: none;
+}
+.fn-clear {
+  zoom: 1; /* for IE6 IE7 */
+}
+.fn-clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+body .fn-hide {
+  display: none;
+}
+body .fn-left,
+body .fn-right {
+  display: inline;
+}
+body .fn-left {
+  float: left;
+}
+body .fn-right {
+  float: right;
+}
+.react-draggable {
+  user-select: none;
+}
+.react-draggable,
+.cursor {
+  cursor: move;
+}
+.no-cursor {
+  cursor: auto;
+}
+.cursor-y {
+  cursor: ns-resize;
+}
+.cursor-x {
+  cursor: ew-resize;
+}
+.react-draggable strong {
+  background: #ddd;
+  border: 1px solid #999;
+  border-radius: 3px;
+  display: block;
+  margin-bottom: 10px;
+  padding: 3px 5px;
+  text-align: center;
+}
+.boxtest {
+  background: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 180px;
+  height: 180px;
+  margin: 10px;
+  padding: 10px;
+  float: left;
+}
+body {
+  height: 100%;
+}
+.lt-main {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  overflow-y: auto;
+  background: #fff;
+  min-width: 1166px;
+  box-sizing: border-box;
+  display: flex;
+  min-width: 1003px;
+}
+.ui-table {
+  padding: 0 40px;
+}
+.ui-table .ant-table-body .ant-table-tbody {
+  text-align: center;
+}
+.ui-table .ant-table-body .ant-table-thead tr th {
+  background: rgba(52,161,239,0.69);
+  color: #fff;
+  text-align: center;
+  border-left: 1px solid #e9e9e9;
+}
+.ui-table .ant-table-body .ant-table-thead tr th:last-child {
+  border-right: 1px solid #e9e9e9;
+}
+.ui-table .ant-table-body .ant-table-tbody tr td {
+  border-left: 1px solid #e9e9e9;
+}
+.ui-table .ant-table-body .ant-table-tbody tr td:last-child {
+  border-right: 1px solid #e9e9e9;
+}
+.ui-table .operation a {
+  margin: 1em;
+}
+.ui-table .deleColor {
+  color: #f00;
+  cursor: pointer;
+}
+.ui-table .ant-popover-buttons {
+  text-align: center;
+}
+.ui-breadcrumb {
+  background: #f1f1f1;
+}
+.ui-breadcrumb div {
+  padding: 0 40px;
+  height: 50px;
+  line-height: 50px;
+}
+.ui-breadcrumb+.ui-table {
+  margin-top: 20px;
+}
+.ant-form-item .ant-col-8 {
+  width: 38%;
+}
+.ant-form-item .ant-form-item-control button {
+  margin: auto 20px;
+}
+.ant-form-item .ant-form-item-control button.reset-form {
+  color: #000;
+  background-color: #ccc;
+  border-color: #999;
+}
+.ant-form-item .ant-form-item-control button.cancel-add {
+  color: #000;
+  background-color: #fff;
+  border-color: #999;
+}
+.ui-search {
+  margin: 15px 40px;
+}
+.ui-search .ant-form-item {
+  display: inline-block;
+  margin: 0 20px 0 0;
+  zoom: 1;
+}
+.ui-search .ant-form-item:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.ui-search .ant-form-item .ant-form-item-label {
+  float: left;
+}
+.ui-search .ant-form-item .ant-form-item-control-wrapper {
+  float: left;
+}
+.ui-search .ant-form-item+.ant-btn-primary {
+  margin: 0;
+}
+.ui-search .auxiliaryClass {
+  display: inline-block;
+  padding: 0 8px;
+  margin-left: -20px;
+}
+.ui-search .timeChang .ant-form-item-control-wrapper {
+  width: 120px;
+}
+.ui-search .ant-btn-primary {
+  margin-top: 2px;
+  margin-left: 20px;
+}
+.ui-search+.ui-btnBar {
+  padding-top: 0;
+}
+.ui-btnBar {
+  padding: 15px 40px;
+}
+.ui-btnBar .ant-btn {
+  margin-right: 30px;
+}
+.ui-btnBar .ant-upload .ant-btn {
+  background: #108ee9;
+}
+.ui-btnBar .ant-upload .ant-btn span {
+  margin-left: 0;
+  color: #fff;
+}
+.ui-btnBar .ant-upload .anticon-upload:before {
+  content: " ";
+}
+.ui-btnBarCenter {
+  text-align: center;
+}
+.ui-btnBarCenter .ant-btn {
+  display: inline-block;
+}
+.ui-tab {
+  margin: 10px 40px 0;
+}
+.ui-formDetail .ant-form-item {
+  float: left;
+  width: 50%;
+  margin-top: 20px;
+}
+.ui-formDetail .ant-form-item >div {
+  float: left;
+}
+.ui-formDetail .ant-form-item:nth-child(odd) {
+  padding-left: calc(50% - 280px);
+}
+.ui-formDetail .btn {
+  width: 100%;
+  float: left;
+  margin-top: 30px;
+}
+.ui-formDetail .btn button {
+  margin-right: 20px;
+}

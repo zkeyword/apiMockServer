@@ -10,7 +10,7 @@ module.exports = (router) => {
                     exp.responses[0].headers.forEach(header => {
                         ctx.set(header.name, header.value)
                     })
-                    ctx.body = jsonParse(exp.responses[0].body)
+                    ctx.body = jsonParse(exp.responses[0].body, true)
                 })
             })
         })

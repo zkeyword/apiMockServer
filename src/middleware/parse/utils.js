@@ -48,7 +48,7 @@ exports.getDrafterResult = dir => {
     })
 }
 
-exports.jsonParse = str => {
+exports.jsonParse = (str, original) => {
     if (!str) return str
     str = str.replace(/\'/g, '"')
     str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
@@ -57,5 +57,5 @@ exports.jsonParse = str => {
     } catch (error) {
         return str
     }
-    return typeof str === 'string' ? str : nanoRender.render(str)
+    return typeof str === 'string' || original ? str : nanoRender.render(str)
 }

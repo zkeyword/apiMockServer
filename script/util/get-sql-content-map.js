@@ -1,7 +1,7 @@
-const fs = require('fs');
-const getSqlMap = require('./get-sql-map');
+const fs = require('fs')
+const getSqlMap = require('./get-sql-map')
 
-let sqlContentMap = {};
+let sqlContentMap = {}
 
 /**
  * 读取sql文件内容
@@ -9,9 +9,9 @@ let sqlContentMap = {};
  * @param  {string} path     文件所在的路径
  * @return {string}          脚本文件内容
  */
-function getSqlContent( fileName,  path ) {
-  let content = fs.readFileSync( path, 'binary' );
-  sqlContentMap[ fileName ] = content;
+function getSqlContent(fileName, path) {
+    let content = fs.readFileSync(path, 'binary')
+    sqlContentMap[ fileName ] = content
 }
 
 /**
@@ -19,12 +19,12 @@ function getSqlContent( fileName,  path ) {
  * @return {object} 
  */
 function getSqlContentMap () {
-  let sqlMap = getSqlMap();
-  for( let key in sqlMap ) {
-    getSqlContent( key, sqlMap[key] );
-  }
+    let sqlMap = getSqlMap()
+    for (let key in sqlMap) {
+        getSqlContent(key, sqlMap[key])
+    }
 
-  return sqlContentMap;
+    return sqlContentMap
 }
 
-module.exports = getSqlContentMap;
+module.exports = getSqlContentMap

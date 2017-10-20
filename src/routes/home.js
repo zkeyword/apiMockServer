@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-let { getDrafterResult, jsonParse } = require('../middleware/parse/utils')
+const { getDrafterResult, jsonParse } = require('../middleware/parse/utils')
 
 router.get('/', async (ctx, next) => {
     let result = await getDrafterResult(`${__dirname}/../../upload/`)
