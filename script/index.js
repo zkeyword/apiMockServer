@@ -15,6 +15,7 @@ const eventLog = function (err, sqlFile, index) {
 let sqlContentMap = getSqlContentMap()
 
 // 执行建表sql脚本
+// TODO: 第二次运行时出错，应该先清空
 const createAllTables = async () => {
     for (let key in sqlContentMap) {
         let sqlShell = sqlContentMap[key]
@@ -32,7 +33,7 @@ const createAllTables = async () => {
         }
     }
     console.log('sql脚本执行结束！')
-    console.log('请按 ctrl + c 键退出！')
+    process.exit()
 }
 
 createAllTables()
