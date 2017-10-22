@@ -38,7 +38,7 @@
 
 #### TODO LIST
 
-- 接入mysql
+- ~~ 接入mysql
 - 支持markdown在线编辑
 - 渲染apiBlueprint解析的数据
 - 支持多个项目
