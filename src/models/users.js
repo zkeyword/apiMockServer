@@ -1,11 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const UserInfo = sequelize.define('user_info',
+    const UserInfo = sequelize.define('users',
         {
-            id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true
-            },
             uid: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -24,10 +19,11 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            freezeTableName: true, // 默认false修改表名为复数，true不修改表名，与数据库表名同步
+            freezeTableName: true // 默认false修改表名为复数，true不修改表名，与数据库表名同步
             // tableName: 'user', // 表名
-            timestamps: false // 是否自动添加时间戳createAt，updateAt
-        })
+            // timestamps: false // 是否自动添加时间戳createAt，updateAt
+        }
+    )
 
     return UserInfo
 }

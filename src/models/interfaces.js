@@ -1,17 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-    const Project = sequelize.define('project',
+    const interfaces = sequelize.define('interfaces',
         {
-            name: {
+            content: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            alias: {
+            title: {
                 type: DataTypes.STRING,
-                allowNull: true
-            },
-            type: {
-                type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false
             }
         },
         {
@@ -20,5 +16,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-    return Project
+    return interfaces
 }

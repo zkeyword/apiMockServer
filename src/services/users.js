@@ -1,8 +1,8 @@
-const { user_info } = require('../models')
+const { users } = require('../models')
 
 exports.getUserByName = async (name) => {
     if (!name) return []
-    let userInfo = await user_info.findAll({
+    let userInfo = await users.findAll({
         where: {
             name: name
         }
