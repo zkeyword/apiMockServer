@@ -4,26 +4,38 @@ const { jsonParse, getDrafterResult } = require('./utils')
 module.exports = (router) => {
     return async (ctx, next) => {
         let result = await getDrafterResult(`${__dirname}/../../../upload/`)
-        let urlList = []
-        // TODO
-        result.forEach(item => {
-            item.ast.resourceGroups.forEach(resourceGroup => {
-                resourceGroup.resources.forEach(resource => {
-                    let parsedUrl = urlParser.parse(resource.uriTemplate)
-                    resource.actions.forEach(action => {
-                        action.url = parsedUrl.url
-                        urlList.push(action)
+        // let urlList = []
+        let handleRouer = (actions, example, url) => {
+            router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
+                example.responses.forEach(response => {
+                    response.headers.forEach(header => {
+                        let type = ctx.req.headers['content-type']
+                        let body = response.body
+                        let status = response.name | 0
+                        console.log(status, type, header.value)
+                        if (type !== undefined && type === header.value) {
+                            ctx.set(header.name, header.value)
+                            ctx.status = status
+                            ctx.body = jsonParse(body, true)
+                        } else if (header.value === 'text/plain') {
+                            ctx.status = status
+                            ctx.body = jsonParse(body, true)
+                        }
                     })
                 })
             })
-        })
-        urlList.forEach(re => {
-            re.examples.forEach(exp => {
-                router[re.method.toLocaleLowerCase()](re.url, async (ctx, next) => {
-                    exp.responses[0].headers.forEach(header => {
-                        ctx.set(header.name, header.value)
+        }
+        result.forEach(item => {
+            // console.log(JSON.stringify(item))
+            item.ast.resourceGroups.forEach(resourceGroup => {
+                resourceGroup.resources.forEach(resource => {
+                    let parsedUrl = urlParser.parse(resource.uriTemplate)
+                    let url = parsedUrl.url
+                    resource.actions.forEach(actions => {
+                        actions.examples.forEach(example => {
+                            handleRouer(actions, example, url)
+                        })
                     })
-                    ctx.body = jsonParse(exp.responses[0].body, true)
                 })
             })
         })
