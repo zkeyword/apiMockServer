@@ -1,27 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-    const UserInfo = sequelize.define('project',
+    const Project = sequelize.define('project',
         {
-            id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true
-            },
             name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                comment: '项目名称'
             },
             alias: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                comment: '别名'
             },
-            type: {
+            description: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                comment: '描述'
             }
         },
         {
-            freezeTableName: true
-        })
+            freezeTableName: true,
+            autoIncrement: true,
+            comment: '项目表'
+        }
+    )
 
-    return UserInfo
+    return Project
 }

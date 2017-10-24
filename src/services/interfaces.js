@@ -1,10 +1,10 @@
-const { users } = require('../models')
+const { interfaces } = require('../models')
 
 exports.add = async req => {
     if (!Object.keys(req).length || !req.name) return
-    return await users.findOrCreate({
+    return await interfaces.findOrCreate({
         where: {
-            username: req.username
+            name: req.name
         },
         defaults: req
     })
@@ -12,7 +12,7 @@ exports.add = async req => {
 
 exports.del = async id => {
     if (!id) return false
-    return await users.destroy({
+    return await interfaces.destroy({
         where: {
             id
         }
@@ -21,7 +21,7 @@ exports.del = async id => {
 
 exports.modify = async (id, req) => {
     if (!(Object.keys(req).length && id)) return false
-    return await users.update(req, {
+    return await interfaces.update(req, {
         where: {
             id
         }
@@ -37,14 +37,10 @@ exports.list = async req => {
             }
         }
     }
-    return await users.findAll(obj)
+    return await interfaces.findAll(obj)
 }
 
-exports.getUserByIdOrName = async obj => {
-    if (!Object.keys(obj).length) return []
-    return await users.findAll({
-        where: {
-            ...obj
-        }
-    })
+exports.alias = async id => {
+    if (!id) return {}
+    return await interfaces.findById(id)
 }

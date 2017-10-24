@@ -1,25 +1,29 @@
-const { project } = require('../models')
+const { project, usersProject, users } = require('../models')
 
 exports.add = async req => {
-    if (req && req.id) {
-        return await project.findOrCreate(req)
-    }
+    if (!Object.keys(req).length || !req.name) return
+    return await project.findOrCreate({
+        where: {
+            name: req.name
+        },
+        defaults: req
+    })
 }
 
 exports.del = async id => {
     if (!id) return false
-    project.destroy({
+    return await project.destroy({
         where: {
             id
         }
     })
 }
 
-exports.modify = async req => {
-    if (!(req && req.id)) return false
+exports.modify = async (id, req) => {
+    if (!(Object.keys(req).length && id)) return false
     return await project.update(req, {
         where: {
-            id: req.id
+            id
         }
     })
 }
@@ -30,7 +34,12 @@ exports.list = async req => {
         obj = {
             where: {
                 ...req
-            }
+            },
+            include: [
+                {
+                    model: users
+                }
+            ]
         }
     }
     return await project.findAll(obj)
