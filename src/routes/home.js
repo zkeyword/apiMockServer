@@ -4,7 +4,7 @@ const usersService = require('../services/users')
 
 router.get('/', async (ctx, next) => {
     let body = await parseResult()
-    let user = await usersService.getUserByName('admin01')
+    let user = await usersService.getUserByIdOrName({ username: 'admin01' })
     console.log(user)
     await ctx.render('index', {
         title: '首页',

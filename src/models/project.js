@@ -3,20 +3,24 @@ module.exports = (sequelize, DataTypes) => {
         {
             name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                comment: '项目名称'
             },
             alias: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                comment: '别名'
             },
-            type: {
+            description: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                comment: '描述'
             }
         },
         {
             freezeTableName: true,
-            autoIncrement: true
+            autoIncrement: true,
+            comment: '项目表'
         }
     )
 

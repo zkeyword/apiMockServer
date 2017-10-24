@@ -1,4 +1,4 @@
-const { project } = require('../models')
+const { project, usersProject, users } = require('../models')
 
 exports.add = async req => {
     if (!Object.keys(req).length || !req.name) return
@@ -34,7 +34,12 @@ exports.list = async req => {
         obj = {
             where: {
                 ...req
-            }
+            },
+            include: [
+                {
+                    model: users
+                }
+            ]
         }
     }
     return await project.findAll(obj)
