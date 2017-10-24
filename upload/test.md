@@ -12,7 +12,17 @@ Also please keep in mind that every single example in this course is a **real AP
 + [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md)
 + [Next: Resource and Actions](02.%20Resource%20and%20Actions.md)
 
-# GET /message
+# GET /message{?status,priority}
++ Parameters
+    + status (string)
+        + Default: `20`
+    + priority (number)
+        + Default: `20`
+
 + Response 200 (text/plain)
 
         Hello World!
+
++ Response 401 (application/json)
+
+        Hi World!
