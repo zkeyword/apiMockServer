@@ -24,5 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
+    Project.associate = (models) => {
+        Project.belongsTo(models.users)
+    }
+
     return Project
 }

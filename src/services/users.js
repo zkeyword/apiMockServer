@@ -1,7 +1,8 @@
 const { users } = require('../models')
 
 exports.add = async req => {
-    if (!Object.keys(req).length || !req.name) return
+    console.log(req)
+    if (!Object.keys(req).length || !req.username) return
     return await users.findOrCreate({
         where: {
             username: req.username
