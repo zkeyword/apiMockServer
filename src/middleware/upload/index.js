@@ -1,5 +1,5 @@
 const multer = require('koa-multer')
-const { getFileFormat } = require('../parse/utils')
+const { getFileFormat } = require('../../utils')
 
 let storage = multer.diskStorage({
     // 文件保存路径  

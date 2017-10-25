@@ -8,11 +8,10 @@
     |__ bin node启动相关
     |__ config 中间件配置
     |__ public 前端开发目录
-    |__ script sql、初始化等相关脚本
+    |__ ~~ script sql、初始化等相关脚本 ~~ // 用 sequelize.sync() 代替
     |__ src 后端开发目录
-    |   |__ controllers 控制器
-    |   |__ dao 数据模型层
     |   |__ middleware 中间件
+    |   |__ models 数据模型层
     |   |__ routes 路由
     |   |__ services 业务层
     |   |__ views 模板
@@ -30,4 +29,17 @@
 
 - 启动项目
 
-    npm run dev 
+    npm run dev
+
+#### 相关文档
+
++ [API Blueprint 教程](https://apiblueprint.org/documentation/tutorial.html)
++ [Mockjs 实例](http://mockjs.com/examples.html)
+
+#### TODO LIST
+
+- ~~ 接入mysql
+- 支持markdown在线编辑
+- 渲染apiBlueprint解析的数据
+- 支持多个项目
+- 支持简单的用户模块，支持后台管理

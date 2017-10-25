@@ -22,7 +22,7 @@ const createAllTables = async () => {
 
         for (let [i, shell] of sqlShellList.entries()) {
             if (shell.trim()) {
-                let result = await query(shell)
+                let result = await query(shell) // TODO: 第二次运行时出错，应该先清空
                 if (result.serverStatus * 1 === 2) {
                     eventLog(null, key, i)
                 } else {
@@ -32,7 +32,7 @@ const createAllTables = async () => {
         }
     }
     console.log('sql脚本执行结束！')
-    console.log('请按 ctrl + c 键退出！')
+    process.exit()
 }
 
 createAllTables()

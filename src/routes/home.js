@@ -1,16 +1,12 @@
 const router = require('koa-router')()
-const { getDrafterResult, jsonParse } = require('../middleware/parse/utils')
+const { parseResult, jsonParse } = require('../services/markdown')
+// const usersService = require('../services/users')
 
 router.get('/', async (ctx, next) => {
-    let result = await getDrafterResult(`${__dirname}/../../upload/`)
-    let body = []
-    result.forEach(item => {
-        body.push(item.ast)
-        // console.log(item.ast.resourceGroups[0].resources[0].actions[0].examples[0].responses[0].body)
-        // console.log(item.ast)
-    })
+    let body = await parseResult()
+    let user = await usersService.getUserByIdOrName({ username: 'admin01' })
     await ctx.render('index', {
-        title: 'Hello Koa 2!',
+        title: '首页',
         body,
         jsonParse
     })

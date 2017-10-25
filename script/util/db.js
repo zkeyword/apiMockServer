@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const config = require('./../../server/configs/config.mysql')
+const config = require('../../config/mysql')
 
 const pool = mysql.createPool({
     host: config.host,
@@ -8,9 +8,9 @@ const pool = mysql.createPool({
     database: config.database
 })
 
-let query = function(sql, values) {
+let query = function (sql, values) {
     return new Promise((resolve, reject) => {
-        pool.getConnection(function(err, connection) {
+        pool.getConnection(function (err, connection) {
             if (err) {
                 reject(err)
             } else {

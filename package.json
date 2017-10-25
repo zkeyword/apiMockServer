@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "init": "node ./script",
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix --ext .js script",
+    "lint": "eslint --fix --ext .js src",
     "precommit": "npm run lint"
   },
   "dependencies": {
@@ -26,6 +27,8 @@
     "koa-stylus": "^0.1.0",
     "koa-views": "^5.2.1",
     "mockjs": "^1.0.1-beta3",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.4.2",
     "nano-json": "^1.2.4",
     "normalize-newline": "^3.0.0",
     "qs": "^6.5.1",
