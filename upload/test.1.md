@@ -32,6 +32,8 @@ This is the `application/vnd.siren+json` message resource representation.
 
 + Response 401 (application/json;charset=UTF-8)
 
+        401
+
 ### Retrieve all the things [PUT]
 
 + Response 200 (application/json;charset=UTF-8)
