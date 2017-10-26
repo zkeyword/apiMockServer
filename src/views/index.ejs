@@ -68,8 +68,13 @@
                                             <%= action.method %>
                                         </dd>
                                         <% action.examples.forEach(example=>{ %>
-                                            <%= JSON.stringify(example.requests) %>
-                                            <% example.responses.forEach(response=>{ %>
+                                            <% example.responses.forEach((response, i)=>{ %>
+                                                <% if(example.requests[i]){ %>
+                                                    <dd>
+                                                        <span>请求参数：</span>
+                                                        <pre><%= example.requests[i].body %></pre>
+                                                    </dd>
+                                                <% } %>
                                                 <dd>
                                                     <span>返回结果： </span>
                                                     <pre><%= jsonParse(response.body) %></pre>
