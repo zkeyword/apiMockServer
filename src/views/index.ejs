@@ -35,17 +35,17 @@
                 <% body.forEach(item=>{ %>
                     <% if(item.metadata){ %>
                         <div class="tabContent">
-                            <div>版本信息</div>
+                            <div class="version">版本信息</div>
                             <div>
                                 <% item.metadata.forEach(meta=>{ %>
-                                    <p>
+                                    <blockquote class="version_infor">
                                         <%= meta.name %>:
                                             <%= meta.value %>
                                     </p>
                                     <% }) %>
                             </div>
                             <% } %>
-                                <h1>
+                                <h1 class="resource">
                                     <%= item.name %>
                                 </h1>
 
@@ -54,30 +54,32 @@
                                 </p>
                                 <% item.resourceGroups.forEach(resourceGroups=>{ %>
                                     <% resourceGroups.resources.forEach(resources=>{ %>
-                                        <h2>资源url:
-                                            <%= resources.uriTemplate %>
-                                        </h2>
-                                        <% resources.actions.forEach(action=>{ %>
-                                            <p>接口名称：
-                                                <%= action.name %>
-                                            </p>
-                                            <p>接口描述：
-                                                <%= action.description %>
-                                            </p>
-                                            <p>请求方法：
-                                                <%= action.method %>
-                                            </p>
-                                            <p>返回结果： </p>
-                                            <p>
+                                        <ul class="resource_list">
+                                            <li>资源url:
+                                                <%= resources.uriTemplate %>
+                                            </li>
+                                            <% resources.actions.forEach(action=>{ %>
+                                                <li>接口名称：
+                                                    <%= action.name %>
+                                                </li>
+                                                <li>接口描述：
+                                                    <%= action.description %>
+                                                </li>
+                                                <li>请求方法：
+                                                    <%= action.method %>
+                                                </li>
+                                                <li>返回结果： </li>
+                                        </ul>
+                                        <pre>
                                                 <% action.examples.forEach(example=>{ %>
                                                     <% example.responses.forEach(response=>{ %>
                                                         <pre><%= jsonParse(response.body) %></pre>
-                                                        <% }) %>
-                                                            <% }) %>
-                                            </p>
-                                            <hr>
+                                        <% }) %>
                                             <% }) %>
+                                                </pre>
+                                                <hr>
                                                 <% }) %>
+                                                    <% }) %>
                         </div>
                         <% }) %>
                             <% }) %>
