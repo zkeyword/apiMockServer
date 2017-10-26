@@ -14,3 +14,203 @@ body
     box-sizing: border-box
     display: flex
     min-width: 1003px
+
+
+
+/*内容区域*/
+.tabmain
+    background: #F3F3F3
+    border:1px solid #F3F3F3
+
+.tabmain .tabGroup
+    float:left
+    width:15%
+    height:auto 
+    z-index:3
+
+.tabmain .tabGroup li
+    line-height:48px
+    padding-left:28px
+    text-align:left
+    cursor:pointer
+    font-size:14px
+    font-family:'Microsoft yahei'
+    color:#666
+    
+.tabmain .tabGroup li.selectedTab
+    padding-left:28px
+    color:#1d9fd3
+    font-weight:bold
+
+.tabmain .tabContent
+    padding:10px 60px
+    background-color:#fff
+    color:#777
+
+.tabContent p a
+    margin-right:15px
+    text-decoration:none
+    text-align:center
+    color:orange 
+    font-weight:bold
+
+.tabContent h3
+    margin-bottom:5px
+    background:orange
+    color:#fff
+    font-size:14px
+    font-weight:bold
+    line-height:28px
+    text-align:center
+
+
+.tabmain .blueline
+    position:absolute
+    top:0px
+    left:0px
+    width:3px
+    height:48px
+    background:#1d9fd3
+    overflow:hidden
+
+
+.tabContent .witness p
+    position:relative
+    padding-left:20px
+
+.tabContent .witness p em
+    color:orange
+    font-weight:bold
+    
+.tabContent .witness p a
+    color:#666
+    font-weight:normal
+    display:block 
+    line-height:24px 
+    text-align:left
+
+.tabContent .witness p a:hover
+    background-color:#efefef
+
+.tabContent .witness p .ele
+    left:0px
+
+
+#container
+    height:950px
+    background:#fff
+    overflow:hidden
+    position: relative
+
+#slider
+    position:absolute
+    top:0px
+    right:0
+    width:6px
+    border-radius:6px
+    background:#ccc
+    cursor:pointer
+    width: 10px
+
+#sliderParent
+    position:absolute
+    left:0
+    height:0
+    width:100%
+    z-index:999
+
+#outerWrap
+    position:relative
+    z-index:999
+
+
+/*滚动条*/
+.wrapacon
+    position:relative
+    float:left
+    width:468px
+    height:360px
+    margin-top:5px
+    overflow:hidden
+
+.wrapaconlis
+    position:absolute
+    left:0
+    top:0
+    width:450px
+
+.scrbar
+    position:relative
+    width:4px 
+    height:355px
+    border:1px solid #f4f4f4
+    border-radius:20px
+    background-color:#f4f4f4
+    float:left
+    left:443px
+    margin-left:15px
+    
+.scrbar .barbg
+    position:absolute
+    right:-1px
+    top:50px
+    width:2px
+    height:105px
+    border:2px solid #dadada
+    background-color:#dadada
+    border-radius:20px
+
+.search
+    width: 500px
+    height: 40px
+    line-height: 40px
+    text-align: center
+  
+.search label
+    width: 64px
+    display: inline-block
+  
+.search input
+    height: 21px
+    padding-left: 3px
+
+
+pre
+    background: #f7f7f7
+    padding:0 10px
+
+
+.version
+    border:1px solid #ddd
+    padding: 10px 20px
+    margin: 0 0 20px
+    
+    .name
+        font-size: 15px
+
+    .list
+        margin-top: 10px
+        font-size: 12px
+
+.resource
+
+    .name
+        font-size: 30px
+        color: #333
+
+    .detail
+        margin: 0 0 20px
+
+.resourcesName
+    font-weight: bold
+    font-size: 20px
+
+.resourcesList
+
+    dt
+        margin: 20px 0 0
+        color:#1d9fd3
+        font-weight:bold
+
+    dd img
+        display:block

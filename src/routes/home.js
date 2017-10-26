@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const marked = require('marked')
 const { parseResult, jsonParse } = require('../services/markdown')
 // const usersService = require('../services/users')
 
@@ -8,7 +9,8 @@ router.get('/', async (ctx, next) => {
     await ctx.render('index', {
         title: '首页',
         body,
-        jsonParse
+        jsonParse,
+        marked
     })
 })
 

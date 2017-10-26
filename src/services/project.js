@@ -34,20 +34,15 @@ exports.list = async req => {
         obj = {
             where: {
                 ...req
-            },
-            include: [
-                {
-                    model: users,
-                    as: 'users',
-                    where: {
-                        id: '1'
-                    }
-                }
-            ]
+            }
         }
     }
-    // project.hasMany(users, { as: 'users' })
-    return await project.findAll(obj)
+    return await project.findAll(obj, {
+        include: [{
+            model: users,
+            attributes: ['id']
+        }]
+    })
 }
 
 exports.alias = async id => {

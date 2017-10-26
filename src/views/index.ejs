@@ -5,7 +5,7 @@
     <title>
         <%= title %>
     </title>
-    <link rel='stylesheet' href='/stylesheets/tab.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
     <script src="script/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/script/index.js"></script>
     <script src="script/event.js"></script>
@@ -21,71 +21,79 @@
     <div class="tabmain">
         <div id="outerWrap">
             <div id="sliderParent"></div>
-            <!-- <div class="blueline" id="blueline" style="top: 0px; "></div> -->
             <ul class="tabGroup">
                 <% body.forEach(item=>{ %>
                     <li class="tabOption">
                         <%=item.fileName %>
                     </li>
-                    <% }) %>
+                <% }) %>
             </ul>
         </div>
         <div id="container">
             <div id="content">
                 <% body.forEach(item=>{ %>
-                    <% if(item.metadata){ %>
-                        <div class="tabContent">
-                            <div class="version">版本信息</div>
-                            <div>
-                                <% item.metadata.forEach(meta=>{ %>
-                                    <blockquote class="version_infor">
-                                        <%= meta.name %>:
-                                            <%= meta.value %>
-                                    </p>
+                    <div class="tabContent">
+                        <% if(item.metadata){ %>
+                            <div class="version">
+                                <div class="name">文档版本信息</div>
+                                <ul class="list">
+                                    <% item.metadata.forEach(meta=>{ %>
+                                        <li>
+                                            <%= meta.name %>: <%= meta.value %>
+                                        </li>
                                     <% }) %>
+                                </ul>
                             </div>
-                            <% } %>
-                                <h1 class="resource">
-                                    <%= item.name %>
-                                </h1>
-
-                                <p>
-                                    <%= item.description %>
-                                </p>
-                                <% item.resourceGroups.forEach(resourceGroups=>{ %>
-                                    <% resourceGroups.resources.forEach(resources=>{ %>
-                                        <ul class="resource_list">
-                                            <li>资源url:
-                                                <%= resources.uriTemplate %>
-                                            </li>
-                                            <% resources.actions.forEach(action=>{ %>
-                                                <li>接口名称：
-                                                    <%= action.name %>
-                                                </li>
-                                                <li>接口描述：
-                                                    <%= action.description %>
-                                                </li>
-                                                <li>请求方法：
-                                                    <%= action.method %>
-                                                </li>
-                                                <li>返回结果： </li>
-                                        </ul>
-                                        <pre>
-                                                <% action.examples.forEach(example=>{ %>
-                                                    <% example.responses.forEach(response=>{ %>
-                                                        <pre><%= jsonParse(response.body) %></pre>
-                                        <% }) %>
-                                            <% }) %>
-                                                </pre>
-                                                <hr>
-                                                <% }) %>
-                                                    <% }) %>
+                        <% } %>
+                        <div class="resource">
+                            <div class="name">模块：<%= item.name %></div>
+                            <div class="detail">
+                                <%- marked(item.description) %>
+                            </div>
                         </div>
-                        <% }) %>
+                        <% item.resourceGroups.forEach(resourceGroups=>{ %>
+                            <% resourceGroups.resources.forEach(resources=>{ %>
+                                <div class="resourcesName">资源:<%= resources.uriTemplate %></div>
+                                <dl class="resourcesList">
+                                    <% resources.actions.forEach(action=>{ %>
+                                        <dt>
+                                            <%= action.name %>
+                                        </dt>
+                                        <dd>
+                                            <span>接口描述：</span>
+                                            <%= action.description %>
+                                        </dd>
+                                        <dd>
+                                            <span>请求方法：</span>
+                                            <%= action.method %>
+                                        </dd>
+                                        <% action.examples.forEach(example=>{ %>
+                                            <%= JSON.stringify(example.requests) %>
+                                            <% example.responses.forEach(response=>{ %>
+                                                <dd>
+                                                    <span>返回结果： </span>
+                                                    <pre><%= jsonParse(response.body) %></pre>
+                                                </dd>
+                                            <% }) %>
+                                        <% }) %>
+                                    <% }) %>
+                                </dl>
                             <% }) %>
+                        <% }) %>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+$.ajax({
+    url:'/message',
+    data:{
+        name:'yang',age:25
+    }
+})
+</script>

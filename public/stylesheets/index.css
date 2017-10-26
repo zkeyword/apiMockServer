@@ -186,41 +186,6 @@ body .fn-right {
   width: 200px;
   position: relative;
 }
-.react-draggable {
-  user-select: none;
-}
-.react-draggable,
-.cursor {
-  cursor: move;
-}
-.no-cursor {
-  cursor: auto;
-}
-.cursor-y {
-  cursor: ns-resize;
-}
-.cursor-x {
-  cursor: ew-resize;
-}
-.react-draggable strong {
-  background: #ddd;
-  border: 1px solid #999;
-  border-radius: 3px;
-  display: block;
-  margin-bottom: 10px;
-  padding: 3px 5px;
-  text-align: center;
-}
-.boxtest {
-  background: #fff;
-  border: 1px solid #999;
-  border-radius: 3px;
-  width: 180px;
-  height: 180px;
-  margin: 10px;
-  padding: 10px;
-  float: left;
-}
 body {
   height: 100%;
 }
@@ -238,147 +203,189 @@ body {
   display: flex;
   min-width: 1003px;
 }
-.ui-table {
-  padding: 0 40px;
+.tabmain {
+  background: #f3f3f3;
+  border: 1px solid #f3f3f3;
 }
-.ui-table .ant-table-body .ant-table-tbody {
-  text-align: center;
+.tabmain .tabGroup {
+  float: left;
+  width: 15%;
+  height: auto;
+  z-index: 3;
 }
-.ui-table .ant-table-body .ant-table-thead tr th {
-  background: rgba(52,161,239,0.69);
-  color: #fff;
-  text-align: center;
-  border-left: 1px solid #e9e9e9;
-}
-.ui-table .ant-table-body .ant-table-thead tr th:last-child {
-  border-right: 1px solid #e9e9e9;
-}
-.ui-table .ant-table-body .ant-table-tbody tr td {
-  border-left: 1px solid #e9e9e9;
-}
-.ui-table .ant-table-body .ant-table-tbody tr td:last-child {
-  border-right: 1px solid #e9e9e9;
-}
-.ui-table .operation a {
-  margin: 1em;
-}
-.ui-table .deleColor {
-  color: #f00;
+.tabmain .tabGroup li {
+  line-height: 48px;
+  padding-left: 28px;
+  text-align: left;
   cursor: pointer;
+  font-size: 14px;
+  font-family: 'Microsoft yahei';
+  color: #666;
 }
-.ui-table .ant-popover-buttons {
-  text-align: center;
+.tabmain .tabGroup li.selectedTab {
+  padding-left: 28px;
+  color: #1d9fd3;
+  font-weight: bold;
 }
-.ui-breadcrumb {
-  background: #f1f1f1;
-}
-.ui-breadcrumb div {
-  padding: 0 40px;
-  height: 50px;
-  line-height: 50px;
-}
-.ui-breadcrumb+.ui-table {
-  margin-top: 20px;
-}
-.ant-form-item .ant-col-8 {
-  width: 38%;
-}
-.ant-form-item .ant-form-item-control button {
-  margin: auto 20px;
-}
-.ant-form-item .ant-form-item-control button.reset-form {
-  color: #000;
-  background-color: #ccc;
-  border-color: #999;
-}
-.ant-form-item .ant-form-item-control button.cancel-add {
-  color: #000;
+.tabmain .tabContent {
+  padding: 10px 60px;
   background-color: #fff;
-  border-color: #999;
+  color: #777;
 }
-.ui-search {
-  margin: 15px 40px;
+.tabContent p a {
+  margin-right: 15px;
+  text-decoration: none;
+  text-align: center;
+  color: #ffa500;
+  font-weight: bold;
 }
-.ui-search .ant-form-item {
-  display: inline-block;
-  margin: 0 20px 0 0;
-  zoom: 1;
-}
-.ui-search .ant-form-item:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-}
-.ui-search .ant-form-item .ant-form-item-label {
-  float: left;
-}
-.ui-search .ant-form-item .ant-form-item-control-wrapper {
-  float: left;
-}
-.ui-search .ant-form-item+.ant-btn-primary {
-  margin: 0;
-}
-.ui-search .auxiliaryClass {
-  display: inline-block;
-  padding: 0 8px;
-  margin-left: -20px;
-}
-.ui-search .timeChang .ant-form-item-control-wrapper {
-  width: 120px;
-}
-.ui-search .ant-btn-primary {
-  margin-top: 2px;
-  margin-left: 20px;
-}
-.ui-search+.ui-btnBar {
-  padding-top: 0;
-}
-.ui-btnBar {
-  padding: 15px 40px;
-}
-.ui-btnBar .ant-btn {
-  margin-right: 30px;
-}
-.ui-btnBar .ant-upload .ant-btn {
-  background: #108ee9;
-}
-.ui-btnBar .ant-upload .ant-btn span {
-  margin-left: 0;
+.tabContent h3 {
+  margin-bottom: 5px;
+  background: #ffa500;
   color: #fff;
-}
-.ui-btnBar .ant-upload .anticon-upload:before {
-  content: " ";
-}
-.ui-btnBarCenter {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 28px;
   text-align: center;
 }
-.ui-btnBarCenter .ant-btn {
+.tabmain .blueline {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 3px;
+  height: 48px;
+  background: #1d9fd3;
+  overflow: hidden;
+}
+.tabContent .witness p {
+  position: relative;
+  padding-left: 20px;
+}
+.tabContent .witness p em {
+  color: #ffa500;
+  font-weight: bold;
+}
+.tabContent .witness p a {
+  color: #666;
+  font-weight: normal;
+  display: block;
+  line-height: 24px;
+  text-align: left;
+}
+.tabContent .witness p a:hover {
+  background-color: #efefef;
+}
+.tabContent .witness p .ele {
+  left: 0px;
+}
+#container {
+  height: 950px;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+#slider {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 6px;
+  border-radius: 6px;
+  background: #ccc;
+  cursor: pointer;
+  width: 10px;
+}
+#sliderParent {
+  position: absolute;
+  left: 0;
+  height: 0;
+  width: 100%;
+  z-index: 999;
+}
+#outerWrap {
+  position: relative;
+  z-index: 999;
+}
+.wrapacon {
+  position: relative;
+  float: left;
+  width: 468px;
+  height: 360px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.wrapaconlis {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 450px;
+}
+.scrbar {
+  position: relative;
+  width: 4px;
+  height: 355px;
+  border: 1px solid #f4f4f4;
+  border-radius: 20px;
+  background-color: #f4f4f4;
+  float: left;
+  left: 443px;
+  margin-left: 15px;
+}
+.scrbar .barbg {
+  position: absolute;
+  right: -1px;
+  top: 50px;
+  width: 2px;
+  height: 105px;
+  border: 2px solid #dadada;
+  background-color: #dadada;
+  border-radius: 20px;
+}
+.search {
+  width: 500px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.search label {
+  width: 64px;
   display: inline-block;
 }
-.ui-tab {
-  margin: 10px 40px 0;
+.search input {
+  height: 21px;
+  padding-left: 3px;
 }
-.ui-formDetail .ant-form-item {
-  float: left;
-  width: 50%;
-  margin-top: 20px;
+pre {
+  background: #f7f7f7;
+  padding: 0 10px;
 }
-.ui-formDetail .ant-form-item >div {
-  float: left;
+.version {
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  margin: 0 0 20px;
 }
-.ui-formDetail .ant-form-item:nth-child(odd) {
-  padding-left: calc(50% - 280px);
+.version .name {
+  font-size: 15px;
 }
-.ui-formDetail .btn {
-  width: 100%;
-  float: left;
-  margin-top: 30px;
+.version .list {
+  margin-top: 10px;
+  font-size: 12px;
 }
-.ui-formDetail .btn button {
-  margin-right: 20px;
+.resource .name {
+  font-size: 30px;
+  color: #333;
 }
-
-
+.resource .detail {
+  margin: 0 0 20px;
+}
+.resourcesName {
+  font-weight: bold;
+  font-size: 20px;
+}
+.resourcesList dt {
+  margin: 20px 0 0;
+  color: #1d9fd3;
+  font-weight: bold;
+}
+.resourcesList dd img {
+  display: block;
+}

@@ -1,104 +1,76 @@
-FORMAT: 1A
+FORMAT: A1
+FORMAT: A1
+FORMAT: A1
 
-# Parameters API
-In this installment of the API Blueprint course we will discuss how to describe URI parameters.
+# 认证和授权服务API
 
-But first let's add more messages to our system. For that we would need
-introduce an message identifier – id. This id will be our parameter when
-communicating with our API about messages.
+认证和授权服务的API接口，该接口属于`uaa-service`服务。
+
+注意：
+
+- 由于网关的原因，在第一个版本中需要在url前面添加`/uaa-service`
 
 
-# Group Messages
-Group of all messages-related resources.
+#  认证 [/v0.1/auth/tokens]
 
-## My Message [/message/{id}]
-Here we have added the message `id` parameter as an 
-[URI Template variable](http://tools.ietf.org/html/rfc6570) in the Message
-resource's URI. Note the parameter name `id` is enclosed in curly brackets. We
-will discuss this parameter in the `Parameters` section below, where we will
-also set its example value to `1` and declare it of an arbitrary 'number' type.
+用于认证。用户登录系统（请求生成一个token）以后，系统生成一个访问token对象，并返回给用户。
+
+访问token分为两种，MacToken和BearerToken。具体请参考[《访问安全设计方案》](http://doc.dynamax.io/document/design/auth-design.html)
+
+## 创建Token（登录） [POST /v0.1/auth/tokens]
+
+用户通过该接口获得认证信息。
+
++ Request (application/json)
+
+        {
+            "username": "",
+            "password": ""
+        }
+
++ Response 201
+
+        {
+            "accessToken": "",   //用户认证的token
+            "refreshToken": "",  //用于刷新认证token的token
+            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
+            "algorithm": "hmac-sha-256",    //加密算法
+            "secret": "",   //加密算法的密钥
+            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
+            "tokenType": ""  //Token的类型，值有：MAC，Bearer等
+        }
+    
+## 获得认证token信息 [GET /v0.1/auth/tokens/{token}]
+
+根据accessToken值获得认证token信息。
 
 + Parameters
-
-    + id: 1 (number) - An unique identifier of the message.
-
-### Retrieve a Message [GET]
-
-+ Request Plain Text Message
-
-    + Headers
-
-            Accept: text/plain
-
-+ Response 200 (text/plain)
-
-    + Headers
-
-            X-My-Message-Header: 42
-
-    + Body
-
-            Hello World!
-
-+ Request JSON Message
-
-    + Headers
-
-            Accept: application/json
+    + token (string) - 认证token信息的accessToken值
 
 + Response 200 (application/json)
 
+        {
+            "accessToken": "",   //用户认证的token
+            "refreshToken": "",  //用于刷新认证token的token
+            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
+            "algorithm": "hmac-sha-256",    //加密算法
+            "secret": "",   //加密算法的密钥
+            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
+            "tokenType": ""  //Token的类型，值有：MAC，Bearer等
+        }
+
+## 删除Token（登出） [DELETE /v0.1/auth/tokens/{token}]
+
+用户登出系统。
+
++ Parameters
+
+    + token (string) - 认证token信息的accessToken值
+    
++ Request
     + Headers
-
-            X-My-Message-Header: 42
-
-    + Body
-
-            {
-              "id": 1,
-              "message": "Hello World!"
-            }
-
-### Update a Message [PUT]
-
-+ Request Update Plain Text Message (text/plain)
-
-        All your base are belong to us.
-
-+ Request Update JSON Message (application/json)
-
-        { "message": "All your base are belong to us." }
+    
+        Authorization: MAC id="",nonce="",mac=""
 
 + Response 204
 
-## All My Messages [/messages{?limit}]
-A resource representing all of my messages in the system.
-
-We have added the query URI template parameter - `limit`. This parameter is
-used for limiting the number of results returned by some actions on this
-resource. It does not affect every possible action of this resource, therefore
-we will discuss it only at the particular action level below.
-
-### Retrieve all Messages [GET]
-
-+ Parameters
-
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `20`
-
-+ Response 200 (application/json)
-
-        [
-          {
-            "id": 1,
-            "message": "Hello World!"
-          },
-          {
-            "id": 2,
-            "message": "Time is an illusion. Lunchtime doubly so."
-          },
-          {
-            "id": 3,
-            "message": "So long, and thanks for all the fish."
-          }
-        ]
