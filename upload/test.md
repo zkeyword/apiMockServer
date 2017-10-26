@@ -13,11 +13,11 @@ Also please keep in mind that every single example in this course is a **real AP
 + [Next: Resource and Actions](02.%20Resource%20and%20Actions.md)
 
 # GET /message{?status,priority}
-+ Parameters
+<!-- + Parameters
     + status (string)
         + Default: `20`
     + priority (number)
-        + Default: `20`
+        + Default: `20` -->
 
 + Response 200 (text/plain)
 

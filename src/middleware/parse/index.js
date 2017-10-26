@@ -9,10 +9,10 @@ module.exports = (router) => {
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 example.responses.forEach(response => {
                     response.headers.forEach(header => {
-                        let type = ctx.req.headers['content-type']
+                        let type = ctx.request.headers['content-type']
                         let body = response.body
                         let status = response.name | 0
-                        console.log(status, type, header.value)
+                        console.log(ctx.request.header['content-type'])
                         if (type !== undefined && type === header.value) {
                             ctx.set(header.name, header.value)
                             ctx.status = status
