@@ -37,11 +37,16 @@ exports.list = async req => {
             },
             include: [
                 {
-                    model: users
+                    model: users,
+                    as: 'users',
+                    where: {
+                        id: '1'
+                    }
                 }
             ]
         }
     }
+    // project.hasMany(users, { as: 'users' })
     return await project.findAll(obj)
 }
 

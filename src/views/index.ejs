@@ -5,48 +5,83 @@
     <title>
         <%= title %>
     </title>
-    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <link rel='stylesheet' href='/stylesheets/tab.css' />
+    <script src="script/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/script/index.js"></script>
+    <script src="script/event.js"></script>
+    <script src="script/tween.js"></script>
+
 </head>
 
 <body>
-    <div class="lt-main">
-        <div class="lt-left">
-            <% body.forEach(item=>{ %>
-                <div class="fileName"><%= item.fileName %></div>
-            <% }) %>
+    <div class="search">
+        <label>项目名称:</label>
+        <input>
+    </div>
+    <div class="tabmain">
+        <div id="outerWrap">
+            <div id="sliderParent"></div>
+            <!-- <div class="blueline" id="blueline" style="top: 0px; "></div> -->
+            <ul class="tabGroup">
+                <% body.forEach(item=>{ %>
+                    <li class="tabOption">
+                        <%=item.fileName %>
+                    </li>
+                    <% }) %>
+            </ul>
         </div>
-        <div class="lt-right">
-            <% body.forEach(item=>{ %>
-                <% if(item.metadata){ %>
-                    <div>版本信息</div>
-                    <div>
-                        <% item.metadata.forEach(meta=>{ %>
-                            <p><%= meta.name %>: <%= meta.value %></p>
-                        <% }) %>
-                    </div>
-                <% } %>
-                <h1><%= item.name %></h1>
-                <p><%= item.description %></p>
-                <% item.resourceGroups.forEach(resourceGroups=>{ %>
-                        <% resourceGroups.resources.forEach(resources=>{ %>
-                            <h2>资源url: <%= resources.uriTemplate %></h2>
-                            <% resources.actions.forEach(action=>{ %>
-                                <p>接口名称： <%= action.name %></p>
-                                <p>接口描述： <%= action.description %></p>
-                                <p>请求方法： <%= action.method %></p>
-                                <p>返回结果： </p>
+        <div id="container">
+            <div id="content">
+                <% body.forEach(item=>{ %>
+                    <% if(item.metadata){ %>
+                        <div class="tabContent">
+                            <div>版本信息</div>
+                            <div>
+                                <% item.metadata.forEach(meta=>{ %>
+                                    <p>
+                                        <%= meta.name %>:
+                                            <%= meta.value %>
+                                    </p>
+                                 <% }) %>
+                            </div>
+                            <% } %>
+                                <h1>
+                                    <%= item.name %>
+                                </h1>
+
                                 <p>
-                                    <% action.examples.forEach(example=>{ %>
-                                        <% example.responses.forEach(response=>{ %>
-                                            <pre><%= jsonParse(response.body) %></pre>
-                                        <% }) %>
-                                    <% }) %>
+                                    <%= item.description %>
                                 </p>
-                                <hr>
-                            <% }) %>
+                                <% item.resourceGroups.forEach(resourceGroups=>{ %>
+                                    <% resourceGroups.resources.forEach(resources=>{ %>
+                                        <h2>资源url:
+                                            <%= resources.uriTemplate %>
+                                        </h2>
+                                        <% resources.actions.forEach(action=>{ %>
+                                            <p>接口名称：
+                                                <%= action.name %>
+                                            </p>
+                                            <p>接口描述：
+                                                <%= action.description %>
+                                            </p>
+                                            <p>请求方法：
+                                                <%= action.method %>
+                                            </p>
+                                            <p>返回结果： </p>
+                                            <p>
+                                                <% action.examples.forEach(example=>{ %>
+                                                    <% example.responses.forEach(response=>{ %>
+                                                        <pre><%= jsonParse(response.body) %></pre>
+                                                        <% }) %>
+                                                            <% }) %>
+                                            </p>
+                                            <hr>
+                                            <% }) %>
+                                         <% }) %>
+                        </div>
                         <% }) %>
-                <% }) %>
-            <% }) %>
+                            <% }) %>
+            </div>
         </div>
     </div>
 </body>

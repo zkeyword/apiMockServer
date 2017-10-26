@@ -175,11 +175,16 @@ body .fn-left,
 body .fn-right {
   display: inline;
 }
-body .fn-left {
-  float: left;
+body .fileName a {
+  width: 80px;
+  height: 20px;
+  margin: 14px 15px 0 10px;
+  display: inline-block;
+  color: #000;
 }
 body .fn-right {
-  float: right;
+  width: 200px;
+  position: relative;
 }
 .react-draggable {
   user-select: none;
@@ -375,3 +380,5 @@ body {
 .ui-formDetail .btn button {
   margin-right: 20px;
 }
+
+
