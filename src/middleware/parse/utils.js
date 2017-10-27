@@ -3,6 +3,7 @@ const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
 const { mock } = require('mockjs')
 const nanoRender = require('nano-json')
+const commentJson = require('comment-json')
 const { readDir, readFile, getFileFormat } = require('../../utils')
 
 exports.getDrafterResult = dir => {
@@ -35,11 +36,17 @@ exports.jsonParse = (str, original) => {
     str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
     if (original) {
         str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
+    } else {
+        str = commentJson.parse(str)
+        str = mock(str)
+        str = commentJson.stringify(str, null, 4)
     }
     try {
         str = mock(JSON.parse(str))
     } catch (error) {
         return str
     }
-    return typeof str === 'string' || original ? str : nanoRender.render(str)
+    if (typeof str === 'string' || original) return str
+    str = nanoRender.render(str)
+    return str
 }

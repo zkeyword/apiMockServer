@@ -1,153 +1,75 @@
-FORMAT: 1A
-HOST: https://alpha-api.app.net
+FORMAT: A1
 
-# Real World API
-This API Blueprint demonstrates a real world example documenting a portion of
-[App.net API](http://developers.app.net).
+# 认证和授权服务API
 
-NOTE: This document is a **work in progress**.
+认证和授权服务的API接口，该接口属于`uaa-service`服务。
 
-# Group Posts
-This section groups App.net post resources.
+注意：
 
-## Post [/stream/0/posts/{post_id}]
-A Post is the other central object utilized by the App.net Stream API. It has
-rich text and annotations which comprise all of the content a users sees in
-their feed. Posts are closely tied to the follow graph...
+- 由于网关的原因，在第一个版本中需要在url前面添加`/uaa-service`
 
-+ Parameters
-    + post_id: `1` (string) - The id of the Post.
 
-+ Model (application/json)
+#  认证 [/v0.1/auth/tokens]
 
-    ```js
-    {
-        "data": {
-            "id": "1", // note this is a string
-            "user": {
-                ...
-            },
-            "created_at": "2012-07-16T17:25:47Z",
-            "text": "@berg FIRST post on this new site #newsocialnetwork",
-            "html": "<span itemprop=\"mention\" data-mention-name=\"berg\" data-mention-id=\"2\">@berg</span> FIRST post on <a href=\"https://join.app.net\" rel=\"nofollow\">this new site</a> <span itemprop=\"hashtag\" data-hashtag-name=\"newsocialnetwork\">#newsocialnetwork</span>.",
-            "source": {
-                "client_id": "udxGzAVBdXwGtkHmvswR5MbMEeVnq6n4",
-                "name": "Clientastic for iOS",
-                "link": "http://app.net"
-            },
-            "machine_only": false,
-            "reply_to": null,
-            "thread_id": "1",
-            "num_replies": 3,
-            "num_reposts": 0,
-            "num_stars": 0,
-            "entities": {
-                "mentions": [{
-                    "name": "berg",
-                    "id": "2",
-                    "pos": 0,
-                    "len": 5
-                }],
-                "hashtags": [{
-                    "name": "newsocialnetwork",
-                    "pos": 34,
-                    "len": 17
-                }],
-                "links": [{
-                    "text": "this new site",
-                    "url": "https://join.app.net"
-                    "pos": 20,
-                    "len": 13
-                }]
-            },
-            "you_reposted": false,
-            "you_starred": false
-        },
-        "meta": {
-            "code": 200,
+用于认证。用户登录系统（请求生成一个token）以后，系统生成一个访问token对象，并返回给用户。
+
+访问token分为两种，MacToken和BearerToken。具体请参考[《访问安全设计方案》](http://doc.dynamax.io/document/design/auth-design.html)
+
+## 创建Token（登录） [POST /v0.1/auth/tokens]
+
+用户通过该接口获得认证信息。
+
++ Request (application/json)
+
+        {
+            "username": "",
+            "password": ""
         }
-    }
-    ```
-
-### Retrieve a Post [GET]
-Returns a specific Post.
-
-+ Response 200
-
-    [Post][]
-
-### Delete a Post [DELETE]
-Delete a Post. The current user must be the same user who created the Post. It
-returns the deleted Post on success.
-
-+ Response 204
-
-## Posts Collection [/stream/0/posts]
-A Collection of posts.
-
-+ Model (application/json)
-
-    ```js
-    {
-        "data": [
-            {
-                "id": "1", // note this is a string
-                ...
-            },
-            {
-                "id": "2",
-                ...
-            },
-            {
-                "id": "3",
-                ...
-            },
-        ],
-        "meta": {
-            "code": 200,
-        }
-    }
-    ```
-
-### Create a Post [POST]
-Create a new Post object. Mentions and hashtags will be parsed out of the post
-text, as will bare URLs...
-
-+ Request
-
-    [Post][]
 
 + Response 201
 
-    [Post][]
+        {
+            "accessToken": "",   //用户认证的token
+            "refreshToken": "",  //用于刷新认证token的token
+            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
+            "algorithm": "hmac-sha-256",    //加密算法
+            "secret": "",   //加密算法的密钥
+            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
+            "tokenType": ""  //Token的类型，值有：MAC，Bearer等
+        }
+    
+## 获得认证token信息 [GET /v0.1/auth/tokens/{token}]
 
-### Retrieve all Posts [GET]
-Retrieves all posts.
-
-+ Response 200
-
-    [Posts Collection][]
-
-## Stars [/stream/0/posts/{post_id}/star]
-A User’s stars are visible to others, but they are not automatically added to
-your followers’ streams.
+根据accessToken值获得认证token信息。
 
 + Parameters
-    + post_id: `1` (string) - The id of the Post.
+    + token (string) - 认证token信息的accessToken值
 
-### Star a Post [POST]
-Save a given Post to the current User’s stars. This is just a “save” action,
-not a sharing action.
++ Response 200 (application/json)
 
-*Note: A repost cannot be starred. Please star the parent Post.*
+        {
+            "accessToken": "",   //用户认证的token
+            "refreshToken": "",  //用于刷新认证token的token
+            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
+            "algorithm": "hmac-sha-256",    //加密算法
+            "secret": "",   //加密算法的密钥
+            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
+            "string": "@image(200x100)"
+        }
 
-+ Response 200
+## 删除Token（登出） [DELETE /v0.1/auth/tokens/{token}]
 
-    [Post][]
+用户登出系统。
 
-### Unstar a Post [DELETE]
-Remove a Star from a Post.
++ Parameters
 
-+ Response 200
+    + token (string) - 认证token信息的accessToken值
+    
++ Request
+    + Headers
+    
+        Authorization: MAC id="",nonce="",mac=""
 
-    [Post][]
++ Response 204
+
+# 授权 [/v0.1/auth/authorization]

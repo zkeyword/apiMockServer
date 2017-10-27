@@ -5,7 +5,7 @@ module.exports = (router) => {
     return async (ctx, next) => {
         let result = await getDrafterResult(`${__dirname}/../../../upload/`)
         let handleRouer = (actions, url) => {
-            console.log(url, actions.method.toLocaleLowerCase())
+            // console.log(url, actions.method.toLocaleLowerCase())
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
                 let isAjaxAccept = ctx.request.header['accept'] === '*/*'
@@ -17,6 +17,11 @@ module.exports = (router) => {
                                 header.body = response.body
                                 header.status = response.name | 0
                                 if (header.value === 'text/plain' && !isAjaxAccept) {
+                                    ctx.set(header.name, header.value)
+                                    ctx.status = header.status
+                                    ctx.body = jsonParse(header.body, true)
+                                }
+                                if (header.value === 'application/json' && !isAjaxAccept) {
                                     ctx.set(header.name, header.value)
                                     ctx.status = header.status
                                     ctx.body = jsonParse(header.body, true)

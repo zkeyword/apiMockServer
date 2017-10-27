@@ -34,18 +34,6 @@
             <div id="content">
                 <% body.forEach(item=>{ %>
                     <dd class="tabContent">
-                        <% if(item.metadata){ %>
-                            <div class="version">
-                                <div class="name">文档版本信息</div>
-                                <ul class="list">
-                                    <% item.metadata.forEach(meta=>{ %>
-                                        <li>
-                                            <%= meta.name %>: <%= meta.value %>
-                                        </li>
-                                    <% }) %>
-                                </ul>
-                            </div>
-                        <% } %>
                         <div class="resource">
                             <div class="name">模块：<%= item.name %></div>
                             <div class="detail">
@@ -100,7 +88,7 @@
                                                     <div class="parameters">
                                                         <div class="title">parameters:</div>
                                                         <div class="list">
-                                                            <% action.parameters.forEach(parameter=>{ %>
+                                                            <% action.parameters.forEach((parameter)=>{ %>
                                                                 <div>
                                                                     <p>name：<%= parameter.name %></p>
                                                                     <p>required：<%= parameter.required? 'yes' : 'no' %></p>
@@ -130,7 +118,7 @@
                                                         <% if(response.body){ %>
                                                             <dd>
                                                                 <span>response:</span>
-                                                                <pre><%= jsonParse(response.body) %></pre>
+                                                                <pre><%- jsonParse(response.body) %></pre>
                                                             </dd>
                                                         <% } %>
                                                     <% }) %>
@@ -152,7 +140,7 @@
                                                                     <span><%= header.name%>:<%= header.value%></span>
                                                                     <% }) %>
                                                                 </div>
-                                                                <pre><%= jsonParse(request.body) %></pre>
+                                                                <pre><%- jsonParse(request.body) %></pre>
                                                             </dd>
                                                         <% } %>
                                                     <% }) %>
@@ -163,6 +151,18 @@
                                 </div>
                             <% }) %>
                         <% }) %>
+                        <% if(item.metadata){ %>
+                            <div class="version">
+                                <div class="name">文档版本信息</div>
+                                <ul class="list">
+                                    <% item.metadata.forEach(meta=>{ %>
+                                        <li>
+                                            <%= meta.name %>: <%= meta.value %>
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        <% } %>
                     </div>
                 <% }) %>
             </div>
