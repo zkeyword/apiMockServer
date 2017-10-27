@@ -1,39 +1,153 @@
 FORMAT: 1A
+HOST: https://alpha-api.app.net
 
-# Resource and Actions API
-This API example demonstrates how to define a resource with multiple actions.
+# Real World API
+This API Blueprint demonstrates a real world example documenting a portion of
+[App.net API](http://developers.app.net).
 
+NOTE: This document is a **work in progress**.
 
-# /message
-This is our [resource](http://www.w3.org/TR/di-gloss/#def-resource). It is
-defined by its
-[URI](http://www.w3.org/TR/di-gloss/#def-uniform-resource-identifier) or, more
-precisely, by its [URI Template](http://tools.ietf.org/html/rfc6570).
+# Group Posts
+This section groups App.net post resources.
 
-This resource has no actions specified but we will fix that soon.
+## Post [/stream/0/posts/{post_id}]
+A Post is the other central object utilized by the App.net Stream API. It has
+rich text and annotations which comprise all of the content a users sees in
+their feed. Posts are closely tied to the follow graph...
 
-## GET
-Here we define an action using the `GET` [HTTP request method](http://www.w3schools.com/tags/ref_httpmethods.asp) for our resource `/message`.
++ Parameters
+    + post_id: `1` (string) - The id of the Post.
 
-As with every good action it should return a
-[response](http://www.w3.org/TR/di-gloss/#def-http-response). A response always
-bears a status code. Code 200 is great as it means all is green. Responding
-with some data can be a great idea as well so let's add a plain text message to
-our response.
++ Model (application/json)
 
-+ Response 200 (text/plain)
+    ```js
+    {
+        "data": {
+            "id": "1", // note this is a string
+            "user": {
+                ...
+            },
+            "created_at": "2012-07-16T17:25:47Z",
+            "text": "@berg FIRST post on this new site #newsocialnetwork",
+            "html": "<span itemprop=\"mention\" data-mention-name=\"berg\" data-mention-id=\"2\">@berg</span> FIRST post on <a href=\"https://join.app.net\" rel=\"nofollow\">this new site</a> <span itemprop=\"hashtag\" data-hashtag-name=\"newsocialnetwork\">#newsocialnetwork</span>.",
+            "source": {
+                "client_id": "udxGzAVBdXwGtkHmvswR5MbMEeVnq6n4",
+                "name": "Clientastic for iOS",
+                "link": "http://app.net"
+            },
+            "machine_only": false,
+            "reply_to": null,
+            "thread_id": "1",
+            "num_replies": 3,
+            "num_reposts": 0,
+            "num_stars": 0,
+            "entities": {
+                "mentions": [{
+                    "name": "berg",
+                    "id": "2",
+                    "pos": 0,
+                    "len": 5
+                }],
+                "hashtags": [{
+                    "name": "newsocialnetwork",
+                    "pos": 34,
+                    "len": 17
+                }],
+                "links": [{
+                    "text": "this new site",
+                    "url": "https://join.app.net"
+                    "pos": 20,
+                    "len": 13
+                }]
+            },
+            "you_reposted": false,
+            "you_starred": false
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
 
-        Hello World!
+### Retrieve a Post [GET]
+Returns a specific Post.
 
-## PUT
-OK, let's add another action. This time to put new data to our resource
-(essentially an update action). We will need to send something in a
-[request](http://www.w3.org/TR/di-gloss/#def-http-request) and then send a
-response back confirming the posting was a success (_HTTP Status Code 204 ~
-Resource updated successfully, no content is returned_).
++ Response 200
 
-+ Request (text/plain)
+    [Post][]
 
-        All your base are belong to us.
+### Delete a Post [DELETE]
+Delete a Post. The current user must be the same user who created the Post. It
+returns the deleted Post on success.
 
 + Response 204
+
+## Posts Collection [/stream/0/posts]
+A Collection of posts.
+
++ Model (application/json)
+
+    ```js
+    {
+        "data": [
+            {
+                "id": "1", // note this is a string
+                ...
+            },
+            {
+                "id": "2",
+                ...
+            },
+            {
+                "id": "3",
+                ...
+            },
+        ],
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Create a Post [POST]
+Create a new Post object. Mentions and hashtags will be parsed out of the post
+text, as will bare URLs...
+
++ Request
+
+    [Post][]
+
++ Response 201
+
+    [Post][]
+
+### Retrieve all Posts [GET]
+Retrieves all posts.
+
++ Response 200
+
+    [Posts Collection][]
+
+## Stars [/stream/0/posts/{post_id}/star]
+A User’s stars are visible to others, but they are not automatically added to
+your followers’ streams.
+
++ Parameters
+    + post_id: `1` (string) - The id of the Post.
+
+### Star a Post [POST]
+Save a given Post to the current User’s stars. This is just a “save” action,
+not a sharing action.
+
+*Note: A repost cannot be starred. Please star the parent Post.*
+
++ Response 200
+
+    [Post][]
+
+### Unstar a Post [DELETE]
+Remove a Star from a Post.
+
++ Response 200
+
+    [Post][]

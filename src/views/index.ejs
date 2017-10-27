@@ -64,7 +64,7 @@
                                     <div class="resources">
                                         <div class="name">资源:<%= resources.uriTemplate %></div>
                                         <div class="detail">
-                                            <%= resources.description %>
+                                            <%- marked(resources.description) %>
                                         </div>
                                         <% if(resources.parameters.length){ %>
                                             <div class="parameters">
