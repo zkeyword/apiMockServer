@@ -1,76 +1,39 @@
-FORMAT: A1
-FORMAT: A1
-FORMAT: A1
+FORMAT: 1A
 
-# 认证和授权服务API
-
-认证和授权服务的API接口，该接口属于`uaa-service`服务。
-
-注意：
-
-- 由于网关的原因，在第一个版本中需要在url前面添加`/uaa-service`
+# Resource and Actions API
+This API example demonstrates how to define a resource with multiple actions.
 
 
-#  认证 [/v0.1/auth/tokens]
+# /message
+This is our [resource](http://www.w3.org/TR/di-gloss/#def-resource). It is
+defined by its
+[URI](http://www.w3.org/TR/di-gloss/#def-uniform-resource-identifier) or, more
+precisely, by its [URI Template](http://tools.ietf.org/html/rfc6570).
 
-用于认证。用户登录系统（请求生成一个token）以后，系统生成一个访问token对象，并返回给用户。
+This resource has no actions specified but we will fix that soon.
 
-访问token分为两种，MacToken和BearerToken。具体请参考[《访问安全设计方案》](http://doc.dynamax.io/document/design/auth-design.html)
+## GET
+Here we define an action using the `GET` [HTTP request method](http://www.w3schools.com/tags/ref_httpmethods.asp) for our resource `/message`.
 
-## 创建Token（登录） [POST /v0.1/auth/tokens]
+As with every good action it should return a
+[response](http://www.w3.org/TR/di-gloss/#def-http-response). A response always
+bears a status code. Code 200 is great as it means all is green. Responding
+with some data can be a great idea as well so let's add a plain text message to
+our response.
 
-用户通过该接口获得认证信息。
++ Response 200 (text/plain)
 
-+ Request (application/json)
+        Hello World!
 
-        {
-            "username": "",
-            "password": ""
-        }
+## PUT
+OK, let's add another action. This time to put new data to our resource
+(essentially an update action). We will need to send something in a
+[request](http://www.w3.org/TR/di-gloss/#def-http-request) and then send a
+response back confirming the posting was a success (_HTTP Status Code 204 ~
+Resource updated successfully, no content is returned_).
 
-+ Response 201
++ Request (text/plain)
 
-        {
-            "accessToken": "",   //用户认证的token
-            "refreshToken": "",  //用于刷新认证token的token
-            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
-            "algorithm": "hmac-sha-256",    //加密算法
-            "secret": "",   //加密算法的密钥
-            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
-            "tokenType": ""  //Token的类型，值有：MAC，Bearer等
-        }
-    
-## 获得认证token信息 [GET /v0.1/auth/tokens/{token}]
-
-根据accessToken值获得认证token信息。
-
-+ Parameters
-    + token (string) - 认证token信息的accessToken值
-
-+ Response 200 (application/json)
-
-        {
-            "accessToken": "",   //用户认证的token
-            "refreshToken": "",  //用于刷新认证token的token
-            "expiresAt": "",    //token的到期时间，格式：2017-10-30T10:27:09.904+0800
-            "algorithm": "hmac-sha-256",    //加密算法
-            "secret": "",   //加密算法的密钥
-            "serverTime": "",   //服务器时间，格式：2017-10-23T10:27:09.907+0800
-            "tokenType": ""  //Token的类型，值有：MAC，Bearer等
-        }
-
-## 删除Token（登出） [DELETE /v0.1/auth/tokens/{token}]
-
-用户登出系统。
-
-+ Parameters
-
-    + token (string) - 认证token信息的accessToken值
-    
-+ Request
-    + Headers
-    
-        Authorization: MAC id="",nonce="",mac=""
+        All your base are belong to us.
 
 + Response 204
-

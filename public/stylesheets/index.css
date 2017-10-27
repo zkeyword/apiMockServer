@@ -232,13 +232,6 @@ body {
   background-color: #fff;
   color: #777;
 }
-.tabContent p a {
-  margin-right: 15px;
-  text-decoration: none;
-  text-align: center;
-  color: #ffa500;
-  font-weight: bold;
-}
 .tabContent h3 {
   margin-bottom: 5px;
   background: #ffa500;
@@ -281,7 +274,6 @@ body {
 #container {
   height: 950px;
   background: #fff;
-  overflow: hidden;
   position: relative;
 }
 #slider {
@@ -356,7 +348,7 @@ body {
 }
 pre {
   background: #f7f7f7;
-  padding: 0 10px;
+  padding: 10px;
 }
 .version {
   border: 1px solid #ddd;
@@ -370,6 +362,10 @@ pre {
   margin-top: 10px;
   font-size: 12px;
 }
+.resourceGroups .name {
+  font-size: 25px;
+  color: #333;
+}
 .resource .name {
   font-size: 30px;
   color: #333;
@@ -377,14 +373,34 @@ pre {
 .resource .detail {
   margin: 0 0 20px;
 }
-.resourcesName {
+.resource .detail p {
+  padding: 10px 0 0;
+}
+.resources {
+  padding: 20px 0;
+}
+.resources .name {
   font-weight: bold;
   font-size: 20px;
+}
+.resources .detail {
+  padding: 10px 0 0;
+}
+.resources .parameters {
+  padding: 10px 0 0;
+}
+.resources .parameters .title {
+  padding: 0 0 5px;
+  font-weight: bold;
 }
 .resourcesList dt {
   margin: 20px 0 0;
   color: #1d9fd3;
   font-weight: bold;
+  font-size: 16px;
+}
+.resourcesList dd .parameters .list {
+  padding: 0 10px 10px;
 }
 .resourcesList dd img {
   display: block;

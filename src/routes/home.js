@@ -6,6 +6,7 @@ const { parseResult, jsonParse } = require('../services/markdown')
 router.get('/', async (ctx, next) => {
     let body = await parseResult()
     // let user = await usersService.getUserByIdOrName({ username: 'admin01' })
+    // console.log(JSON.stringify(body))
     await ctx.render('index', {
         title: '首页',
         body,

@@ -33,11 +33,12 @@ exports.jsonParse = (str, original) => {
     if (!str) return str
     str = str.replace(/\'/g, '"')
     str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
-    str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
+    if (original) {
+        str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
+    }
     try {
         str = mock(JSON.parse(str))
     } catch (error) {
-        console.log(str)
         return str
     }
     return typeof str === 'string' || original ? str : nanoRender.render(str)
