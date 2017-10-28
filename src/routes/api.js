@@ -4,17 +4,18 @@ const router = require('koa-router')()
 const project = require('../services/project')
 router.post('/project', async (ctx, next) => {
     let body = await project.add(ctx.request.body)
-    let res = ''
-    if (body) {
-        if (body[1]) {
-            res = body[0]
-        } else {
-            res = `${body[0].name}已存在`
-        }
-    } else {
-        res = `添加失败`
-    }
-    ctx.body = res
+    // let res = ''
+    console.log(body)
+    // if (body) {
+    //     if (body[1]) {
+    //         res = body[0]
+    //     } else {
+    //         res = `${body[0].name}已存在`
+    //     }
+    // } else {
+    //     res = `添加失败`
+    // }
+    ctx.body = body
 })
 
 router.del('/project/:id', async (ctx, next) => {

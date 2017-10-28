@@ -1,13 +1,15 @@
 const { project, users } = require('../models')
 
 exports.add = async req => {
-    if (!Object.keys(req).length || !req.name) return
-    return await project.findOrCreate({
+    if (!Object.keys(req).length || !req.name || !req.userId) return
+    let user = await users.findById(req.userId)
+    let proj = await project.findOrCreate({
         where: {
             name: req.name
         },
         defaults: req
     })
+    return await user.addProject(proj)
 }
 
 exports.del = async id => {
