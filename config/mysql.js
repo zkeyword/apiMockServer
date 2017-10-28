@@ -1,8 +1,8 @@
 module.exports = {
     database: 'apiMockServer',
     username: 'root',
-    password: '',
+    password: '123456',
     port: '3306',
-    host: '192.168.1.131',
+    host: '127.0.0.1',
     dialect: 'mysql'
 }

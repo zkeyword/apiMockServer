@@ -1,4 +1,4 @@
-const { project, usersProject, users } = require('../models')
+const { project, users } = require('../models')
 
 exports.add = async req => {
     if (!Object.keys(req).length || !req.name) return
@@ -34,14 +34,21 @@ exports.list = async req => {
         obj = {
             where: {
                 ...req
+            },
+            include: {
+                model: users,
+                required: true
             }
         }
     }
-    return await project.findAll(obj, {
-        include: [{
+    return await project.findAll({
+        include: {
             model: users,
-            attributes: ['id']
-        }]
+            where: {
+                ...req
+            }
+            // ,required: true // 加个required: true,即可
+        }
     })
 }
 
