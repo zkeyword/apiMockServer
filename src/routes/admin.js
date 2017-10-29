@@ -4,7 +4,7 @@ const upload = require('../middleware/upload')
 const { unlink } = require('../utils')
 
 router.get('/', async (ctx, next) => {
-    let body = await parseResult()
+    let body = await parseResult(`${__dirname}/../../upload/`)
     await ctx.render('admin', {
         title: '接口管理',
         body

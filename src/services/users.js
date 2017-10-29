@@ -1,4 +1,4 @@
-const { users } = require('../models')
+const { users, project } = require('../models')
 
 exports.add = async req => {
     if (!Object.keys(req).length || !req.username) return
@@ -12,6 +12,13 @@ exports.add = async req => {
 
 exports.del = async id => {
     if (!id) return false
+    let proj = await project.findAll({
+        attributes: ['userId'],
+        where: {
+            userId: id
+        }
+    })
+    if (proj.length) return
     return await users.destroy({
         where: {
             id

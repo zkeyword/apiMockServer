@@ -19,7 +19,7 @@ router.post('/project', async (ctx, next) => {
 })
 
 router.del('/project/:id', async (ctx, next) => {
-    let body = await project.del(ctx.params.id)
+    let body = await project.del(ctx.params.id, ctx.request.body)
     if (body) {
         ctx.body = `删除成功`
     } else {
