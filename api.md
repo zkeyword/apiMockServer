@@ -80,18 +80,18 @@
 + Request (application/json)
 
         {
-            "username": "apiMockService",
-            "password": "123456",
-            "nick": "apiMock"
+            "name": "apiMockService",
+            "alias": "123456",
+            "description": "apiMock"
         }
 
 + Response 200
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "alias": "123456",
+            "description": "apiMock"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
@@ -105,9 +105,9 @@
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "alias": "123456",
+            "description": "apiMock"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
@@ -127,18 +127,18 @@
 + Request (application/json)
 
         {
-            "username": "apiMockService",
-            "password": "123456",
-            "nick": "apiMock"
+            "name": "apiMockService",
+            "alias": "123456",
+            "description": "apiMock"
         }
 
 + Response 200
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "alias": "123456",
+            "description": "apiMock"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
@@ -153,18 +153,16 @@
 + Request (application/json)
 
         {
-            "username": "apiMockService",
-            "password": "123456",
-            "nick": "apiMock"
+            "name": "apiMockService",
+            "content": "123456"
         }
 
 + Response 200
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "content": "123456"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
@@ -178,9 +176,8 @@
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "content": "123456"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
@@ -200,18 +197,16 @@
 + Request (application/json)
 
         {
-            "username": "apiMockService",
-            "password": "123456",
-            "nick": "apiMock"
+            "name": "apiMockService",
+            "content": "123456"
         }
 
 + Response 200
 
         {
             "id": 3,
-            "username": "1",
-            "password": "1",
-            "nick": "1",
+            "name": "apiMockService",
+            "content": "123456"
             "updatedAt": "2017-10-29T02:17:12.553Z",
             "createdAt": "2017-10-29T02:17:12.553Z"
         }
