@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+</head>
+
+<body>
+    <div class="lt-main">
+        <div>
+            <form action="/admin/upload" method="post" enctype="multipart/form-data">  
+                <input type="file" name="file"/>  
+                <input type="submit" value="ok"/>  
+            </form>
+            <div>
+                <% body.forEach(item=>{ %>
+                    <div class="fileName"><%= item.fileName %>   <a href="/admin/delfile/<%= item.fileName %>">删除</a></div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
