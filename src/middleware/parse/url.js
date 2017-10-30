@@ -12,9 +12,7 @@ exports.parse = function (url) {
         return path.replace(PATHNAME_REGEX, ':$1')
     }
     var processQueryParameters = function (queryParams) {
-        if (!queryParams) {
-            return {}
-        }
+        if (!queryParams) return {}
         return qs.parse(queryParams.replace(/\{|\}/g, '').replace(/\,/g, '&').replace(PARAMETER_OPERATORS_REGEX, ''))
     }
 
