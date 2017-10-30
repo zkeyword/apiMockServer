@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-    interfaces.associate = (models) => {
-        interfaces.belongsTo(models.Project)
-    }
+    // interfaces.associate = (models) => {
+    //     interfaces.belongsTo(models.Project)
+    // }
 
     return interfaces
 }

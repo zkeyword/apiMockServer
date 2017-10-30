@@ -1,6 +1,7 @@
 const { project, users } = require('../models')
 
 exports.add = async req => {
+    console.log(Object.keys(req).length, req.name, req.userId)
     if (!(Object.keys(req).length && req.name && req.userId)) return false
     let user = await users.findById(req.userId)
     if (!user) return null

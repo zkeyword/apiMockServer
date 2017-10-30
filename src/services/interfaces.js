@@ -1,17 +1,21 @@
-const { interfaces } = require('../models')
+const { interfaces, project } = require('../models')
 
 exports.add = async req => {
-    if (!Object.keys(req).length || !req.name) return
-    return await interfaces.findOrCreate({
+    if (!(Object.keys(req).length && req.name && req.projectId)) return false
+    let proj = await project.findById(req.projectId)
+    if (!proj) return null
+    let inte = await interfaces.findOrCreate({
         where: {
             name: req.name
         },
         defaults: req
     })
+    if (inte[1]) await proj.addInterfaces(inte)
+    return inte
 }
 
-exports.del = async id => {
-    if (!id) return false
+exports.del = async (id, req) => {
+    if (!(Object.keys(req).length && id && req.projectId)) return false
     return await interfaces.destroy({
         where: {
             id
@@ -20,7 +24,7 @@ exports.del = async id => {
 }
 
 exports.modify = async (id, req) => {
-    if (!(Object.keys(req).length && id)) return false
+    if (!(Object.keys(req).length && id && req.projectId)) return false
     return await interfaces.update(req, {
         where: {
             id
@@ -29,15 +33,14 @@ exports.modify = async (id, req) => {
 }
 
 exports.list = async req => {
-    let obj = {}
-    if (req) {
-        obj = {
+    return await interfaces.findAll({
+        include: {
+            model: project,
             where: {
                 ...req
             }
         }
-    }
-    return await interfaces.findAll(obj)
+    })
 }
 
 exports.alias = async id => {

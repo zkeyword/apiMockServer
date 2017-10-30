@@ -5,7 +5,7 @@ const project = require('../services/project')
 router.post('/project', async (ctx, next) => {
     let body = await project.add(ctx.request.body)
     // let res = ''
-    console.log(body)
+    // console.log(body)
     // if (body) {
     //     if (body[1]) {
     //         res = body[0]
