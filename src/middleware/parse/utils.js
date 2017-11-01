@@ -24,7 +24,6 @@ function handleRtr(str, isRevert = false) {
         str = str.replace(/(\d)-(\d)/g, '$1❅$2') // 替换 1-10 中的 -
         str = str.replace(/(\w)\|(\d)/g, '$1✡$2') // 替换 string|1-10 中的 |
         str = str.replace(/\[SOCKET\s+(.*)\]/g, '[GET /SOCKET$1]')
-        console.log(str)
     }
     return str
 }
