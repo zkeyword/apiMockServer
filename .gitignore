@@ -34,3 +34,6 @@ npm-debug.log
 
 # local history for vscode
 .history
+
+# css
+public/stylesheets/index.css
