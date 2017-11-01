@@ -6,6 +6,29 @@ const nanoRender = require('nano-json')
 const commentJson = require('comment-json')
 const { readDir, readFile, getFileFormat } = require('../../utils')
 
+function handleRtr(str, isRevert = false) {
+    if (isRevert) {
+        str = str.replace(/❅/g, '-')
+        str = str.replace(/✡/g, '|')
+        str = str.replace(/☥/g, '(')
+        str = str.replace(/♁/g, ')')
+        str = str.replace(/\\"/g, '\'')
+    } else {
+        str = normalizeNewline(str)
+        str = str.replace(/(@|Random\.)([a-z]+)\((.*)\)/g, function () {
+            let fun = arguments[2]
+            let val = arguments[3]
+            val = val.replace(/\,/g, '_')
+            return `@${fun}☥${val}♁`
+        }) // 替换 Random. 为 @
+        str = str.replace(/(\d)-(\d)/g, '$1❅$2') // 替换 1-10 中的 -
+        str = str.replace(/(\w)\|(\d)/g, '$1✡$2') // 替换 string|1-10 中的 |
+        str = str.replace(/\[SOCKET\s+(.*)\]/g, '[GET /SOCKET$1]')
+        console.log(str)
+    }
+    return str
+}
+
 exports.getDrafterResult = dir => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -15,7 +38,8 @@ exports.getDrafterResult = dir => {
             list.forEach(async (fileName, index) => {
                 if (getFileFormat(fileName) === 'md') {
                     let result = await readFile(`${dir}/${fileName}`)
-                    let item = drafter.parseSync(normalizeNewline(result), { type: 'ast' })
+                    result = handleRtr(result)
+                    let item = drafter.parseSync(result, { type: 'ast' })
                     if (result) {
                         item.ast.fileName = fileName
                         arr[index] = item // 保证顺序
@@ -33,7 +57,7 @@ exports.getDrafterResult = dir => {
 exports.jsonParse = (str, original) => {
     if (!str) return str
     str = str.replace(/\'/g, '"')
-    str = str.replace(/Random\.(.*?)\)/g, '"@$1)"')
+    str = handleRtr(str, true)
     if (original) {
         str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
     } else {
