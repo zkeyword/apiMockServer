@@ -11,53 +11,81 @@
 </head>
 
 <body>
-    <div class="search">
-        <label>项目名称:</label>
-        <input>
+    <div class="lt-header">
+        <div class="search">
+            <input>
+        </div>
     </div>
-    <div class="tabmain">
-        <div id="outerWrap">
-            <div id="sliderParent"></div>
-            <div class="tabGroup scrollbar">
+    <div class="lt-main">
+        <div class="lt-left">
+            <div class="menu">
                 <% body.forEach(item=>{ %>
-                    <div class="tabOption">
-                        <a href="#<%=item.fileName %>"> <%=item.fileName %></a>
+                    <div class="item">
+                        <a href="#<%=item.name %>"> <%= item.name %></a>
                         <ul>
-                            <li><a href="#"></a>
-                            <ul>
-                                <li><a>2222</a></li>
-                                <li><a>3333</a></li>
-                                <li><a>4444</a></li>
-                           </ul>
-                            </li>
+                            <% item.resourceGroups.forEach(resourceGroups=>{ %>
+                                <li>
+                                    <a href="#<%= resourceGroups.name %>"> <%= resourceGroups.name %></a>
+                                    <ul>
+                                        <li>
+                                            <% resourceGroups.resources.forEach(resources=>{ %>
+                                                <a href="#<%= resources.uriTemplate %>"><%= resources.uriTemplate %></a>
+                                                <ul>
+                                                    <% resources.actions.forEach(action=>{ %>
+                                                        <li>
+                                                            <a href="#<%= action.name %>"><%= action.name %></a>
+                                                        </li>
+                                                    <% }) %>
+                                                </ul>
+                                            <% }) %>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <% }) %>
                         </ul>
                     </div>
                 <% }) %>
             </div>
         </div>
-        <div id="container">
+        <div class="lt-right" id="container">
                 <% body.forEach(item=>{ %>
-                    <div class="tabContent" id="<%=item.fileName %>">
-                        <div class="resource" >
-                            <div class="name" >模块：<%= item.name %></div>
-                            <div class="detail">
-                                <%- marked(item.description) %>
-                            </div>
-                        </div>
-                        <% item.resourceGroups.forEach(resourceGroups=>{ %>
-                            <% if(resourceGroups.name){ %>
-                                <div class="resourceGroups">
-                                    <div class="name"><%= resourceGroups.name %></div>
-                                    <div class="desc"><%- marked(resourceGroups.description) %></div>
+                    <div class="tabContent" id="<%=item.name %>">
+                        <div class="resource">
+                            <div class="name"><%= item.name %></div>
+                            <% if(item.description){ %>
+                                <div class="detail">
+                                    <%- marked(item.description) %>
                                 </div>
                             <% } %>
+                        </div>
+                        <% item.resourceGroups.forEach((resourceGroups, resourceGroupsIndex)=>{ %>
+                            <% if(resourceGroups.name){ %>
+                                <div class="resourceGroups">
+                                    <div class="name" id="<%= resourceGroups.name %>"><%= resourceGroups.name %></div>
+                                    <% if(resourceGroups.description){ %>
+                                        <div class="desc"><%- marked(resourceGroups.description) %></div>
+                                    <% } %>
+                                </div>
+                            <% } %>
+                            <!-- TODO 不确定 item.content[resourceGroupsIndex] -->
+                            <% item.content[resourceGroupsIndex].content.forEach(dataStructure=>{ %>
+                                <% dataStructure.content.forEach(institute=>{ %>
+                                    <% institute.content.forEach(ins=>{ %>
+                                        <%= JSON.stringify(ins) %>
+                                        <%= ins.content.key.content %>
+                                        <%= ins.content.value.content %>
+                                    <% }) %>
+                                <% }) %>
+                            <% }) %>
                             <% resourceGroups.resources.forEach(resources=>{ %>
                                 <div>
                                     <div class="resources">
-                                        <div class="name">资源:<%= resources.uriTemplate %></div>
-                                        <div class="detail">
-                                            <%- marked(resources.description) %>
-                                        </div>
+                                        <div class="name" id="<%= resources.uriTemplate %>">资源:<%= resources.uriTemplate %></div>
+                                        <% if(resources.description){ %>
+                                            <div class="detail">
+                                                <%- marked(resources.description) %>
+                                            </div>
+                                        <% } %>
                                         <% if(resources.parameters.length){ %>
                                             <div class="parameters">
                                                 <div class="title">parameters:</div> 
@@ -76,7 +104,7 @@
                                     </div>
                                     <dl class="resourcesList">
                                         <% resources.actions.forEach(action=>{ %>
-                                            <dt>
+                                            <dt id="<%= action.name %>">
                                                 <%= action.name %>
                                             </dt>
                                             <dd>
@@ -116,7 +144,7 @@
                                                                     <span><%= header.name%>:<%= header.value%></span>
                                                                     <% }) %>
                                                                 </div>
-                                                                <pre><%= example.requests[i].body %></pre>
+                                                                <pre><%- jsonParse(example.requests[i].body) %></pre>
                                                             </dd>
                                                         <% } %>
                                                         <% if(response.body){ %>

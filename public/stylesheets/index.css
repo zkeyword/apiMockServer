@@ -189,250 +189,149 @@ body .fn-right {
 body {
   height: 100%;
 }
+.lt-header {
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  z-index: 999999;
+  background: #fff;
+  position: fixed;
+  zoom: 1;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.lt-header:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.lt-header .search {
+  float: right;
+}
+.lt-header .search label {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+}
+.lt-header .search input {
+  height: 30px;
+  padding-left: 3px;
+  box-sizing: border-box;
+}
 .lt-main {
   position: absolute;
   z-index: 1;
-  top: 10px;
+  top: 60px;
   bottom: 10px;
   left: 10px;
   right: 10px;
-  overflow-y: auto;
   background: #fff;
-  min-width: 1166px;
   box-sizing: border-box;
   display: flex;
   min-width: 1003px;
 }
-.tabmain {
-  border: 1px solid #f3f3f3;
+.lt-main .lt-left {
+  width: 200px;
+  padding: 10px;
+  margin: 0 20px 0 0;
+  border-right: 1px solid rgba(0,0,0,0.05);
 }
-.tabmain .tabGroup {
-  z-index: 3;
+.lt-main .lt-left .menu {
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  overflow: auto;
 }
-.tabGroup::-webkit-scrollbar-thumb {
+.lt-main .lt-left .menu::-webkit-scrollbar-thumb {
   background: #ffa711;
   border-radius: 4px;
 }
-.tabmain .tabGroup li {
+.lt-main .lt-left .menu a {
+  color: #666;
+}
+.lt-main .lt-left .menu a:hover {
+  font-weight: bold;
+}
+.lt-main .lt-left .menu .item {
+  padding: 0 0 10px;
+}
+.lt-main .lt-left .menu li {
   line-height: 30px;
-  padding-left: 15px;
+  padding-left: 10px;
   text-align: left;
   cursor: pointer;
   font-size: 14px;
-  font-family: 'Microsoft yahei';
-  color: #666;
 }
-.tabmain .tabGroup li.selectedTab {
-  padding-left: 28px;
-  color: #1d9fd3;
-  font-weight: bold;
+.lt-main .lt-right {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 0 0;
 }
-.tabmain .tabContent {
-  padding: 10px 30px;
-  background-color: #fff;
-  color: #777;
+.lt-main .lt-right::-webkit-scrollbar-thumb {
+  background: #ffa711;
+  border-radius: 4px;
 }
-.tabContent h3 {
-  margin-bottom: 5px;
-  background: #ffa500;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 28px;
-  text-align: center;
-}
-.tabmain .blueline {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 3px;
-  height: 48px;
-  background: #1d9fd3;
-  overflow: hidden;
-}
-.tabContent .witness p {
-  position: relative;
-  padding-left: 20px;
-}
-.tabContent .witness p em {
-  color: #ffa500;
-  font-weight: bold;
-}
-.tabContent .witness p a {
-  color: #666;
-  font-weight: normal;
-  display: block;
-  line-height: 24px;
-  text-align: left;
-}
-.tabContent .witness p a:hover {
-  background-color: #efefef;
-}
-.tabContent .witness p .ele {
-  left: 0px;
-}
-.tabContent:target {
-  padding-top: 48px;
-}
-#container {
-  height: 950px;
-  background: #fff;
-  position: relative;
-  left: 15%;
-  top: 48px;
-  width: calc(100% - 15%);
-}
-#slider {
-  position: absolute;
-  top: 0px;
-  right: 0;
-  width: 6px;
-  border-radius: 6px;
-  background: #ccc;
-  cursor: pointer;
-  width: 10px;
-}
-.tabOption {
-  line-height: 50px;
-  padding-left: 25px;
-}
-.scrollbar .tabOption a {
-  color: #777;
-  display: inline-block;
-  width: 100%;
-}
-#outerWrap {
-  position: fixed;
-  z-index: 999;
-  width: 15%;
-  height: 90%;
-  background: #f7f7f7;
-  top: 5%;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  padding: 10px;
-}
-.tabOption a:active {
-  background: #1d9fd3;
-}
-.tabOption a:active {
-  color: #fff;
-}
-.wrapacon {
-  position: relative;
-  float: left;
-  width: 468px;
-  height: 360px;
-  margin-top: 5px;
-  overflow: hidden;
-}
-.wrapaconlis {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 450px;
-}
-.scrbar {
-  position: relative;
-  width: 4px;
-  height: 355px;
-  border: 1px solid #f4f4f4;
-  border-radius: 20px;
-  background-color: #f4f4f4;
-  float: left;
-  left: 443px;
-  margin-left: 15px;
-}
-.scrbar .barbg {
-  position: absolute;
-  right: -1px;
-  top: 50px;
-  width: 2px;
-  height: 105px;
-  border: 2px solid #dadada;
-  background-color: #dadada;
-  border-radius: 20px;
-}
-.search {
-  width: 100%;
-  height: 51px;
-  line-height: 51px;
-  text-align: left;
-  z-index: 999999;
-  background: #fff;
-  padding-left: 236px;
-  position: fixed;
-}
-.search label {
-  width: 64px;
-  display: inline-block;
-}
-.search input {
-  height: 21px;
-  padding-left: 3px;
-}
-pre {
-  background: #f7f7f7;
-  padding: 10px;
+.lt-main .lt-right pre {
+  background: rgba(0,0,0,0.01);
+  padding: 20px;
   margin-top: 10px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 5px;
 }
-.version {
+.lt-main .lt-right .version {
   border: 1px solid #ddd;
   padding: 10px 20px;
   margin: 20px 0 86px;
 }
-.version .name {
+.lt-main .lt-right .version .name {
   font-size: 15px;
 }
-.version .list {
+.lt-main .lt-right .version .list {
   margin-top: 10px;
   font-size: 12px;
 }
-.resourceGroups .name {
+.lt-main .lt-right .resourceGroups .name {
   font-size: 25px;
   color: #333;
 }
-.resource .name {
+.lt-main .lt-right .resource .name {
   font-size: 30px;
   color: #333;
 }
-.resource .detail {
+.lt-main .lt-right .resource .detail {
   margin: 0 0 20px;
 }
-.resource .detail p {
+.lt-main .lt-right .resource .detail p {
   padding: 10px 0 0;
 }
-.resources {
+.lt-main .lt-right .resources {
   padding: 20px 0;
 }
-.resources .name {
+.lt-main .lt-right .resources .name {
   font-weight: bold;
   font-size: 20px;
 }
-.resources .detail {
+.lt-main .lt-right .resources .detail {
   padding: 10px 0 0;
 }
-.resources .parameters {
+.lt-main .lt-right .resources .parameters {
   padding: 10px 0 0;
 }
-.resources .parameters .title {
+.lt-main .lt-right .resources .parameters .title {
   padding: 0 0 5px;
   font-weight: bold;
 }
-.resourcesList dt {
+.lt-main .lt-right .resourcesList dt {
   margin: 20px 0 0;
   color: #1d9fd3;
   font-weight: bold;
   font-size: 16px;
 }
-.resourcesList dd .parameters .list {
+.lt-main .lt-right .resourcesList dd .parameters .list {
   padding: 0 10px 10px;
 }
-.resourcesList dd img {
+.lt-main .lt-right .resourcesList dd img {
   display: block;
 }
