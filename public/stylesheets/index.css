@@ -204,18 +204,23 @@ body {
   min-width: 1003px;
 }
 .tabmain {
-  background: #f3f3f3;
   border: 1px solid #f3f3f3;
 }
 .tabmain .tabGroup {
-  float: left;
-  width: 15%;
-  height: auto;
   z-index: 3;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: auto;
+}
+.tabGroup::-webkit-scrollbar-thumb {
+  background: #ffa711;
+  border-radius: 4px;
 }
 .tabmain .tabGroup li {
-  line-height: 48px;
-  padding-left: 28px;
+  line-height: 30px;
+  padding-left: 15px;
   text-align: left;
   cursor: pointer;
   font-size: 14px;
@@ -228,7 +233,7 @@ body {
   font-weight: bold;
 }
 .tabmain .tabContent {
-  padding: 10px 60px;
+  padding: 10px 30px;
   background-color: #fff;
   color: #777;
 }
@@ -271,10 +276,16 @@ body {
 .tabContent .witness p .ele {
   left: 0px;
 }
+.tabContent:target {
+  padding-top: 48px;
+}
 #container {
   height: 950px;
   background: #fff;
   position: relative;
+  left: 15%;
+  top: 48px;
+  width: calc(100% - 15%);
 }
 #slider {
   position: absolute;
@@ -286,16 +297,31 @@ body {
   cursor: pointer;
   width: 10px;
 }
-#sliderParent {
-  position: absolute;
-  left: 0;
-  height: 0;
+.tabOption {
+  line-height: 50px;
+  padding-left: 25px;
+}
+.scrollbar .tabOption a {
+  color: #777;
+  display: inline-block;
   width: 100%;
-  z-index: 999;
 }
 #outerWrap {
-  position: relative;
+  position: fixed;
   z-index: 999;
+  width: 15%;
+  height: 90%;
+  background: #f7f7f7;
+  top: 5%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px;
+}
+.tabOption a:active {
+  background: #1d9fd3;
+}
+.tabOption a:active {
+  color: #fff;
 }
 .wrapacon {
   position: relative;
@@ -333,10 +359,14 @@ body {
   border-radius: 20px;
 }
 .search {
-  width: 500px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+  width: 100%;
+  height: 51px;
+  line-height: 51px;
+  text-align: left;
+  z-index: 999999;
+  background: #fff;
+  padding-left: 236px;
+  position: fixed;
 }
 .search label {
   width: 64px;
@@ -349,11 +379,12 @@ body {
 pre {
   background: #f7f7f7;
   padding: 10px;
+  margin-top: 10px;
 }
 .version {
   border: 1px solid #ddd;
   padding: 10px 20px;
-  margin: 0 0 20px;
+  margin: 20px 0 86px;
 }
 .version .name {
   font-size: 15px;
