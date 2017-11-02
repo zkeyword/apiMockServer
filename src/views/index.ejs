@@ -72,8 +72,16 @@
                                 <% dataStructure.content.forEach(institute=>{ %>
                                     <% institute.content.forEach(ins=>{ %>
                                         <%= JSON.stringify(ins) %>
-                                        <%= ins.content.key.content %>
-                                        <%= ins.content.value.content %>
+                                        <table border="1" class="table">
+                                            <tr>
+                                                <th>
+                                                    <%= ins.content.key.content %>
+                                                </th>
+                                                <td>
+                                                    <%= ins.content.value.content %>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     <% }) %>
                                 <% }) %>
                             <% }) %>
