@@ -3,7 +3,7 @@
         {
             "name": "mockServer",
             "script": "bin/www",
-            "cwd": "/program/jenkins/node/workspace/apiMockServer",
+            "cwd": "./",
             "args": [],
             "autorestart": true,
             "max_memory_restart": "1G",
