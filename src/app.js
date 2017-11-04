@@ -5,6 +5,7 @@ const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaStatic = require('koa-static')
+const cors = require('koa2-cors')
 
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
@@ -22,6 +23,9 @@ app.use(stylus(`${__dirname}/../public`))
 app.use(koaStatic(`${__dirname}/../public`))
 app.use(views(`${__dirname}/views`, {
     extension: 'ejs'
+}))
+app.use(cors({
+    credentials: true
 }))
 
 // logger

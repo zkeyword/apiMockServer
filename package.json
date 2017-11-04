@@ -28,6 +28,7 @@
     "koa-static": "^3.0.0",
     "koa-stylus": "^0.1.0",
     "koa-views": "^5.2.1",
+    "koa2-cors": "^2.0.3",
     "marked": "^0.3.6",
     "mockjs": "^1.0.1-beta3",
     "mysql": "^2.15.0",
