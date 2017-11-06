@@ -6,6 +6,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaStatic = require('koa-static')
 const cors = require('koa2-cors')
+const jwtKoa = require('koa-jwt')
 
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
@@ -26,6 +27,10 @@ app.use(views(`${__dirname}/views`, {
 }))
 app.use(cors({
     credentials: true
+}))
+app.use(jwtKoa({ secret: 'mockService' }).unless({
+    path: [/^\/$/, /api/]
+    // path: [/^\/$/, /^\/project/]
 }))
 
 // logger
