@@ -1,9 +1,8 @@
 module.exports = {
     database: 'jsmock',
-    username: 'jsmock',
-    password: 'JavaScriptM0ck',
+    username: 'root',
+    password: '123456',
     port: '3306',
-    host: 'rm-wz9515p648o5t6is9o.mysql.rds.aliyuncs.com',
-    encoding: 'UTF8MB4_GENERAL_CI',
+    host: '127.0.0.1',
     dialect: 'mysql'
 }
