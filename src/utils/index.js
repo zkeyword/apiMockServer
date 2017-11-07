@@ -40,6 +40,7 @@ exports.password = (str1, str2) => {
 }
 
 exports.signToke = user => {
+    console.log(1212, jwt.refresh)
     return jwt.sign(
         {
             ...user

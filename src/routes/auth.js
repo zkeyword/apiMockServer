@@ -8,12 +8,30 @@ router.post('/', async (ctx, next) => {
     let body = await users.getUserByIdOrName({ username: req.username })
     let token = signToke({ id: 1 })
     let pay = await checkToken(token)
-    console.log(token, pay)
+    let serverTime = +(new Date())
     if (md5(req.password) === body.password) {
-        ctx.body = '登录成功'
+        ctx.body = {
+            tokenType: 'Bearer',
+            accessToken: token,
+            expiresAt: serverTime + pay.exp,
+            serverTime,
+            refreshToken: ''
+        }
     } else {
         ctx.body = '密码出错'
     }
+})
+
+router.put('/refresh', async (ctx, next) => {
+
+})
+
+router.del('/:token', async (ctx, next) => {
+
+})
+
+router.get('/', async (ctx, next) => {
+    ctx.body = ctx.user
 })
 
 module.exports = router

@@ -19,16 +19,12 @@ router.post('/', async (ctx, next) => {
 
 router.del('/:id', async (ctx, next) => {
     let body = await project.del(ctx.params.id, ctx.request.body)
-    if (body) {
-        ctx.body = `删除成功`
-    } else {
-        ctx.body = `删除失败`
-    }
+    ctx.body = body ? 1 : 0
 })
 
 router.put('/:id', async (ctx, next) => {
     let body = await project.modify(ctx.params.id, ctx.request.body)
-    ctx.body = body[0] ? `修改成功` : `修改失败`
+    ctx.body = body[0] ? 1 : 0
 })
 
 router.get('/', async (ctx, next) => {

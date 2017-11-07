@@ -13,6 +13,7 @@ const routes = require('./routes')
 const error = require('./routes/error')
 const parse = require('./middleware/parse')
 const { apiAUTH } = require('./middleware/auth')
+const jwtConfig = require('../config/jwt')
 
 // middlewares
 app.use(bodyparser({
@@ -28,8 +29,8 @@ app.use(views(`${__dirname}/views`, {
 app.use(cors({
     credentials: true
 }))
-app.use(jwtKoa({ secret: 'mockService' }).unless({
-    path: [/^\/$/, /api/]
+app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
+    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//]
     // path: [/^\/$/, /^\/project/]
 }))
 

@@ -33,15 +33,26 @@ exports.modify = async (id, req) => {
 }
 
 exports.list = async req => {
-    return await project.findAll({
-        include: {
-            model: users,
-            where: {
-                ...req
+    if (!req) {
+        return await project.findAll({
+            include: {
+                model: users,
+                where: {
+                    ...req
+                }
+                // ,required: true // 加个required: true,即可
             }
-            // ,required: true // 加个required: true,即可
-        }
-    })
+        })
+    } else {
+        return await project.findOne({
+            include: {
+                model: users,
+                where: {
+                    ...req
+                }
+            }
+        })
+    }
 }
 
 exports.alias = async id => {
