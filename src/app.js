@@ -5,12 +5,15 @@ const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaStatic = require('koa-static')
+const cors = require('koa2-cors')
+const jwtKoa = require('koa-jwt')
 
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
 const error = require('./routes/error')
 const parse = require('./middleware/parse')
 const { apiAUTH } = require('./middleware/auth')
+const jwtConfig = require('../config/jwt')
 
 // middlewares
 app.use(bodyparser({
@@ -22,6 +25,13 @@ app.use(stylus(`${__dirname}/../public`))
 app.use(koaStatic(`${__dirname}/../public`))
 app.use(views(`${__dirname}/views`, {
     extension: 'ejs'
+}))
+app.use(cors({
+    credentials: true
+}))
+app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
+    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
+    // path: [/^\/$/, /^\/project/]
 }))
 
 // logger

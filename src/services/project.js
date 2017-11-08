@@ -1,7 +1,6 @@
 const { project, users } = require('../models')
 
 exports.add = async req => {
-    console.log(Object.keys(req).length, req.name, req.userId)
     if (!(Object.keys(req).length && req.name && req.userId)) return false
     let user = await users.findById(req.userId)
     if (!user) return null
@@ -34,15 +33,26 @@ exports.modify = async (id, req) => {
 }
 
 exports.list = async req => {
-    return await project.findAll({
-        include: {
-            model: users,
-            where: {
-                ...req
+    if (!req) {
+        return await project.findAll({
+            include: {
+                model: users,
+                where: {
+                    ...req
+                }
+                // ,required: true // 加个required: true,即可
             }
-            // ,required: true // 加个required: true,即可
-        }
-    })
+        })
+    } else {
+        return await project.findOne({
+            include: {
+                model: users
+            },
+            where: {
+                id: req.id
+            }
+        })
+    }
 }
 
 exports.alias = async id => {

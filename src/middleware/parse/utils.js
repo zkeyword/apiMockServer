@@ -53,6 +53,20 @@ exports.getDrafterResult = dir => {
     })
 }
 
+exports.getDBDrafterResult = list => {
+    let arr = []
+    list.forEach(async (itm, index) => {
+        let result = itm.content
+        result = handleRtr(result)
+        let item = drafter.parseSync(result, { type: 'ast' })
+        if (result) {
+            item.ast.fileName = itm.project.alias
+            arr[index] = item // 保证顺序
+        }
+    })
+    return arr.filter(x => x)
+}
+
 exports.jsonParse = (str, original) => {
     if (!str) return str
     str = str.replace(/\'/g, '"')

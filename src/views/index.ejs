@@ -69,20 +69,53 @@
                             <% } %>
                             <!-- TODO 不确定 item.content[resourceGroupsIndex] -->
                             <% item.content[resourceGroupsIndex].content.forEach(dataStructure=>{ %>
-                                <% dataStructure.content.forEach(institute=>{ %>
-                                    <% institute.content.forEach(ins=>{ %>
-                                        <%= JSON.stringify(ins) %>
-                                        <table border="1" class="table">
-                                            <tr>
-                                                <th>
-                                                    <%= ins.content.key.content %>
-                                                </th>
-                                                <td>
-                                                    <%= ins.content.value.content %>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    <% }) %>
+                                <table border="1" class="table">
+                                    <tr>
+                                        <th>
+                                            key
+                                        </th>
+                                        <th>
+                                            default
+                                        </th>
+                                        <th>
+                                            samples
+                                        </th>
+                                        <th>
+                                            type
+                                        </th>
+                                        <th>
+                                            required
+                                        </th>
+                                        <th>
+                                            meta
+                                        </th>
+                                    </tr>
+                                    <% dataStructure.content.forEach(institute=>{ %>
+                                        <% institute.content.forEach(ins=>{ %>
+                                            <%= JSON.stringify(ins) %>
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <%= ins.content.key.content %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ins.content.value.content %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ins.content.value.content %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ins.content.value.element %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ins.attributes ? true : false %>
+                                                    </td>
+                                                    <td>
+                                                        <%= ins.meta.description %>
+                                                    </td>
+                                                </tr>
+                                        <% }) %>
+                                    </table>
                                 <% }) %>
                             <% }) %>
                             <% resourceGroups.resources.forEach(resources=>{ %>

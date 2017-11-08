@@ -49,7 +49,7 @@ exports.list = async req => {
 
 exports.getUserByIdOrName = async obj => {
     if (!Object.keys(obj).length) return []
-    return await users.findAll({
+    return await users.findOne({
         where: {
             ...obj
         }

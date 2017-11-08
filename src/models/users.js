@@ -1,3 +1,6 @@
+const md5 = require('md5')
+const { password } = require('../utils')
+
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define('users',
         {
@@ -15,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: true,
                 comment: '昵称'
+            },
+            role: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0, // 0普通用户，1管理员
+                comment: '角色'
             }
         },
         {
@@ -28,6 +36,18 @@ module.exports = (sequelize, DataTypes) => {
     Users.associate = (models) => {
         Users.hasMany(models.project)
     }
+
+    Users.findOrCreate({
+        where: {
+            username: 'admin'
+        },
+        defaults: {
+            username: 'admin',
+            password: md5(password('admin', '123456')),
+            nick: '管理员',
+            role: 1
+        }
+    })
 
     return Users
 }

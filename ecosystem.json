@@ -1,0 +1,20 @@
+{
+    "apps": [
+        {
+            "name": "mockServer",
+            "script": "bin/www",
+            "cwd": "./",
+            "args": [],
+            "autorestart": true,
+            "max_memory_restart": "1G",
+            "autorestart": true,
+            "node_args": [],
+            "args": [],
+            "env": {},
+            "watch": true,
+            "watch_options": {
+                "usePolling": true
+            }
+        }
+    ]
+}
