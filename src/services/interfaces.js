@@ -33,14 +33,27 @@ exports.modify = async (id, req) => {
 }
 
 exports.list = async req => {
-    return await interfaces.findAll({
-        include: {
-            model: project,
-            where: {
-                ...req
+    if (!req) {
+        return await interfaces.findAll({
+            include: {
+                attributes: ['alias'],
+                model: project
             }
-        }
-    })
+        })
+    } else {
+        return await interfaces.findOne({
+            include: {
+                model: project
+            },
+            where: {
+                id: req.id
+            }
+        })
+    }
+}
+
+exports.getListByProjectId = async req => {
+
 }
 
 exports.alias = async id => {

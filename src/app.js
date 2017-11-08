@@ -30,7 +30,7 @@ app.use(cors({
     credentials: true
 }))
 app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
-    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//]
+    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
     // path: [/^\/$/, /^\/project/]
 }))
 

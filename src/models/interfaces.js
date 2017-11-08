@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
                 comment: '接口文档模块名'
             },
             content: {
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
                 allowNull: false,
                 comment: '接口文档内容'
             }
@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-    // interfaces.associate = (models) => {
-    //     interfaces.belongsTo(models.Project)
-    // }
+    interfaces.associate = (models) => {
+        interfaces.belongsTo(models.project)
+    }
 
     return interfaces
 }

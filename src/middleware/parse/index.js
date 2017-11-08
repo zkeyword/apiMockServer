@@ -3,9 +3,11 @@ const { jsonParse, getDrafterResult } = require('./utils')
 
 module.exports = (router) => {
     return async (ctx, next) => {
+        if (/^\/project/.test(ctx.url)) return await next()
         let result = await getDrafterResult(`${__dirname}/../../../upload/`)
         let handleRouer = (actions, url) => {
-            // console.log(url, actions.method.toLocaleLowerCase())
+            url = `/project${url}`
+            // console.log(url)
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
                 let isAjaxAccept = ctx.request.header['accept'] === '*/*'

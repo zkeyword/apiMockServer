@@ -46,10 +46,10 @@ exports.list = async req => {
     } else {
         return await project.findOne({
             include: {
-                model: users,
-                where: {
-                    ...req
-                }
+                model: users
+            },
+            where: {
+                id: req.id
             }
         })
     }
