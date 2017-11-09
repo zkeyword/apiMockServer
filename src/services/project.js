@@ -40,7 +40,6 @@ exports.list = async req => {
                 where: {
                     ...req
                 }
-                // ,required: true // 加个required: true,即可
             }
         })
     } else {

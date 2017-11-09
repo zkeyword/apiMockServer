@@ -60,8 +60,8 @@ exports.getDBDrafterResult = list => {
         result = handleRtr(result)
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
-            item.ast.fileName = itm.project.alias
-            arr[index] = item // 保证顺序
+            item.ast.alias = itm.project.alias
+            arr[index] = item.ast
         }
     })
     return arr.filter(x => x)
