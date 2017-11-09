@@ -1,0 +1,130 @@
+<div class="tabContent" id="<%=item.name %>">
+    <div class="resource">
+        <div class="name"><%= item.name %></div>
+        <% if(item.description){ %>
+            <div class="detail">
+                <%- marked(item.description) %>
+            </div>
+        <% } %>
+    </div>
+    <% item.resourceGroups.forEach((resourceGroups, resourceGroupsIndex)=>{ %>
+        <% if(resourceGroups.name){ %>
+            <div class="resourceGroups">
+                <div class="name" id="<%= resourceGroups.name %>"><%= resourceGroups.name %></div>
+                <% if(resourceGroups.description){ %>
+                    <div class="desc"><%- marked(resourceGroups.description) %></div>
+                <% } %>
+            </div>
+        <% } %>
+
+        <!-- TODO 不确定 item.content[resourceGroupsIndex] -->
+        <%- include('./partial/table', {content: item.content[resourceGroupsIndex].content}) %>
+
+        <% resourceGroups.resources.forEach(resources=>{ %>
+            <div>
+                <div class="resources">
+                    <div class="name" id="<%= resources.uriTemplate %>">Resources:<%= resources.uriTemplate %></div>
+                    <% if(resources.description){ %>
+                        <div class="detail">
+                            <%- marked(resources.description) %>
+                        </div>
+                    <% } %>
+                    <% if(resources.parameters.length){ %>
+                        <div class="parameters">
+                            <div class="title">parameters:</div> 
+                            <div class="list">
+                                <% resources.parameters.forEach(parameter=>{ %>
+                                    <div>
+                                        <p>name：<%= parameter.name %></p>
+                                        <p>required：<%= parameter.required? 'yes' : 'no' %></p>
+                                        <p>type：<%= parameter.type %></p>
+                                        <p>description：<%= parameter.description %></p>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+                <dl class="resourcesList">
+                    <% resources.actions.forEach(action=>{ %>
+                        <dt id="<%= action.name %>">
+                            <%= action.name %>
+                        </dt>
+                        <dd>
+                            <span>description：</span>
+                            <%= action.description %>
+                        </dd>
+                        <dd>
+                            <span>method：</span>
+                            <%= action.method %>
+                        </dd>
+                        <% if(action.parameters.length){ %>
+                            <dd>
+                                <div class="parameters">
+                                    <div class="title">parameters:</div>
+                                    <div class="list">
+                                        <% action.parameters.forEach((parameter)=>{ %>
+                                            <div>
+                                                <p>name：<%= parameter.name %></p>
+                                                <p>required：<%= parameter.required? 'yes' : 'no' %></p>
+                                                <p>type：<%= parameter.type %></p>
+                                                <p>description：<%= parameter.description %></p>
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                            </dd>
+                        <% } %>
+                        <% action.examples.forEach(example=>{ %>
+                            <% if(example.responses.length >= example.requests.length){ %>
+                                <% example.responses.forEach((response, i)=>{ %>
+                                    <% if(example.requests[i]){ %>
+                                        <dd>
+                                            <span>request：</span>
+                                            <div>
+                                                header：
+                                                <% example.requests[i].headers.forEach(header=>{ %>
+                                                <span><%= header.name%>:<%= header.value%></span>
+                                                <% }) %>
+                                            </div>
+                                            <pre><%- jsonParse(example.requests[i].body) %></pre>
+                                        </dd>
+                                    <% } %>
+                                    <% if(response.body){ %>
+                                        <dd>
+                                            <span>response:</span>
+                                            <pre><%- jsonParse(response.body) %></pre>
+                                        </dd>
+                                    <% } %>
+                                <% }) %>
+                            <% } %>
+                            <% if(example.responses.length < example.requests.length) { %>
+                                <% example.requests.forEach((request, i)=>{ %>
+                                    <% if(example.response && example.response[i] && example.response[i].body){ %>
+                                        <dd>
+                                            <span>request：</span>
+                                            <pre><%= example.response[i].body %></pre>
+                                        </dd>
+                                    <% } %>
+                                    <% if(request.body || request.headers){ %>
+                                        <dd>
+                                            <span>response: </span>
+                                            <div>
+                                                header：
+                                                <% request.headers.forEach(header=>{ %>
+                                                <span><%= header.name%>:<%= header.value%></span>
+                                                <% }) %>
+                                            </div>
+                                            <pre><%- jsonParse(request.body) %></pre>
+                                        </dd>
+                                    <% } %>
+                                <% }) %>
+                            <% } %>
+                        <% }) %>
+                    <% }) %>
+                </dl>
+            </div>
+        <% }) %>
+    <% }) %>
+    <%- include('./partial/metadata', {metadata: item.metadata})  %>
+</div>

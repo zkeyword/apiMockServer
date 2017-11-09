@@ -1,0 +1,51 @@
+<% content.forEach(dataStructure=>{ %>
+    <% if(dataStructure.content.length){ %>
+        <table border="1" class="table">
+            <tr>
+                <th>
+                    key
+                </th>
+                <th>
+                    default
+                </th>
+                <th>
+                    samples
+                </th>
+                <th>
+                    type
+                </th>
+                <th>
+                    required
+                </th>
+                <th>
+                    meta
+                </th>
+            </tr>
+            <% dataStructure.content.forEach(institute=>{ %>
+                <% institute.content.forEach(ins=>{ %>
+                    <%= JSON.stringify(ins) %>
+                        <tr>
+                            <td>
+                                <%= ins.content.key.content %>
+                            </td>
+                            <td>
+                                <%= ins.content.value.content %>
+                            </td>
+                            <td>
+                                <%= ins.content.value.content %>
+                            </td>
+                            <td>
+                                <%= ins.content.value.element %>
+                            </td>
+                            <td>
+                                <%= ins.attributes ? true : false %>
+                            </td>
+                            <td>
+                                <%= ins.meta.description %>
+                            </td>
+                        </tr>
+                <% }) %>
+            <% }) %>
+        </table>
+    <% } %>
+<% }) %>

@@ -1,0 +1,12 @@
+<% if(metadata){ %>
+    <div class="version">
+        <div class="name">文档版本信息</div>
+        <ul class="list">
+            <% metadata.forEach(meta=>{ %>
+                <li>
+                    <%= meta.name %>: <%= meta.value %>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
