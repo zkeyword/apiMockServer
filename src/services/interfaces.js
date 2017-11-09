@@ -40,23 +40,14 @@ exports.list = async req => {
                 model: project
             }
         })
-    } else {
-        return await interfaces.findOne({
-            include: {
-                model: project
-            },
-            where: {
-                id: req.id
-            }
-        })
     }
-}
-
-exports.getListByProjectId = async req => {
-
-}
-
-exports.alias = async id => {
-    if (!id) return {}
-    return await interfaces.findById(id)
+    return await interfaces.findAll({
+        include: {
+            attributes: ['alias'],
+            model: project
+        },
+        where: {
+            projectId: req.id
+        }
+    })
 }
