@@ -1,16 +1,18 @@
 {
     "apps": [
         {
-            "name": "mockServer",
+            "name": "apiMockServer",
             "script": "bin/www",
-            "cwd": "./",
+            "cwd": "/program/jenkins/node/workspace/api-mock-server/",
             "args": [],
             "autorestart": true,
             "max_memory_restart": "1G",
             "autorestart": true,
             "node_args": [],
             "args": [],
-            "env": {},
+            "env": {
+                "NODE_APIMOCKSERVER_PORT": "4002"
+            },
             "watch": true,
             "watch_options": {
                 "usePolling": true

@@ -209,6 +209,11 @@ body {
   clear: both;
   height: 0;
 }
+.lt-header .logo {
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+}
 .lt-header .search {
   float: right;
 }
@@ -257,6 +262,9 @@ body {
 .lt-main .lt-left .menu .item {
   padding: 0 0 10px;
 }
+.lt-main .lt-left .menu .interfacesName {
+  padding: 0 0 0 10px;
+}
 .lt-main .lt-left .menu li {
   line-height: 30px;
   padding-left: 10px;
@@ -280,28 +288,21 @@ body {
   border: 1px solid rgba(0,0,0,0.05);
   border-radius: 5px;
 }
-.lt-main .lt-right .version {
+.lt-main .lt-right .metadata {
   border: 1px solid #ddd;
   padding: 10px 20px;
-  margin: 20px 0 86px;
+  margin: 20px 0 20px;
 }
-.lt-main .lt-right .version .name {
+.lt-main .lt-right .metadata .name {
   font-size: 15px;
 }
-.lt-main .lt-right .version .list {
+.lt-main .lt-right .metadata .list {
   margin-top: 10px;
   font-size: 12px;
 }
 .lt-main .lt-right .resourceGroups .name {
   font-size: 25px;
   color: #333;
-}
-.lt-main .lt-right .table {
-  margin-top: 20px;
-}
-.lt-main .lt-right .table td,
-.lt-main .lt-right .table th {
-  padding: 10px;
 }
 .lt-main .lt-right .resource .name {
   font-size: 30px;
@@ -330,11 +331,18 @@ body {
   padding: 0 0 5px;
   font-weight: bold;
 }
-.lt-main .lt-right .resourcesList dt {
+.lt-main .lt-right .resourcesList .action .actionName {
   margin: 20px 0 0;
   color: #1d9fd3;
   font-weight: bold;
   font-size: 16px;
+}
+.lt-main .lt-right .resourcesList .action .urlWrap {
+  padding: 10px 0;
+}
+.lt-main .lt-right .resourcesList .action .urlWrap .method {
+  border: 1px solid #ddd;
+  padding: 2px 5px;
 }
 .lt-main .lt-right .resourcesList dd .parameters .list {
   padding: 0 10px 10px;

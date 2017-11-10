@@ -13,6 +13,11 @@ body
     padding: 10px 20px
     box-shadow: 0 0 5px rgba(#000, 0.1)
 
+    .logo
+        float: left
+        font-size: 20px
+        font-weight: bold
+
     .search
         float: right
   
@@ -62,6 +67,9 @@ body
             .item
                 padding: 0 0 10px
 
+            .interfacesName
+                padding: 0 0 0 10px
+
             li
                 line-height:30px
                 padding-left:10px
@@ -87,11 +95,10 @@ body
             border: 1px solid rgba(#000, 0.05)
             border-radius: 5px
 
-
-        .version
+        .metadata
             border:1px solid #ddd
             padding: 10px 20px
-            margin: 20px 0 86px
+            margin: 20px 0 20px
             
             .name
                 font-size: 15px
@@ -105,12 +112,6 @@ body
             .name
                 font-size: 25px
                 color: #333
-        .table
-            margin-top: 20px
-
-            td
-            th
-                padding: 10px        
 
         .resource
 
@@ -143,11 +144,19 @@ body
 
         .resourcesList
 
-            dt
-                margin: 20px 0 0
-                color:#1d9fd3
-                font-weight:bold
-                font-size: 16px
+            .action
+
+                .actionName
+                    margin: 20px 0 0
+                    color:#1d9fd3
+                    font-weight:bold
+                    font-size: 16px
+
+                .urlWrap
+                    padding: 10px 0
+                    .method
+                        border: 1px solid #ddd
+                        padding: 2px 5px
 
             dd 
                 .parameters
