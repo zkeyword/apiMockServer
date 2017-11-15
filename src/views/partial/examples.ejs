@@ -1,0 +1,46 @@
+<% examples.forEach(example=>{ %>
+    <% if(example.responses.length >= example.requests.length){ %>
+        <% example.responses.forEach((response, i)=>{ %>
+            <% if(example.requests[i]){ %>
+                <div>
+                    <span>request：</span>
+                    <div>
+                        header：
+                        <% example.requests[i].headers.forEach(header=>{ %>
+                        <span><%= header.name%>:<%= header.value%></span>
+                        <% }) %>
+                    </div>
+                    <% if(example.requests[i].body){ %><pre><%- jsonParse(example.requests[i].body) %></pre><% } %>
+                </div>
+            <% } %>
+            <% if(response.body){ %>
+                <div>
+                    <span>response:</span>
+                    <pre><%- jsonParse(response.body) %></pre>
+                </div>
+            <% } %>
+        <% }) %>
+    <% } %>
+    <% if(example.responses.length < example.requests.length) { %>
+        <% example.requests.forEach((request, i)=>{ %>
+            <% if(example.response && example.response[i] && example.response[i].body){ %>
+                <div>
+                    <span>request：</span>
+                    <pre><%= example.response[i].body %></pre>
+                </div>
+            <% } %>
+            <% if(request.body || request.headers){ %>
+                <div>
+                    <span>response: </span>
+                    <div>
+                        header：
+                        <% request.headers.forEach(header=>{ %>
+                        <span><%= header.name%>:<%= header.value%></span>
+                        <% }) %>
+                    </div>
+                    <% if(request.body){ %><pre><%- jsonParse(request.body) %></pre><% } %>
+                </div>
+            <% } %>
+        <% }) %>
+    <% } %>
+<% }) %>

@@ -1,0 +1,8 @@
+<% if(resourceGroups.name){ %>
+    <div class="resourceGroups">
+        <div class="name" id="<%= resourceGroups.name %>"><%= resourceGroups.name %></div>
+        <% if(resourceGroups.description){ %>
+            <div class="desc"><%- marked(resourceGroups.description) %></div>
+        <% } %>
+    </div>
+<% } %>

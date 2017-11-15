@@ -12,16 +12,20 @@
 
 <body>
     <div class="lt-header">
+        <div class="logo">APIMOCK</div>
+        <!--
         <div class="search">
             <input>
         </div>
+        -->
     </div>
     <div class="lt-main">
         <div class="lt-left">
             <div class="menu">
                 <% body.forEach(item=>{ %>
                     <div class="item">
-                        <a href="#<%=item.name %>"> <%= item.name %></a>
+                        <a href="#<%=item.name %>"> <%= item.alias %></a>
+                        <div class="interfacesName"><%= item.interfacesName %></div>
                         <ul>
                             <% item.resourceGroups.forEach(resourceGroups=>{ %>
                                 <li>
@@ -29,11 +33,10 @@
                                     <ul>
                                         <li>
                                             <% resourceGroups.resources.forEach(resources=>{ %>
-                                                <a href="#<%= resources.uriTemplate %>"><%= resources.uriTemplate %></a>
                                                 <ul>
                                                     <% resources.actions.forEach(action=>{ %>
                                                         <li>
-                                                            <a href="#<%= action.name %>"><%= action.name %></a>
+                                                            <a href="#<%= action.name %>" title="<%= resources.uriTemplate %>"><%= action.name %></a>
                                                         </li>
                                                     <% }) %>
                                                 </ul>
@@ -49,7 +52,7 @@
         </div>
         <div class="lt-right" id="container">
             <% body.forEach(item=>{ %>
-                <%- include('./preview', {item})  %>
+                <%- include('./preview', {body: item})  %>
             <% }) %>
         </div>
     </div>

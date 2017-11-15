@@ -1,5 +1,7 @@
 const router = require('koa-router')()
 const interfaces = require('../services/interfaces')
+const marked = require('marked')
+const { jsonParse, getDBDrafterResult } = require('../middleware/parse/utils')
 
 router.post('/', async (ctx, next) => {
     let body = await interfaces.add(ctx.request.body)
@@ -36,6 +38,25 @@ router.get('/', async (ctx, next) => {
 
 router.get('/:id', async (ctx, next) => {
     ctx.body = await interfaces.list({ id: ctx.params.id })
+})
+
+router.get('/preview/:id', async (ctx, next) => {
+    let interfacesList = await interfaces.list({ id: ctx.params.id })
+    let body = getDBDrafterResult(interfacesList)[0]
+    let revertString = (str, type) => {
+        let reg = /^\/SOCKET/g
+        if (reg.test(str)) {
+            if (!type) return false
+            str = str.replace(reg, '')
+        }
+        return str
+    }
+    await ctx.render('preview', {
+        jsonParse,
+        marked,
+        body,
+        revertString
+    })
 })
 
 module.exports = router

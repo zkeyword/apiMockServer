@@ -1,6 +1,6 @@
-<% if(metadata){ %>
-    <div class="version">
-        <div class="name">文档版本信息</div>
+<% if(metadata && metadata.length){ %>
+    <div class="metadata">
+        <div class="name">文档信息</div>
         <ul class="list">
             <% metadata.forEach(meta=>{ %>
                 <li>

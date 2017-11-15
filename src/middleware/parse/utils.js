@@ -58,14 +58,24 @@ exports.getDBDrafterResult = list => {
     list.forEach(async (itm, index) => {
         let result = itm.content
         result = handleRtr(result)
+        // let a = drafter.validateSync(result, { type: 'ast' })
+        // console.log(a)
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
             item.ast.alias = itm.project.alias
+            item.ast.interfacesName = itm.name
             arr[index] = item.ast
         }
     })
     return arr.filter(x => x)
 }
+
+exports.validateDrafterResult = result => {
+    let item = drafter.validateSync(result, { type: 'ast' })
+    console.log(item)
+}
+
+
 
 exports.jsonParse = (str, original) => {
     if (!str) return str
@@ -87,3 +97,4 @@ exports.jsonParse = (str, original) => {
     str = nanoRender.render(str)
     return str
 }
+
