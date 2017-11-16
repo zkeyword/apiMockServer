@@ -62,9 +62,12 @@ exports.getDBDrafterResult = list => {
         // console.log(a)
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
-            item.ast.alias = itm.project.alias
-            item.ast.interfacesName = itm.name
-            arr[index] = item.ast
+            let ast = item.ast
+            ast.alias = itm.project.alias
+            ast.interfacesName = itm.name
+            ast.createdAt = itm.createdAt
+            ast.updatedAt = itm.updatedAt
+            arr[index] = ast
         }
     })
     return arr.filter(x => x)
@@ -74,8 +77,6 @@ exports.validateDrafterResult = result => {
     let item = drafter.validateSync(result, { type: 'ast' })
     console.log(item)
 }
-
-
 
 exports.jsonParse = (str, original) => {
     if (!str) return str
@@ -97,4 +98,3 @@ exports.jsonParse = (str, original) => {
     str = nanoRender.render(str)
     return str
 }
-
