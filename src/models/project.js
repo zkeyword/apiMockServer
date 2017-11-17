@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
+            underscored: false,
             freezeTableName: true,
             autoIncrement: true,
             comment: '项目表'

@@ -15,10 +15,12 @@ exports.add = async req => {
 }
 
 exports.del = async (id, req) => {
+    console.log(req.projectId)
     if (!(Object.keys(req).length && id && req.projectId)) return false
     return await interfaces.destroy({
         where: {
-            id
+            id,
+            projectId: req.projectId
         }
     })
 }

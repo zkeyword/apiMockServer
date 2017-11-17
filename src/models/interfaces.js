@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
+            underscored: false,
             freezeTableName: true,
             autoIncrement: true,
             comment: '接口表'
