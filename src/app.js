@@ -29,17 +29,18 @@ app.use(views(`${__dirname}/views`, {
 app.use(cors({
     credentials: true
 }))
-app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
-    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
-    // path: [/^\/$/, /^\/project/]
-}))
+// app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
+//     path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
+//     // path: [/^\/$/, /^\/project/]
+// }))
 
 // logger
 app.use(async (ctx, next) => {
     const start = new Date()
     await next()
-    const ms = new Date() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    const end = new Date()
+    const ms = end - start
+    console.log(`${end.toLocaleString()}: ${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // routes

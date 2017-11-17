@@ -1,0 +1,21 @@
+<% if(parameters.length){ %>
+    <div class="parameters">
+        <div class="title">parameters:</div>
+        <div class="list">
+            <% parameters.forEach((parameter)=>{ %>
+                <div class="item">
+                    <span class="nameBox">
+                        <span class="name">
+                            <%= parameter.name %>
+                        </span>
+                        <span class="tagWrap">
+                            <span class="type tag"><%= parameter.type %></span>
+                            <%- parameter.required && '<span class="required tag">required</span>' %>
+                        </span>
+                    </span>
+                    <span class="desc">- <%= parameter.description %></span>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+<% } %>

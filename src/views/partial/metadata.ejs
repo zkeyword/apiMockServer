@@ -1,12 +1,12 @@
-<% if(metadata){ %>
-    <div class="version">
-        <div class="name">文档版本信息</div>
-        <ul class="list">
-            <% metadata.forEach(meta=>{ %>
-                <li>
-                    <%= meta.name %>: <%= meta.value %>
-                </li>
-            <% }) %>
-        </ul>
-    </div>
-<% } %>
+<div class="metadata">
+    <div class="name">文档信息</div>
+    <ul class="list">
+        <li> createdAt: <%= body.createdAt.toLocaleString() %></li>
+        <li> updatedAt: <%= body.updatedAt.toLocaleString() %></li>
+        <% body.metadata.forEach(meta=>{ %>
+            <li>
+                <%= meta.name %>: <%= meta.value %>
+            </li>
+        <% }) %>
+    </ul>
+</div>
