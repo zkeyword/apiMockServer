@@ -18,6 +18,12 @@ exports.del = async (id, req) => {
     console.log(req.projectId)
     if (!(Object.keys(req).length && id && req.projectId)) return false
     return await interfaces.destroy({
+        include: {
+            model: project,
+            where: {
+                ...req
+            }
+        },
         where: {
             id,
             projectId: req.projectId

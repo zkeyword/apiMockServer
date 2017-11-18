@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const project = require('../services/project')
 const interfaces = require('../services/interfaces')
 const marked = require('marked')
 const { jsonParse, getDBDrafterResult } = require('../middleware/parse/utils')
@@ -19,6 +20,9 @@ router.post('/', async (ctx, next) => {
 })
 
 router.del('/:id', async (ctx, next) => {
+    // let userId = ctx.body.userId
+    // let projectObj = await project.list({ id: userId })
+    // console.log(projectObj)
     let body = await interfaces.del(ctx.params.id, ctx.request.body)
     if (body) {
         ctx.body = `删除成功`

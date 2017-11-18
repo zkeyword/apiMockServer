@@ -29,10 +29,10 @@ app.use(views(`${__dirname}/views`, {
 app.use(cors({
     credentials: true
 }))
-// app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
-//     path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
-//     // path: [/^\/$/, /^\/project/]
-// }))
+app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
+    path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
+    // path: [/^\/$/, /^\/project/]
+}))
 
 // logger
 app.use(async (ctx, next) => {
