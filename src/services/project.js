@@ -35,6 +35,7 @@ exports.modify = async (id, req) => {
 exports.list = async req => {
     if (!req) {
         return await project.findAll({
+            // attributes: ['name'], // 查找自定字段 https://segmentfault.com/a/1190000003987871#articleHeader12
             include: {
                 model: users,
                 where: {
