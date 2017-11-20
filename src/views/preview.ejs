@@ -21,15 +21,15 @@
                 <%- include('./partial/resources', {resources}) %>
 
                 <div class="resourcesList">
-                    <% resources.actions.forEach(action=>{ %>
-                        
-                        <%- include('./partial/actionHeader', {action}) %>
-                        
-                        <%- include('./partial/parameters', {parameters: action.parameters}) %>
-                        
-                        <%- include('./partial/examples', {examples: action.examples}) %>
-
-                    <% }) %>
+                    <% if(resources.actions.length){ %>
+                        <% resources.actions.forEach(action=>{ %>
+                            <%- include('./partial/actionHeader', {action}) %>
+                            <%- include('./partial/parameters', {parameters: action.parameters}) %>
+                            <%- include('./partial/examples', {examples: action.examples}) %>
+                        <% }) %>
+                    <% } else { %>
+                        暂时没有相关内容
+                    <% } %>
                 </div>
 
             </div>

@@ -55,7 +55,11 @@ exports.list = async req => {
     }
 }
 
-exports.alias = async id => {
-    if (!id) return {}
-    return await project.findById(id)
+exports.getProjectbyIdAndUserId = async (id, userId) => {
+    return await project.findOne({
+        where: {
+            id,
+            userId
+        }
+    })
 }

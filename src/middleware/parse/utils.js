@@ -2,8 +2,9 @@
 const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
 const { mock } = require('mockjs')
-const nanoRender = require('nano-json')
+// const nanoRender = require('nano-json')
 const commentJson = require('comment-json')
+const stringifyObject = require('stringify-object')
 const { readDir, readFile, getFileFormat } = require('../../utils')
 
 function handleRtr(str, isRevert = false) {
@@ -73,6 +74,17 @@ exports.getDBDrafterResult = list => {
     return arr.filter(x => x)
 }
 
+exports.revertString = (str, type) => {
+    let socketReg = /^\/SOCKET/g
+    let tagReg = /(\{(.+?)\})/g
+    if (socketReg.test(str)) {
+        if (!type) return false
+        str = str.replace(socketReg, '')
+    }
+    str = str.replace(tagReg, '<span>$1</span>')
+    return str
+}
+
 exports.validateDrafterResult = result => {
     let item = drafter.validateSync(result, { type: 'ast' })
     console.log(item)
@@ -95,6 +107,10 @@ exports.jsonParse = (str, original) => {
         return str
     }
     if (typeof str === 'string' || original) return str
-    str = nanoRender.render(str)
+    // str = nanoRender.render(str)
+    str = stringifyObject(str, {
+        indent: '    ',
+        singleQuotes: false
+    })
     return str
 }

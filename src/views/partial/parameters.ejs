@@ -9,8 +9,8 @@
                             <%= parameter.name %>
                         </span>
                         <span class="tagWrap">
-                            <span class="type tag"><%= parameter.type %></span>
-                            <%- parameter.required && '<span class="required tag">required</span>' %>
+                            <%- parameter.type && `<span class="tag type">${parameter.type}</span>` %>
+                            <% if(parameter.required){%><span class="tag required">required</span><%} %>
                         </span>
                     </span>
                     <span class="desc">- <%= parameter.description %></span>

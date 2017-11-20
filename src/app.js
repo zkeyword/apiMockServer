@@ -40,7 +40,7 @@ app.use(async (ctx, next) => {
     await next()
     const end = new Date()
     const ms = end - start
-    console.log(`${end.toLocaleString()}: ${ctx.method} ${ctx.url} - ${ms}ms`)
+    console.log(`${ctx.ip} - ${end.toLocaleString()}: ${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // routes

@@ -5,8 +5,12 @@
     
     <div class="urlWrap">
         <span class="method"><%= revertString(action.attributes.uriTemplate) ? action.method : 'SOCKET' %></span>
-        <span class="uriTemplate"><%= revertString(action.attributes.uriTemplate, true) %></span>
+        <span class="uriTemplate"><%- revertString(action.attributes.uriTemplate, true) %></span>
     </div>
-    <% if(action.description){ %><div><%= action.description %></div><% } %>
+    <% if(action.description){ %>
+        <div class="detail">
+            <%- marked(action.description) %>
+        </div>
+    <% } %>
     
 </div>
