@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 const marked = require('marked')
 const interfaces = require('../services/interfaces')
-const { getDBDrafterResult, jsonParse, revertString } = require('../middleware/parse/utils')
+const { getDBDrafterResult, jsonParse, revertString, replaceParentheses } = require('../middleware/parse/utils')
 
 // const { parseResult } = require('../services/markdown')
 // router.get('/', async (ctx, next) => {
@@ -22,6 +22,7 @@ router.get('/', async (ctx, next) => {
         jsonParse,
         marked,
         revertString,
+        replaceParentheses,
         body
     })
 })

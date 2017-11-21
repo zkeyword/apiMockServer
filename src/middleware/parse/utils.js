@@ -85,6 +85,17 @@ exports.revertString = (str, type) => {
     return str
 }
 
+exports.replaceParentheses = (str, type) => {
+    let tagReg = /(\{(.+?)\})/g
+    if (type) {
+        str = str.replace(tagReg, '<span>$1</span>')
+    } else {
+        str = str.replace(/(\{)\?/g, '/{$1')
+        str = str.replace(tagReg, '$1')
+    }
+    return str
+}
+
 exports.validateDrafterResult = result => {
     let item = drafter.validateSync(result, { type: 'ast' })
     console.log(item)

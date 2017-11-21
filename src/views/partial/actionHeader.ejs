@@ -5,7 +5,11 @@
     
     <div class="urlWrap">
         <span class="method"><%= revertString(action.attributes.uriTemplate) ? action.method : 'SOCKET' %></span>
-        <span class="uriTemplate"><%- revertString(action.attributes.uriTemplate, true) %></span>
+        <span class="uriTemplate">
+            <a href="/project/<%- body.alias + replaceParentheses(action.attributes.uriTemplate) %>">
+                <%- replaceParentheses(action.attributes.uriTemplate, true) %>
+            </a>
+        </span>
     </div>
     <% if(action.description){ %>
         <div class="detail">

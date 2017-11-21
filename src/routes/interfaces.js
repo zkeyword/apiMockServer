@@ -2,7 +2,7 @@ const router = require('koa-router')()
 const project = require('../services/project')
 const interfaces = require('../services/interfaces')
 const marked = require('marked')
-const { jsonParse, getDBDrafterResult, revertString } = require('../middleware/parse/utils')
+const { jsonParse, getDBDrafterResult, revertString, replaceParentheses } = require('../middleware/parse/utils')
 
 router.post('/', async (ctx, next) => {
     let projectObj = await project.getProjectbyIdAndUserId(ctx.request.body.projectId, ctx.user.id)
@@ -54,7 +54,8 @@ router.get('/preview/:id', async (ctx, next) => {
         jsonParse,
         marked,
         body,
-        revertString
+        revertString,
+        replaceParentheses
     })
 })
 
