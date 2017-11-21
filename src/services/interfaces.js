@@ -51,3 +51,16 @@ exports.list = async req => {
         }
     })
 }
+
+exports.fetch = async (id) => {
+    if (!id) return false
+    return await interfaces.findOne({
+        include: {
+            attributes: ['alias'],
+            model: project
+        },
+        where: {
+            id
+        }
+    })
+}
