@@ -2,7 +2,9 @@
 
 给apiblueprint补充mockjs的功能，实现apiblueprint不能随机的缺点，支持markdown上传编辑，支持多个项目数据mock。
 
-- 其中暂不支持Function部分
+- 暂不支持Mockjs中的Function部分
+
+- 暂不支持apiBlueprint的JSON Schema部分
 
 - 添加SOCKET写法，由于http本身没有SOCKET方法，所以用固定的形式：
 
@@ -50,8 +52,9 @@
 
 #### TODO LIST
 
-- 支持markdown在线编辑
-- 渲染apiBlueprint解析的数据
-- 支持多个项目
-- 支持简单的用户模块，支持后台管理
+~~ - 支持markdown在线编辑
+~~ - 渲染apiBlueprint解析的数据
+~~ - 支持多个项目
+~~ - 支持简单的用户模块，支持后台管理
 - json语法检查
+- 美化渲染模板
