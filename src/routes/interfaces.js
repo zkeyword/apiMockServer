@@ -47,6 +47,10 @@ router.get('/:id', async (ctx, next) => {
     ctx.body = await interfaces.list({ id: ctx.params.id })
 })
 
+router.get('/content/:id', async (ctx, next) => {
+    ctx.body = await interfaces.fetch(ctx.params.id)
+})
+
 router.get('/preview/:id', async (ctx, next) => {
     let interfacesList = await interfaces.fetch(ctx.params.id)
     let body = getDBDrafterResult([interfacesList])[0]
