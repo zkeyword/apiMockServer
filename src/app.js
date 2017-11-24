@@ -11,7 +11,7 @@ const jwtKoa = require('koa-jwt')
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
 const error = require('./routes/error')
-const parse = require('./middleware/parse/db')
+const parse = require('./middleware/parse')
 const { apiAUTH } = require('./middleware/auth')
 const jwtConfig = require('../config/jwt')
 

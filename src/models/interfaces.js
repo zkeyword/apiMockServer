@@ -6,6 +6,16 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 comment: '接口文档模块名'
             },
+            requst: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+                comment: 'requst模板'
+            },
+            response: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+                comment: 'response模板'
+            },
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
