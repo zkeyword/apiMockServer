@@ -1,0 +1,155 @@
+.tabContent
+    padding: 10px 0 40px
+    margin: 0 0 40px
+    border-bottom: 2px dotted #ddd
+    position: relative
+
+    &:after
+        content: 'THE END'
+        position: absolute
+        bottom: -12px
+        left: 48%
+        right: 50%
+        background: #fff
+        width: 80px
+        text-align: center
+
+    .metadata
+        border:1px solid #ddd
+        padding: 10px 20px
+        margin: 0 0 20px
+        border-radius: 5px
+        
+        .list
+            font-size: 12px
+
+    // .resourceGroups
+
+    //     .name
+    //         font-size: 25px
+    //         color: #333
+
+    .resource
+
+        .name
+            font-size: 30px
+            color: #333
+
+        .detail
+            padding: 0 20px
+        
+            p
+                padding: 10px 0 0
+
+    .resources
+        padding: 20px 0 0
+
+        .name
+            font-weight: bold
+            font-size: 20px
+            
+        .detail
+            padding: 10px 20px 0
+
+        .parameters
+            padding: 10px 0 0
+
+            .title
+                padding: 0 0 5px
+                font-weight: bold
+
+    .resourcesList
+
+        .action
+
+            .actionName
+                margin: 20px 0 0
+                color:#1d9fd3
+                font-weight:bold
+                font-size: 16px
+
+            .urlWrap
+                padding: 10px 0
+
+                .method
+                    border: 1px solid #ddd
+                    padding: 2px 5px
+
+                .uriTemplate
+
+                    span
+
+                        &:nth-child(odd)
+                            color: #db7f07
+
+                        &:nth-child(even)
+                            color: #088c05
+
+            .detail
+                padding: 0 20px
+
+        .parameters
+
+            .title
+                font-weight: bold
+                border-bottom: 1px solid #eee
+                padding: 10px 0
+
+            .list
+                padding: 0 10px 10px
+                
+                .item
+                    padding: 10px 0
+                    border-bottom: 1px solid #eee
+
+                    .nameBox
+                        position: relative
+
+                        // .name
+                        //     font-size: 18px
+
+                        .tagWrap
+                            position: absolute
+                            top: -10px
+                            right: -98px
+                            width: 100px
+
+                            .tag
+                                border: 1px solid #ddd
+                                padding: 1px 3px
+                                border-radius: 5px
+                                font-size: 5px
+                                background: #fff
+                                float: left
+                    .desc
+                        padding: 0 0 0 100px
+
+                    &:nth-child(odd)
+
+                        .name
+                            color: #db7f07
+
+                    &:nth-child(even)
+
+                        .name
+                            color: #088c05
+
+        .request
+
+            .title
+                font-weight: bold
+                padding: 10px 0
+                font-weight: bold
+    
+        .response
+
+            .title
+                font-weight: bold
+                padding: 10px 0
+                font-weight: bold
+
+        pre
+            background: rgba(#000, 0.01)
+            padding: 20px
+            border: 1px solid rgba(#000, 0.05)
+            border-radius: 5px

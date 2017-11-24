@@ -293,13 +293,13 @@ body ::-webkit-scrollbar-thumb {
   overflow-y: auto;
   padding: 0 20px 0 0;
 }
-.lt-main .lt-right .tabContent {
+.tabContent {
   padding: 10px 0 40px;
   margin: 0 0 40px;
   border-bottom: 2px dotted #ddd;
   position: relative;
 }
-.lt-main .lt-right .tabContent:after {
+.tabContent:after {
   content: 'THE END';
   position: absolute;
   bottom: -12px;
@@ -309,86 +309,86 @@ body ::-webkit-scrollbar-thumb {
   width: 80px;
   text-align: center;
 }
-.lt-main .lt-right .tabContent .metadata {
+.tabContent .metadata {
   border: 1px solid #ddd;
   padding: 10px 20px;
   margin: 0 0 20px;
   border-radius: 5px;
 }
-.lt-main .lt-right .tabContent .metadata .list {
+.tabContent .metadata .list {
   font-size: 12px;
 }
-.lt-main .lt-right .tabContent .resource .name {
+.tabContent .resource .name {
   font-size: 30px;
   color: #333;
 }
-.lt-main .lt-right .tabContent .resource .detail {
+.tabContent .resource .detail {
   padding: 0 20px;
 }
-.lt-main .lt-right .tabContent .resource .detail p {
+.tabContent .resource .detail p {
   padding: 10px 0 0;
 }
-.lt-main .lt-right .tabContent .resources {
+.tabContent .resources {
   padding: 20px 0 0;
 }
-.lt-main .lt-right .tabContent .resources .name {
+.tabContent .resources .name {
   font-weight: bold;
   font-size: 20px;
 }
-.lt-main .lt-right .tabContent .resources .detail {
+.tabContent .resources .detail {
   padding: 10px 20px 0;
 }
-.lt-main .lt-right .tabContent .resources .parameters {
+.tabContent .resources .parameters {
   padding: 10px 0 0;
 }
-.lt-main .lt-right .tabContent .resources .parameters .title {
+.tabContent .resources .parameters .title {
   padding: 0 0 5px;
   font-weight: bold;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .actionName {
+.tabContent .resourcesList .action .actionName {
   margin: 20px 0 0;
   color: #1d9fd3;
   font-weight: bold;
   font-size: 16px;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .urlWrap {
+.tabContent .resourcesList .action .urlWrap {
   padding: 10px 0;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .urlWrap .method {
+.tabContent .resourcesList .action .urlWrap .method {
   border: 1px solid #ddd;
   padding: 2px 5px;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .urlWrap .uriTemplate span:nth-child(odd) {
+.tabContent .resourcesList .action .urlWrap .uriTemplate span:nth-child(odd) {
   color: #db7f07;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .urlWrap .uriTemplate span:nth-child(even) {
+.tabContent .resourcesList .action .urlWrap .uriTemplate span:nth-child(even) {
   color: #088c05;
 }
-.lt-main .lt-right .tabContent .resourcesList .action .detail {
+.tabContent .resourcesList .action .detail {
   padding: 0 20px;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .title {
+.tabContent .resourcesList .parameters .title {
   font-weight: bold;
   border-bottom: 1px solid #eee;
   padding: 10px 0;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list {
+.tabContent .resourcesList .parameters .list {
   padding: 0 10px 10px;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item {
+.tabContent .resourcesList .parameters .list .item {
   padding: 10px 0;
   border-bottom: 1px solid #eee;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item .nameBox {
+.tabContent .resourcesList .parameters .list .item .nameBox {
   position: relative;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item .nameBox .tagWrap {
+.tabContent .resourcesList .parameters .list .item .nameBox .tagWrap {
   position: absolute;
   top: -10px;
   right: -98px;
   width: 100px;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item .nameBox .tagWrap .tag {
+.tabContent .resourcesList .parameters .list .item .nameBox .tagWrap .tag {
   border: 1px solid #ddd;
   padding: 1px 3px;
   border-radius: 5px;
@@ -396,26 +396,26 @@ body ::-webkit-scrollbar-thumb {
   background: #fff;
   float: left;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item .desc {
+.tabContent .resourcesList .parameters .list .item .desc {
   padding: 0 0 0 100px;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item:nth-child(odd) .name {
+.tabContent .resourcesList .parameters .list .item:nth-child(odd) .name {
   color: #db7f07;
 }
-.lt-main .lt-right .tabContent .resourcesList .parameters .list .item:nth-child(even) .name {
+.tabContent .resourcesList .parameters .list .item:nth-child(even) .name {
   color: #088c05;
 }
-.lt-main .lt-right .tabContent .resourcesList .request .title {
+.tabContent .resourcesList .request .title {
   font-weight: bold;
   padding: 10px 0;
   font-weight: bold;
 }
-.lt-main .lt-right .tabContent .resourcesList .response .title {
+.tabContent .resourcesList .response .title {
   font-weight: bold;
   padding: 10px 0;
   font-weight: bold;
 }
-.lt-main .lt-right .tabContent .resourcesList pre {
+.tabContent .resourcesList pre {
   background: rgba(0,0,0,0.01);
   padding: 20px;
   border: 1px solid rgba(0,0,0,0.05);
