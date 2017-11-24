@@ -1,14 +1,12 @@
 const urlParser = require('./url')
-const { jsonParse, getDBDrafterResult } = require('./utils')
-const interfaces = require('../../services/interfaces')
+const { jsonParse, getDrafterResult } = require('./utils')
 
 module.exports = (router) => {
     return async (ctx, next) => {
-        if (!/^\/project/.test(ctx.url)) return await next()
-        let interfacesList = await interfaces.list()
-        let result = getDBDrafterResult(interfacesList)
-        let handleRouer = (actions, url, projectName) => {
-            url = `/project/${projectName}${url}`
+        if (/^\/project/.test(ctx.url)) return await next()
+        let result = await getDrafterResult(`${__dirname}/../../../upload/`)
+        let handleRouer = (actions, url) => {
+            url = `/project${url}`
             // console.log(url)
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
@@ -51,13 +49,12 @@ module.exports = (router) => {
         }
 
         result.forEach(item => {
-            item.resourceGroups.forEach(resourceGroup => {
+            item.ast.resourceGroups.forEach(resourceGroup => {
                 resourceGroup.resources.forEach(resource => {
-                    // console.log(resourceGroup.resources)
+                    let parsedUrl = urlParser.parse(resource.uriTemplate)
+                    let url = parsedUrl.url
                     resource.actions.forEach(actions => {
-                        let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
-                        let url = parsedUrl.url
-                        handleRouer(actions, url, item.alias)
+                        handleRouer(actions, url)
                     })
                 })
             })
