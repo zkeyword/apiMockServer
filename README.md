@@ -27,13 +27,11 @@
     |__ .eslintrc.js eslint脚本检查配置
     |__ package.json npm依赖管理
 
-
 #### 环境依赖
 
 - node 7.6+
 
 - mysql
-
 
 #### 相关命令
 
@@ -50,18 +48,21 @@
 + [API Blueprint 教程](https://apiblueprint.org/documentation/tutorial.html)
 + [Mockjs 实例](http://mockjs.com/examples.html)
 
-#### TODO LIST
+#### TODO LIST（含client端）
 
-~~ - 支持markdown在线编辑
-~~ - 渲染apiBlueprint解析的数据
-~~ - 支持多个项目
-~~ - 支持简单的用户模块，支持后台管理
+- ~~ 支持markdown在线编辑
+- ~~ 渲染apiBlueprint解析的数据
+- ~~ 支持多个项目
+- ~~ 支持简单的用户模块，支持后台管理
 - json语法检查
 - 美化渲染模板
-- 支持预制按钮输出控制
+- 支持预制按钮根据输出控制
 - 接口页全局按ctrl+s保存
 - 支持自动保存
 - Attributes支持
+- 支持历史接口修改记录
+- 简化学习apiBlueprint成本
+- 支持接口测试
 
 #### BUG
 
