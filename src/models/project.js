@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
                 comment: '别名'
             },
+            status: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                comment: '状态'
+            },
             description: {
                 type: DataTypes.STRING,
                 allowNull: true,
