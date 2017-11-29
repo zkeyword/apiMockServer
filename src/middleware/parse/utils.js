@@ -6,6 +6,7 @@ const { mock } = require('mockjs')
 const commentJson = require('comment-json')
 const stringifyObject = require('stringify-object')
 const { readDir, readFile, getFileFormat } = require('../../utils')
+const urlParser = require('./url')
 
 function handleRtr(str, isRevert = false) {
     if (isRevert) {
@@ -90,8 +91,10 @@ exports.replaceParentheses = (str, type) => {
     if (type) {
         str = str.replace(tagReg, '<span>$1</span>')
     } else {
-        str = str.replace(/(\{)\?/g, '/{$1')
-        str = str.replace(tagReg, '$1')
+        str = urlParser.parse(str)
+        return str.url
+        // str = str.replace(/(\{)\?/g, '/{$1')
+        // str = str.replace(tagReg, '$1')
     }
     return str
 }

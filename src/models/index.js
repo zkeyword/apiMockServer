@@ -22,8 +22,8 @@ Object.keys(db).forEach(function (modelName) {
     }
 })
 
-// sequelize.sync()
-sequelize.sync({ force: true }) // 直接删表重建
+sequelize.sync()
+// sequelize.sync({ force: true }) // 直接删表重建
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 

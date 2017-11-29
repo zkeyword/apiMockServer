@@ -12,7 +12,8 @@ router.get('/', async (ctx, next) => {
         marked,
         revertString,
         replaceParentheses,
-        body
+        body,
+        rootUrl: ctx.request.href
     })
 })
 
