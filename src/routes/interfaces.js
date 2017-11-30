@@ -59,7 +59,8 @@ router.get('/preview/:id', async (ctx, next) => {
         marked,
         body,
         revertString,
-        replaceParentheses
+        replaceParentheses,
+        rootUrl: ctx.request.href
     })
 })
 
