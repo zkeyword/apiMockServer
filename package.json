@@ -36,10 +36,12 @@
     "mockjs": "^1.0.1-beta3",
     "mysql": "^2.15.0",
     "mysql2": "^1.4.2",
+    "nano-json": "^1.2.4",
     "normalize-newline": "^3.0.0",
     "qs": "^6.5.1",
     "require-directory": "^2.1.1",
     "sequelize": "^4.15.0",
+    "sockjs": "^0.3.19",
     "stringify-object": "^3.2.1",
     "stylus": "^0.54.5"
   },

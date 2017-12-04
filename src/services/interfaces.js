@@ -6,7 +6,8 @@ exports.add = async req => {
     if (!proj) return null
     let inte = await interfaces.findOrCreate({
         where: {
-            name: req.name
+            name: req.name,
+            projectId: req.projectId
         },
         defaults: req
     })

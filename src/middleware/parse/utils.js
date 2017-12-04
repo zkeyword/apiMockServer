@@ -2,10 +2,8 @@
 const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
 const { mock } = require('mockjs')
-// const nanoRender = require('nano-json')
 const commentJson = require('comment-json')
 const stringifyObject = require('stringify-object')
-const { readDir, readFile, getFileFormat } = require('../../utils')
 const urlParser = require('./url')
 
 function handleRtr(str, isRevert = false) {
@@ -28,31 +26,6 @@ function handleRtr(str, isRevert = false) {
         str = str.replace(/\[SOCKET\s+(.*)\]/g, '[GET /SOCKET$1]')
     }
     return str
-}
-
-exports.getDrafterResult = dir => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let list = await readDir(dir)
-            let count = 0
-            let arr = []
-            list.forEach(async (fileName, index) => {
-                if (getFileFormat(fileName) === 'md') {
-                    let result = await readFile(`${dir}/${fileName}`)
-                    result = handleRtr(result)
-                    let item = drafter.parseSync(result, { type: 'ast' })
-                    if (result) {
-                        item.ast.fileName = fileName
-                        arr[index] = item // 保证顺序
-                    }
-                }
-                if (count === list.length - 1) resolve(arr.filter(x => x))
-                count++
-            })
-        } catch (error) {
-            resolve([])
-        }
-    })
 }
 
 exports.getDBDrafterResult = list => {
