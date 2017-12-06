@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
                 comment: '别名'
             },
+            status: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                comment: '状态'
+            },
             description: {
                 type: DataTypes.STRING,
                 allowNull: true,
@@ -18,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
+            underscored: false,
             freezeTableName: true,
             autoIncrement: true,
             comment: '项目表'

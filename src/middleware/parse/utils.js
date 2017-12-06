@@ -2,9 +2,9 @@
 const drafter = require('drafter')
 const normalizeNewline = require('normalize-newline')
 const { mock } = require('mockjs')
-const nanoRender = require('nano-json')
 const commentJson = require('comment-json')
-const { readDir, readFile, getFileFormat } = require('../../utils')
+const stringifyObject = require('stringify-object')
+const urlParser = require('./url')
 
 function handleRtr(str, isRevert = false) {
     if (isRevert) {
@@ -28,31 +28,6 @@ function handleRtr(str, isRevert = false) {
     return str
 }
 
-exports.getDrafterResult = dir => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let list = await readDir(dir)
-            let count = 0
-            let arr = []
-            list.forEach(async (fileName, index) => {
-                if (getFileFormat(fileName) === 'md') {
-                    let result = await readFile(`${dir}/${fileName}`)
-                    result = handleRtr(result)
-                    let item = drafter.parseSync(result, { type: 'ast' })
-                    if (result) {
-                        item.ast.fileName = fileName
-                        arr[index] = item // 保证顺序
-                    }
-                }
-                if (count === list.length - 1) resolve(arr.filter(x => x))
-                count++
-            })
-        } catch (error) {
-            resolve([])
-        }
-    })
-}
-
 exports.getDBDrafterResult = list => {
     let arr = []
     list.forEach(async (itm, index) => {
@@ -62,20 +37,45 @@ exports.getDBDrafterResult = list => {
         // console.log(a)
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
-            item.ast.alias = itm.project.alias
-            item.ast.interfacesName = itm.name
-            arr[index] = item.ast
+            let ast = item.ast
+            ast.alias = itm.project.alias
+            ast.interfacesName = itm.name
+            ast.createdAt = itm.createdAt
+            ast.updatedAt = itm.updatedAt
+            arr[index] = ast
         }
     })
     return arr.filter(x => x)
+}
+
+exports.revertString = (str, type) => {
+    let socketReg = /^\/SOCKET/g
+    let tagReg = /(\{(.+?)\})/g
+    if (socketReg.test(str)) {
+        if (!type) return false
+        str = str.replace(socketReg, '')
+    }
+    str = str.replace(tagReg, '<span>$1</span>')
+    return str
+}
+
+exports.replaceParentheses = (str, type) => {
+    let tagReg = /(\{(.+?)\})/g
+    if (type) {
+        str = str.replace(tagReg, '<span>$1</span>')
+    } else {
+        str = urlParser.parse(str)
+        return str.url
+        // str = str.replace(/(\{)\?/g, '/{$1')
+        // str = str.replace(tagReg, '$1')
+    }
+    return str
 }
 
 exports.validateDrafterResult = result => {
     let item = drafter.validateSync(result, { type: 'ast' })
     console.log(item)
 }
-
-
 
 exports.jsonParse = (str, original) => {
     if (!str) return str
@@ -84,9 +84,13 @@ exports.jsonParse = (str, original) => {
     if (original) {
         str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
     } else {
-        str = commentJson.parse(str)
-        str = mock(str)
-        str = commentJson.stringify(str, null, 4)
+        try {
+            str = commentJson.parse(str)
+            str = mock(str)
+            str = commentJson.stringify(str, null, 4)
+        } catch (error) {
+            return str
+        }
     }
     try {
         str = mock(JSON.parse(str))
@@ -94,7 +98,10 @@ exports.jsonParse = (str, original) => {
         return str
     }
     if (typeof str === 'string' || original) return str
-    str = nanoRender.render(str)
+    // str = nanoRender.render(str)
+    str = stringifyObject(str, {
+        indent: '    ',
+        singleQuotes: false
+    })
     return str
 }
-

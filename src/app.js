@@ -11,7 +11,7 @@ const jwtKoa = require('koa-jwt')
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
 const error = require('./routes/error')
-const parse = require('./middleware/parse/db')
+const parse = require('./middleware/parse')
 const { apiAUTH } = require('./middleware/auth')
 const jwtConfig = require('../config/jwt')
 
@@ -38,8 +38,9 @@ app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
 app.use(async (ctx, next) => {
     const start = new Date()
     await next()
-    const ms = new Date() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    const end = new Date()
+    const ms = end - start
+    console.log(`${ctx.ip} - ${end.toLocaleString()}: ${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // routes

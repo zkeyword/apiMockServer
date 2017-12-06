@@ -6,6 +6,16 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 comment: '接口文档模块名'
             },
+            request: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+                comment: 'request模板'
+            },
+            response: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+                comment: 'response模板'
+            },
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
@@ -13,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
+            underscored: false,
             freezeTableName: true,
             autoIncrement: true,
             comment: '接口表'
