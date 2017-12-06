@@ -2,8 +2,8 @@
     <% if(example.responses.length >= example.requests.length){ %>
         <% example.responses.forEach((response, i)=>{ %>
             <% if(example.requests[i]){ %>
-                <div>
-                    <span>request：</span>
+                <div class="request">
+                    <div class="title">request：</div>
                     <div>
                         header：
                         <% example.requests[i].headers.forEach(header=>{ %>
@@ -14,8 +14,8 @@
                 </div>
             <% } %>
             <% if(response.body){ %>
-                <div>
-                    <span>response:</span>
+                <div class="response">
+                    <div class="title">response: </div>
                     <pre><%- jsonParse(response.body) %></pre>
                 </div>
             <% } %>
@@ -24,14 +24,14 @@
     <% if(example.responses.length < example.requests.length) { %>
         <% example.requests.forEach((request, i)=>{ %>
             <% if(example.response && example.response[i] && example.response[i].body){ %>
-                <div>
-                    <span>request：</span>
+                <div class="request">
+                    <div class="title">request：</div>
                     <pre><%= example.response[i].body %></pre>
                 </div>
             <% } %>
             <% if(request.body || request.headers){ %>
-                <div>
-                    <span>response: </span>
+                <div class="response">
+                    <div class="title">response: </div>
                     <div>
                         header：
                         <% request.headers.forEach(header=>{ %>

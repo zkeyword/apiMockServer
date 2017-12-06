@@ -9,6 +9,7 @@ module.exports = (router) => {
         let result = getDBDrafterResult(interfacesList)
         let handleRouer = (actions, url, projectName) => {
             url = `/project/${projectName}${url}`
+            console.log(url)
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
                 let isAjaxAccept = ctx.request.header['accept'] === '*/*'
@@ -52,9 +53,10 @@ module.exports = (router) => {
         result.forEach(item => {
             item.resourceGroups.forEach(resourceGroup => {
                 resourceGroup.resources.forEach(resource => {
-                    let parsedUrl = urlParser.parse(resource.uriTemplate)
-                    let url = parsedUrl.url
+                    // console.log(resourceGroup.resources)
                     resource.actions.forEach(actions => {
+                        let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
+                        let url = parsedUrl.url
                         handleRouer(actions, url, item.alias)
                     })
                 })

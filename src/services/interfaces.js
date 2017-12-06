@@ -6,7 +6,8 @@ exports.add = async req => {
     if (!proj) return null
     let inte = await interfaces.findOrCreate({
         where: {
-            name: req.name
+            name: req.name,
+            projectId: req.projectId
         },
         defaults: req
     })
@@ -15,7 +16,7 @@ exports.add = async req => {
 }
 
 exports.del = async (id, req) => {
-    if (!(Object.keys(req).length && id && req.projectId)) return false
+    if (!id) return false
     return await interfaces.destroy({
         where: {
             id
@@ -24,7 +25,7 @@ exports.del = async (id, req) => {
 }
 
 exports.modify = async (id, req) => {
-    if (!(Object.keys(req).length && id && req.projectId)) return false
+    if (!id) return false
     return await interfaces.update(req, {
         where: {
             id
@@ -48,6 +49,19 @@ exports.list = async req => {
         },
         where: {
             projectId: req.id
+        }
+    })
+}
+
+exports.fetch = async (id) => {
+    if (!id) return false
+    return await interfaces.findOne({
+        include: {
+            attributes: ['alias'],
+            model: project
+        },
+        where: {
+            id
         }
     })
 }

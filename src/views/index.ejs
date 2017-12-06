@@ -22,9 +22,11 @@
     <div class="lt-main">
         <div class="lt-left">
             <div class="menu">
-                <% body.forEach(item=>{ %>
+                <% body.forEach((item,index)=>{ %>
                     <div class="item">
+                        <% if(index===0){ %><% } %>
                         <a href="#<%=item.name %>"> <%= item.alias %></a>
+                        
                         <div class="interfacesName"><%= item.interfacesName %></div>
                         <ul>
                             <% item.resourceGroups.forEach(resourceGroups=>{ %>

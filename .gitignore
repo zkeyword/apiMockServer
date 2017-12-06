@@ -37,3 +37,6 @@ npm-debug.log
 
 # css
 public/stylesheets/index.css
+
+# history
+.history

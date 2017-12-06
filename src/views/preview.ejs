@@ -1,39 +1,41 @@
-<div class="tabContent" id="<%=body.name %>">
-    <%- include('./partial/metadata', {metadata: body.metadata})  %>
-    <div class="resource">
-        <div class="name"><%= body.name %></div>
-        <% if(body.description){ %>
-            <div class="detail">
-                <%- marked(body.description) %>
-            </div>
-        <% } %>
-    </div>
-    <% body.resourceGroups.forEach((resourceGroups, resourceGroupsIndex)=>{ %>
+<% if(body){ %>
+    <div class="tabContent" id="<%=body.name %>">
+        <%- include('./partial/metadata', {metadata: body.metadata})  %>
+        <div class="resource">
+            <div class="name"><%= body.name %></div>
+            <% if(body.description){ %>
+                <div class="detail">
+                    <%- marked(body.description) %>
+                </div>
+            <% } %>
+        </div>
+        <% body.resourceGroups.forEach((resourceGroups, resourceGroupsIndex)=>{ %>
 
-        <%- include('./partial/resourceGroupsHeader', {resourceGroups}) %>
+            <%- include('./partial/resourceGroupsHeader', {resourceGroups}) %>
 
-        <!-- TODO 不确定 body.content[resourceGroupsIndex] -->
-        <%- include('./partial/table', {content: body.content[resourceGroupsIndex].content}) %>
+            <!-- TODO 不确定 body.content[resourceGroupsIndex] -->
+            <%- include('./partial/table', {content: body.content[resourceGroupsIndex].content}) %>
 
-        <% resourceGroups.resources.forEach(resources=>{ %>
-            <div class="resourceGroups">
+            <% resourceGroups.resources.forEach(resources=>{ %>
+                <div class="resourceGroups">
 
-                <%- include('./partial/resources', {resources}) %>
+                    <%- include('./partial/resources', {resources}) %>
 
-                <div class="resourcesList">
-                    <% resources.actions.forEach(action=>{ %>
-                        
-                        <%- include('./partial/actionHeader', {action}) %>
-                        
-                        <%- include('./partial/parameters', {parameters: action.parameters}) %>
-                        
-                        <%- include('./partial/examples', {examples: action.examples}) %>
+                    <div class="resourcesList">
+                        <% if(resources.actions.length){ %>
+                            <% resources.actions.forEach(action=>{ %>
+                                <%- include('./partial/actionHeader', {action,body}) %>
+                                <%- include('./partial/parameters', {parameters: action.parameters}) %>
+                                <%- include('./partial/examples', {examples: action.examples}) %>
+                            <% }) %>
+                        <% } else { %>
+                            暂时没有相关内容
+                        <% } %>
+                    </div>
 
-                    <% }) %>
                 </div>
 
-            </div>
-
+            <% }) %>
         <% }) %>
-    <% }) %>
-</div>
+    </div>
+<% } %>

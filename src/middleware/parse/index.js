@@ -1,14 +1,14 @@
 const urlParser = require('./url')
-const { jsonParse, getDrafterResult } = require('./utils')
+const { jsonParse, getDBDrafterResult } = require('./utils')
+const interfaces = require('../../services/interfaces')
 
 module.exports = (router) => {
     return async (ctx, next) => {
-        if (/^\/project/.test(ctx.url)) return await next()
-        let result = await getDrafterResult(`${__dirname}/../../../upload/`)
-        let handleRouer = (actions, url) => {
-            url = `/project${url}`
-            // console.log(url)
-            router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
+        if (!/^\/project/.test(ctx.url)) return await next()
+        let interfacesList = await interfaces.list()
+        let result = getDBDrafterResult(interfacesList)
+        let handleRouer = (actions, url, projectName) => {
+            router[actions.method.toLocaleLowerCase()](`/project/${projectName}${url}`, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
                 let isAjaxAccept = ctx.request.header['accept'] === '*/*'
                 actions.examples.forEach(example => {
@@ -49,12 +49,14 @@ module.exports = (router) => {
         }
 
         result.forEach(item => {
-            item.ast.resourceGroups.forEach(resourceGroup => {
+            item.resourceGroups.forEach(resourceGroup => {
                 resourceGroup.resources.forEach(resource => {
-                    let parsedUrl = urlParser.parse(resource.uriTemplate)
-                    let url = parsedUrl.url
+                    // console.log(resourceGroup.resources)
                     resource.actions.forEach(actions => {
-                        handleRouer(actions, url)
+                        let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
+                        let url = parsedUrl.url
+                        console.log(url)
+                        handleRouer(actions, url, item.alias)
                     })
                 })
             })

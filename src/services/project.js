@@ -35,6 +35,7 @@ exports.modify = async (id, req) => {
 exports.list = async req => {
     if (!req) {
         return await project.findAll({
+            // attributes: ['name'], // 查找自定字段 https://segmentfault.com/a/1190000003987871#articleHeader12
             include: {
                 model: users,
                 where: {
@@ -54,7 +55,11 @@ exports.list = async req => {
     }
 }
 
-exports.alias = async id => {
-    if (!id) return {}
-    return await project.findById(id)
+exports.getProjectbyIdAndUserId = async (id, userId) => {
+    return await project.findOne({
+        where: {
+            id,
+            userId
+        }
+    })
 }
