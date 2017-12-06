@@ -7,6 +7,7 @@ const logger = require('koa-logger')
 const koaStatic = require('koa-static')
 const cors = require('koa2-cors')
 const jwtKoa = require('koa-jwt')
+const helmet = require('koa-helmet')
 
 const stylus = require('./middleware/stylus')
 const routes = require('./routes')
@@ -16,6 +17,7 @@ const { apiAUTH } = require('./middleware/auth')
 const jwtConfig = require('../config/jwt')
 
 // middlewares
+app.use(helmet())
 app.use(bodyparser({
     enableTypes: ['json', 'form', 'text']
 }))
