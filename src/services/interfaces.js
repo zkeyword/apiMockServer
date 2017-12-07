@@ -11,7 +11,7 @@ exports.add = async req => {
         },
         defaults: req
     })
-    if (inte[1]) await proj.addInterfaces(inte)
+    if (inte.id && inte[1]) await proj.addInterfaces(inte)
     return inte
 }
 
