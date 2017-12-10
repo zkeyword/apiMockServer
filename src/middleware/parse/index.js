@@ -55,7 +55,6 @@ module.exports = (router) => {
                     resource.actions.forEach(actions => {
                         let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
                         let url = parsedUrl.url
-                        console.log(url)
                         handleRouer(actions, url, item.alias)
                     })
                 })

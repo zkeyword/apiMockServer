@@ -5,7 +5,6 @@ const { getDBDrafterResult, jsonParse, revertString, replaceParentheses } = requ
 
 router.get('/', async (ctx, next) => {
     let interfacesList = await interfaces.list()
-    console.log(interfacesList)
     let body = getDBDrafterResult(interfacesList)
     await ctx.render('index', {
         title: '首页',

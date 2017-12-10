@@ -9,7 +9,6 @@ module.exports = (router) => {
         let result = getDBDrafterResult(interfacesList)
         let handleRouer = (actions, url, projectName) => {
             url = `/project/${projectName}${url}`
-            console.log(url)
             router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
                 let type = ctx.request.headers['content-type']
                 let isAjaxAccept = ctx.request.header['accept'] === '*/*'

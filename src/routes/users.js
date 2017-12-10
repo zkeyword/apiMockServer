@@ -27,7 +27,6 @@ router.del('/:id', async (ctx, next) => {
 
 router.put('/:id', async (ctx, next) => {
     let body = await users.modify(ctx.params.id, ctx.request.body)
-    console.log(11, body)
     ctx.body = body[0] ? `修改成功` : `修改失败`
 })
 
