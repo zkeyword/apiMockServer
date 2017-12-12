@@ -65,3 +65,12 @@ exports.fetch = async (id) => {
         }
     })
 }
+
+exports.fetchByName = async (name) => {
+    if (!name) return false
+    return await interfaces.findOne({
+        where: {
+            name
+        }
+    })
+}
