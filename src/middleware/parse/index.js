@@ -1,19 +1,22 @@
+let router = require('koa-router')()
+
 const urlParser = require('./url')
 const { jsonParse, getDBDrafterResult } = require('./utils')
 const interfaces = require('../../services/interfaces')
 
-let getItemResult = async (name) => {
-    let interfacesList = await interfaces.fetchByName(name)
-    // getDBDrafterResult(interfacesList) // TODO 等待解析
-    return interfacesList
-}
+// let getItemResult = async (name) => {
+//     let interfacesList = await interfaces.fetchByName(name)
+//     // getDBDrafterResult(interfacesList) // TODO 等待解析
+//     return interfacesList
+// }
 
-let handleRouer = (actions, url, projectName, router, interfacesName) => {
-    router[actions.method.toLocaleLowerCase()](`/project/${projectName}${url}`, async (ctx, next) => {
+let handleRouer = (actions, url, app, interfacesName) => {
+    // console.log(router.stack)
+    router[actions.method.toLocaleLowerCase()](url, async (ctx, next) => {
         let type = ctx.request.headers['content-type']
         let isAjaxAccept = ctx.request.header['accept'] === '*/*'
-        let itemResult = await getItemResult(interfacesName)
-        console.log(itemResult) // 防止单个接口数据修改后，数据不是最新的，重新从数据库获取新的数据  -- 衍生问题：所有数据都更新后如何刷新路由
+        // let itemResult = await getItemResult(interfacesName)
+        // console.log(itemResult) // 防止单个接口数据修改后，数据不是最新的，重新从数据库获取新的数据  -- 衍生问题：所有数据都更新后如何刷新路由
         actions.examples.forEach(example => {
             example.responses.forEach(response => {
                 if (response.headers.length) {
@@ -49,10 +52,11 @@ let handleRouer = (actions, url, projectName, router, interfacesName) => {
             })
         })
     })
+    app.use(router.routes(), router.allowedMethods())
 }
 
-let getRouter = async router => {
-    let interfacesList = await interfaces.list()
+let getRouter = async (app, projectName, reqUrl) => {
+    let interfacesList = await interfaces.list({ name: projectName })
     let result = getDBDrafterResult(interfacesList)
     result.forEach(item => {
         item.resourceGroups.forEach(resourceGroup => {
@@ -61,17 +65,25 @@ let getRouter = async router => {
                 resource.actions.forEach(actions => {
                     let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
                     let url = parsedUrl.url
-                    handleRouer(actions, url, item.alias, router, item.interfacesName)
+                    url = `/project/${projectName}${url}`
+                    if (reqUrl === url) {
+                        handleRouer(actions, url, app, item.interfacesName)
+                    } else {
+                        // TODO 清空router
+                        // router.stack = []
+                        // app.use(router.routes(), router.allowedMethods())
+                    }
                 })
             })
         })
     })
 }
 
-module.exports = (router) => {
+module.exports = (app) => {
     return async (ctx, next) => {
-        if (!/^\/project/.test(ctx.url)) return await next()
-        await getRouter(router)
+        let urlArr = ctx.url.split('/')
+        if (urlArr.length < 3 || urlArr[1] !== 'project') return await next()
+        await getRouter(app, urlArr[2], ctx.url)
         await next()
     }
 }

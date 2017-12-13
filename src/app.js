@@ -47,7 +47,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(apiAUTH)
-app.use(parse(routes))
+app.use(parse(app))
 app.use(routes.routes(), routes.allowedMethods())
 app.use(error())
 

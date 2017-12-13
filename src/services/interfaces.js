@@ -45,10 +45,20 @@ exports.list = async req => {
     return await interfaces.findAll({
         include: {
             attributes: ['alias'],
-            model: project
-        },
-        where: {
-            projectId: req.id
+            model: project,
+            where: { ...req }
+        }
+    })
+}
+
+exports.listByProductName = async name => {
+    return await interfaces.findAll({
+        include: {
+            attributes: ['alias'],
+            model: project,
+            where: {
+                name
+            }
         }
     })
 }
