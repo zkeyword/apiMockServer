@@ -22,6 +22,7 @@
     "koa-bodyparser": "^3.2.0",
     "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",
+    "koa-helmet": "^3.3.0",
     "koa-json": "^2.0.2",
     "koa-jwt": "^3.2.2",
     "koa-logger": "^2.0.1",
@@ -41,8 +42,10 @@
     "qs": "^6.5.1",
     "require-directory": "^2.1.1",
     "sequelize": "^4.15.0",
+    "sjson": "^0.2.8",
     "sockjs": "^0.3.19",
     "stringify-object": "^3.2.1",
+    "strip-json-comments": "^2.0.1",
     "stylus": "^0.54.5"
   },
   "devDependencies": {

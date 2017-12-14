@@ -10,7 +10,7 @@ exports.add = async req => {
         },
         defaults: req
     })
-    if (proj[1]) await user.addProject(proj)
+    if (proj.id && proj[1]) await user.addProject(proj)
     return proj
 }
 
@@ -57,6 +57,7 @@ exports.list = async req => {
 
 exports.getProjectbyIdAndUserId = async (id, userId) => {
     return await project.findOne({
+        attributes: ['id'],
         where: {
             id,
             userId

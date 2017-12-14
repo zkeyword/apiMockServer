@@ -20,6 +20,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.TEXT,
                 allowNull: false,
                 comment: '接口文档内容'
+            },
+            sort: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                comment: '接口排序'
             }
         },
         {

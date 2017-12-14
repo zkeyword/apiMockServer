@@ -260,6 +260,7 @@ body ::-webkit-scrollbar-thumb {
   padding: 10px;
   margin: 0 20px 0 0;
   border-right: 1px solid rgba(0,0,0,0.05);
+  overflow: auto;
 }
 .lt-main .lt-left .menu {
   width: 100%;
@@ -382,22 +383,13 @@ body ::-webkit-scrollbar-thumb {
 .tabContent .resourcesList .parameters .list .item .nameBox {
   position: relative;
 }
-.tabContent .resourcesList .parameters .list .item .nameBox .tagWrap {
-  position: absolute;
-  top: -10px;
-  right: -98px;
-  width: 100px;
-}
 .tabContent .resourcesList .parameters .list .item .nameBox .tagWrap .tag {
   border: 1px solid #ddd;
   padding: 1px 3px;
   border-radius: 5px;
   font-size: 5px;
   background: #fff;
-  float: left;
-}
-.tabContent .resourcesList .parameters .list .item .desc {
-  padding: 0 0 0 100px;
+  display: inline-block;
 }
 .tabContent .resourcesList .parameters .list .item:nth-child(odd) .name {
   color: #db7f07;

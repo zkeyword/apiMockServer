@@ -11,7 +11,7 @@ exports.add = async req => {
         },
         defaults: req
     })
-    if (inte[1]) await proj.addInterfaces(inte)
+    if (inte.id && inte[1]) await proj.addInterfaces(inte)
     return inte
 }
 
@@ -45,10 +45,20 @@ exports.list = async req => {
     return await interfaces.findAll({
         include: {
             attributes: ['alias'],
-            model: project
-        },
-        where: {
-            projectId: req.id
+            model: project,
+            where: { ...req }
+        }
+    })
+}
+
+exports.listByProductName = async name => {
+    return await interfaces.findAll({
+        include: {
+            attributes: ['alias'],
+            model: project,
+            where: {
+                name
+            }
         }
     })
 }
@@ -62,6 +72,15 @@ exports.fetch = async (id) => {
         },
         where: {
             id
+        }
+    })
+}
+
+exports.fetchByName = async (name) => {
+    if (!name) return false
+    return await interfaces.findOne({
+        where: {
+            name
         }
     })
 }

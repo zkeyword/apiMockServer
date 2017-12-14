@@ -1,9 +1,11 @@
 
 const drafter = require('drafter')
-const normalizeNewline = require('normalize-newline')
 const { mock } = require('mockjs')
+const normalizeNewline = require('normalize-newline')
 const commentJson = require('comment-json')
+const stripJsonComments = require('strip-json-comments')
 const stringifyObject = require('stringify-object')
+const SJSON = require('sjson')
 const urlParser = require('./url')
 
 function handleRtr(str, isRevert = false) {
@@ -16,10 +18,15 @@ function handleRtr(str, isRevert = false) {
     } else {
         str = normalizeNewline(str)
         str = str.replace(/(@|Random\.)([a-z]+)\((.*)\)/g, function () {
-            let fun = arguments[2]
-            let val = arguments[3]
-            val = val.replace(/\,/g, '_')
-            return `@${fun}☥${val}♁`
+            try {
+                let mockStr = arguments[0]
+                return `"${mock(mockStr)}"`
+            } catch (error) {
+                let fun = arguments[2]
+                let val = arguments[3]
+                val = val.replace(/\,/g, '_')
+                return `@${fun}☥${val}♁`
+            }
         }) // 替换 Random. 为 @
         str = str.replace(/(\d)-(\d)/g, '$1❅$2') // 替换 1-10 中的 -
         str = str.replace(/(\w)\|(\d)/g, '$1✡$2') // 替换 string|1-10 中的 |
@@ -34,11 +41,10 @@ exports.getDBDrafterResult = list => {
         let result = itm.content
         result = handleRtr(result)
         // let a = drafter.validateSync(result, { type: 'ast' })
-        // console.log(a)
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
             let ast = item.ast
-            ast.alias = itm.project.alias
+            ast.alias = itm.project ? itm.project.alias : null
             ast.interfacesName = itm.name
             ast.createdAt = itm.createdAt
             ast.updatedAt = itm.updatedAt
@@ -79,10 +85,14 @@ exports.validateDrafterResult = result => {
 
 exports.jsonParse = (str, original) => {
     if (!str) return str
-    str = str.replace(/\'/g, '"')
     str = handleRtr(str, true)
     if (original) {
-        str = str.replace(/(\/\/.*)|(\/\*.*\*\/)/g, '')
+        str = stripJsonComments(str) // 清除注释
+        /* key无引号、单双引号的问题 */
+        str = str.replace(/(\w):\/\//g, '$1☜//') // 网址被误伤
+        str = SJSON.squish(str)
+        str = SJSON.unsquish(str)
+        str = str.replace(/(\w)☜\/\//g, '$1://')
     } else {
         try {
             str = commentJson.parse(str)
