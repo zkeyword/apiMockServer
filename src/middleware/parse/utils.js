@@ -44,7 +44,7 @@ exports.getDBDrafterResult = list => {
         let item = drafter.parseSync(result, { type: 'ast' })
         if (result) {
             let ast = item.ast
-            ast.alias = itm.project.alias
+            ast.alias = itm.project ? itm.project.alias : null
             ast.interfacesName = itm.name
             ast.createdAt = itm.createdAt
             ast.updatedAt = itm.updatedAt
