@@ -46,6 +46,7 @@ exports.getDBDrafterResult = list => {
             let ast = item.ast
             ast.alias = itm.project ? itm.project.alias : null
             ast.interfacesName = itm.name
+            ast.interfacesId = itm.id
             ast.createdAt = itm.createdAt
             ast.updatedAt = itm.updatedAt
             arr[index] = ast

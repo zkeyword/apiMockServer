@@ -5,18 +5,18 @@ const interfaces = require('../../services/interfaces')
 let router = require('koa-router')()
 
 /* 根据接口名查接口内容 */
-let getItemResult = async (name) => {
-    let interfacesList = await interfaces.fetchByName(name)
+let getItemResult = async (id) => {
+    let interfacesList = await interfaces.fetch(id)
     return getDBDrafterResult([interfacesList])
 }
 
 /* 路由 */
-let handleRouer = ({ reqUrl, method, projectName, interfacesName }) => {
+let handleRouer = ({ reqUrl, method, projectAlias, interfacesId }) => {
     return router[method.toLocaleLowerCase()](reqUrl, async (ctx, next) => {
         let type = ctx.request.headers['content-type']
         let isAjaxAccept = ctx.request.header['accept'] === '*/*'
-        let result = await getItemResult(interfacesName)
-        handleParse({ reqUrl, method, result, projectName }, (interfacesName, actions) => {
+        let result = await getItemResult(interfacesId)
+        handleParse({ reqUrl, method, result, projectAlias }, (interfacesId, actions) => {
             actions.examples.forEach(example => {
                 example.responses.forEach(response => {
                     if (response.headers.length) {
@@ -56,15 +56,15 @@ let handleRouer = ({ reqUrl, method, projectName, interfacesName }) => {
 }
 
 /* 处理根据项目查询出来的结果，并匹配url */
-let handleParse = ({ reqUrl, method, result, projectName }, callback) => {
+let handleParse = ({ reqUrl, method, result, projectAlias }, callback) => {
     result.forEach(item => {
         item.resourceGroups.forEach(resourceGroup => {
             resourceGroup.resources.forEach(resource => {
                 resource.actions.forEach(actions => {
                     let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
-                    let url = `/project/${projectName}${parsedUrl.url}`
+                    let url = `/project/${projectAlias}${parsedUrl.url}`
                     if (reqUrl === url && actions.method === method) {
-                        callback(item.interfacesName, actions)
+                        callback(item.interfacesId, actions)
                     }
                 })
             })
@@ -73,17 +73,17 @@ let handleParse = ({ reqUrl, method, result, projectName }, callback) => {
 }
 
 /* 根据项目名获取路由 */
-let getParse = async (projectName, reqUrl, method) => {
-    let interfacesList = await interfaces.list({ name: projectName })
+let getParse = async (projectAlias, reqUrl, method) => {
+    let interfacesList = await interfaces.list({ alias: projectAlias })
     let result = getDBDrafterResult(interfacesList)
     return new Promise((resolve, reject) => {
         let tmp = null
-        handleParse({ reqUrl, method, result, projectName }, (interfacesName, actions) => {
+        handleParse({ reqUrl, method, result, projectAlias }, (interfacesId, actions) => {
             tmp = {
                 reqUrl,
                 method,
-                projectName,
-                interfacesName
+                projectAlias,
+                interfacesId
             }
         })
         resolve(tmp)
