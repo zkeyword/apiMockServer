@@ -12,6 +12,7 @@ let getItemResult = async (id) => {
 
 /* 路由 */
 let handleRouer = ({ reqUrl, method, projectAlias, interfacesId }) => {
+    console.log(1212121212, reqUrl)
     return router[method.toLocaleLowerCase()](reqUrl, async (ctx, next) => {
         let type = ctx.request.headers['content-type']
         let isAjaxAccept = ctx.request.header['accept'] === '*/*'
@@ -63,13 +64,16 @@ let handleParse = ({ reqUrl, method, result, projectAlias }, callback) => {
                 resource.actions.forEach(actions => {
                     let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
                     let url = `/project/${projectAlias}${parsedUrl.url}`
-                    let parsedReqUrl = urlParser.parse(reqUrl)
                     if (actions.method === method) {
+                        // callback(item.interfacesId, actions)
                         if (reqUrl === url) {
                             callback(item.interfacesId, actions)
                         } else {
+                            let parsedReqUrl = urlParser.parse(reqUrl)
                             url = url.replace(/\/:\w+/g, '/')
                             if (parsedReqUrl.url === url) {
+                                callback(item.interfacesId, actions)
+                            } else if ((new RegExp(url)).test(reqUrl)) { // 判断reqUrl是不是在uriTemplate解析的结果内
                                 callback(item.interfacesId, actions)
                             }
                         }
@@ -104,9 +108,9 @@ module.exports = (app) => {
         if (urlArr.length < 3 || urlArr[1] !== 'project') return await next()
         let parse = await getParse(urlArr[2], ctx.url, ctx.method)
         router.stack = []
+        console.log(parse)
         if (parse) {
             router = handleRouer(parse)
-            console.log(router)
             app.use(router.routes(), router.allowedMethods())
         }
         await next()
