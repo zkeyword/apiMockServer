@@ -63,8 +63,16 @@ let handleParse = ({ reqUrl, method, result, projectAlias }, callback) => {
                 resource.actions.forEach(actions => {
                     let parsedUrl = urlParser.parse(actions.attributes.uriTemplate)
                     let url = `/project/${projectAlias}${parsedUrl.url}`
-                    if (reqUrl === url && actions.method === method) {
-                        callback(item.interfacesId, actions)
+                    let parsedReqUrl = urlParser.parse(reqUrl)
+                    if (actions.method === method) {
+                        if (reqUrl === url) {
+                            callback(item.interfacesId, actions)
+                        } else {
+                            url = url.replace(/\/:\w+/g, '/')
+                            if (parsedReqUrl.url === url) {
+                                callback(item.interfacesId, actions)
+                            }
+                        }
                     }
                 })
             })
@@ -98,6 +106,7 @@ module.exports = (app) => {
         router.stack = []
         if (parse) {
             router = handleRouer(parse)
+            console.log(router)
             app.use(router.routes(), router.allowedMethods())
         }
         await next()
