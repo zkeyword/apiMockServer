@@ -31,6 +31,7 @@ function handleRtr(str, isRevert = false) {
         str = str.replace(/(\d)-(\d)/g, '$1❅$2') // 替换 1-10 中的 -
         str = str.replace(/(\w)\|(\d)/g, '$1✡$2') // 替换 string|1-10 中的 |
         str = str.replace(/\[SOCKET\s+(.*)\]/g, '[GET /SOCKET$1]')
+        str = str.replace(/\[MQTT\s+(.*)\]/g, '[GET /MQTT$1]')
     }
     return str
 }
@@ -56,14 +57,16 @@ exports.getDBDrafterResult = list => {
 }
 
 exports.revertString = (str, type) => {
-    let socketReg = /^\/SOCKET/g
+    let socketReg = /^\/SOCKET|^\/MQTT/g
     let tagReg = /(\{(.+?)\})/g
-    if (socketReg.test(str)) {
-        if (!type) return false
-        str = str.replace(socketReg, '')
+    if (type) {
+        str = str.replace(tagReg, '<span>$1</span>')
+        return str
+    } else {
+        let searchResult = str.match(socketReg)
+        if (!searchResult) return false
+        return str.match(socketReg)[0].replace(/\//g, '')
     }
-    str = str.replace(tagReg, '<span>$1</span>')
-    return str
 }
 
 exports.replaceParentheses = (str, type) => {

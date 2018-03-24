@@ -2,9 +2,7 @@
 
 给apiblueprint补充mockjs的功能，实现apiblueprint不能随机的缺点，支持markdown上传编辑，支持多个项目数据mock。
 
-- 暂不支持Mockjs中的Function部分
-
-- 暂不支持apiBlueprint的JSON Schema部分
+- 其中暂不支持Function部分
 
 - 添加SOCKET写法，由于http本身没有SOCKET方法，所以用固定的形式：
 
@@ -27,11 +25,13 @@
     |__ .eslintrc.js eslint脚本检查配置
     |__ package.json npm依赖管理
 
+
 #### 环境依赖
 
 - node 7.6+
 
 - mysql
+
 
 #### 相关命令
 
@@ -48,24 +48,10 @@
 + [API Blueprint 教程](https://apiblueprint.org/documentation/tutorial.html)
 + [Mockjs 实例](http://mockjs.com/examples.html)
 
-#### TODO LIST（含client端）
+#### TODO LIST
 
-- ~~支持markdown在线编辑~~
-- ~~渲染apiBlueprint解析的数据~~
-- ~~支持多个项目~~
-- ~~支持简单的用户模块，支持后台管理~~
+- 支持markdown在线编辑
+- 渲染apiBlueprint解析的数据
+- 支持多个项目
+- 支持简单的用户模块，支持后台管理
 - json语法检查
-- 美化渲染模板
-- 支持预制按钮根据输出控制
-- 接口页全局按ctrl+s保存
-- 支持自动保存
-- Attributes支持
-- 支持历史接口修改记录
-- 简化学习apiBlueprint成本
-- 支持接口测试
-
-#### BUG
-
-- [GET] 解析有误
-- 接口页看不到项目名
-- ~~完成数据变动时mock接口被router缓存的问题~~

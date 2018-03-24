@@ -1,4 +1,4 @@
 module.exports = {
     secret: 'jsmock',
-    expiresIn: '1h'
+    expiresIn: '30d'
 }

@@ -33,10 +33,10 @@ npm-debug.log
 .DS_Store
 
 # local history for vscode
-.history
+.history/*
 
 # css
 public/stylesheets/index.css
 
-# history
+# vscode
 .history

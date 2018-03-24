@@ -33,7 +33,6 @@ app.use(cors({
 }))
 app.use(jwtKoa({ secret: jwtConfig.secret }).unless({
     path: [/^\/$/, /favicon.ico/, /\/v0.1\/api\/auth\//, /^\/project/]
-    // path: [/^\/$/, /^\/project/]
 }))
 
 // logger
