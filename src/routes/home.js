@@ -37,7 +37,7 @@ router.get('project/:id', async (ctx, next) => {
         revertString,
         replaceParentheses,
         body,
-        rootUrl: ctx.request.href
+        rootUrl: `${ctx.protocol}://${ctx.host}`
     })
 })
 

@@ -4,8 +4,6 @@
             "name": "apiMockServer",
             "script": "bin/www",
             "cwd": "/program/jenkins/node/workspace/api-mock-server/",
-            "args": [],
-            "autorestart": true,
             "max_memory_restart": "1G",
             "autorestart": true,
             "node_args": [],
@@ -15,8 +13,13 @@
             },
             "watch": true,
             "watch_options": {
-                "usePolling": true
-            }
+                "ignoreInitial": true
+            },
+            "ignore_watch": [
+                "node_modules",
+                "logs",
+                "public"
+            ]
         }
     ]
 }
