@@ -6,11 +6,11 @@ exports.add = async (interfaceId, req) => {
     if (!interfacesItem) return null
     let historyList = await exports.list(interfaceId)
     let len = historyList.length
-    if (len > 9) {
-        historyList.reverse()
+    if (len > 8) {
+        // historyList.reverse()
         let delArr = []
         for (let i = 0; i < len; i++) {
-            if (i > 9) {
+            if (i > 8) {
                 delArr.push(historyList[i].id)
             }
         }
@@ -34,7 +34,10 @@ exports.list = async interfaceId => {
     let historyList = await history.findAll({
         where: {
             interfaceId
-        }
+        },
+        order: [
+            ['id', 'DESC']
+        ]
     })
     return historyList
 }
