@@ -65,17 +65,20 @@ exports.revertString = (str, type) => {
     } else {
         let searchResult = str.match(socketReg)
         if (!searchResult) return false
+        console.log(socketReg, str.match(socketReg)[0].replace(/\//g, ''))
         return str.match(socketReg)[0].replace(/\//g, '')
     }
 }
 
 exports.replaceParentheses = (str, type) => {
     let tagReg = /(\{(.+?)\})/g
+    let socketReg = /^\/SOCKET|^\/MQTT/g
     if (type) {
+        str = str.replace(socketReg, '')
         str = str.replace(tagReg, '<span>$1</span>')
     } else {
         str = urlParser.parse(str)
-        return str.url
+        return str.url.replace(socketReg, '')
         // str = str.replace(/(\{)\?/g, '/{$1')
         // str = str.replace(tagReg, '$1')
     }

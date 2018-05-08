@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    const History = sequelize.define('history',
+    const Historys = sequelize.define('history',
         {
-            user: {
+            userId: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 comment: '操作人'
@@ -20,8 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-    History.associate = (models) => {
+    Historys.associate = (models) => {
+        Historys.belongsTo(models.interfaces)
     }
 
-    return History
+    return Historys
 }

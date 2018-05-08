@@ -27,7 +27,8 @@ exports.modify = async (id, req) => {
     if (!(Object.keys(req).length && id && req.userId)) return false
     return await project.update(req, {
         where: {
-            id
+            id,
+            userId: req.userId
         }
     })
 }

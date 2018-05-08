@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const interfaces = sequelize.define('interfaces',
+    const Interfaces = sequelize.define('interfaces',
         {
             name: {
                 type: DataTypes.STRING,
@@ -35,9 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-    interfaces.associate = (models) => {
-        interfaces.belongsTo(models.project)
+    Interfaces.associate = (models) => {
+        Interfaces.belongsTo(models.project)
+        Interfaces.hasMany(models.history)
     }
 
-    return interfaces
+    return Interfaces
 }
